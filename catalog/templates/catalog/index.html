@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gradient with Bootstrap</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        body {
+            /* Set gradient background */
+            background: linear-gradient(to right, #4CAF50, #FFFF00);
+            /* Set height to 100vh for full-screen gradient */
+            height: 100vh;
+            /* Center the content vertically and horizontally */
+            display: flex;
+            margin: 0;
+        }
+
+        /* Sidebar styles */
+        .sidebar {
+            margin-left: 10px;
+            border-radius: 10px;
+            height: 95%;
+            width: 250px;
+            position: fixed;
+            background-color: rgba(255, 255, 255, 0.7); /* Adjust opacity as needed */
+            margin-top: 20px;
+            margin-bottom: 30px;
+        }
+
+        .sidebar a {
+            padding: 15px;
+            text-decoration: none;
+            font-size: 20px;
+            color: #333;
+            display: block;
+        }
+
+        .sidebar a:hover {
+            background-color: #ddd;
+        }
+
+        /* Content container styles */
+        .content-container {
+            border-radius: 10px;
+        {#margin-left: 250px; /* Adjust based on the sidebar width */#}{#padding: 20px;#}{#border-radius: 10px;#} background-color: rgba(255, 255, 255, 0.5); /* Adjust opacity as needed */
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <a href="#">Home</a>
+    <a href="#">About</a>
+    <a href="#">Contact</a>
+</div>
+
+<!-- Content Container -->
+<div class="container content-container">
+    <h1 class="text-center">Translucent Container with Gradient Background</h1>
+    <p>This is a simple example of a translucent container on a gradient background with a Bootstrap sidebar.</p>
+</div>
+
+<!-- Bootstrap JS and Popper.js -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.0.7/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
