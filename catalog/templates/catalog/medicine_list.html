@@ -3,23 +3,19 @@
 {#{% load partials %}#}
 
 {% block content %}
-
-    <div class="flex flex-col items-center mx-10 md:mx-20">
-    <h1 class="prose-2xl mb-4">CatMed</h1>
-    
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
         {% for medicine in medicines %}
-            <div class="card bg-base-100 w-72 shadow-xl">
+            <div class="card bg-base-100 w-72 shadow-xl" hx-get="/{{ medicine.id }}" hx-target="#main-container" hx-swap="outerHTML" hx-push-url="true">
                 <figure>
-{#                    <img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="{{ medicine.name }}"/>#}
+                    {#                    <img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="{{ medicine.name }}"/>#}
                 </figure>
                 <div class="card-body">
                     <h2 class="card-title">
                         {{ medicine.name }}
-{#                        <div class="badge badge-secondary">NEW</div>#}
-                        
+                        {#                        <div class="badge badge-secondary">NEW</div>#}
+
                     </h2>
-{#                    <p>{{ medicine.description }}</p>#}
+                    {#                    <p>{{ medicine.description }}</p>#}
                     <div class="card-actions justify-end">
                         <div class="badge badge-outline">Cure</div>
                         <div class="badge badge-outline">Products</div>
@@ -28,7 +24,6 @@
             </div>
         {% endfor %}
     </div>
-</div>
 
 
 

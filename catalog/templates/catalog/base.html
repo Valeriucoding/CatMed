@@ -18,22 +18,27 @@
     <input id="my-drawer-2" type="checkbox" class="drawer-toggle"/>
     <div class="drawer-content">
         <div class="mt-4">
-            {% block content %}
-            {% endblock %}
+            <div class="flex flex-col items-center mx-10 md:mx-20">
+                <h1 class="prose-2xl mb-4">CatMed</h1>
+                <div id="main-container">
+                {% block content %}
+                {% endblock %}
+                </div>
+            </div>
+            </div>
+            <label for="my-drawer-2" class="btn btn-primary drawer-button lg:hidden">
+                Open drawer
+            </label>
         </div>
-        <label for="my-drawer-2" class="btn btn-primary drawer-button lg:hidden">
-            Open drawer
-        </label>
+        <div class="drawer-side">
+            <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label>
+            <ul class="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+                <!-- Sidebar content here -->
+                <li><a>Sidebar Item 1</a></li>
+                <li><a>Sidebar Item 2</a></li>
+            </ul>
+        </div>
     </div>
-    <div class="drawer-side">
-        <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label>
-        <ul class="menu bg-base-200 text-base-content min-h-full w-80 p-4">
-            <!-- Sidebar content here -->
-            <li><a>Sidebar Item 1</a></li>
-            <li><a>Sidebar Item 2</a></li>
-        </ul>
-    </div>
-</div>
 
 </body>
 </html>

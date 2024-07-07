@@ -1,0 +1,41 @@
+<!-- medicine_detail_partial.html -->
+<div id="main-container">
+    <h1 class="text-3xl font-bold">{{ medicine.name }}</h1>
+    <p>{{ medicine.description }}</p>
+
+    <h2 class="text-2xl mt-4">Diseases</h2>
+    <ul>
+        {% for disease in medicine.diseases.all %}
+            <li>{{ disease.name }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2 class="text-2xl mt-4">Medication Types</h2>
+    <ul>
+        {% for type in medicine.medication_types.all %}
+            <li>{{ type.name }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2 class="text-2xl mt-4">Body Organs</h2>
+    <ul>
+        {% for organ in medicine.body_organs.all %}
+            <li>{{ organ.name }}</li>
+        {% endfor %}
+    </ul>
+
+    <h2 class="text-2xl mt-4">Products</h2>
+    <ul>
+        {% for product in medicine.medicine_products.all %}
+            <li>
+                <strong>{{ product.name }}</strong> - {{ product.get_buy_place_display }}
+                {% if product.product_url %}
+                    - <a href="{{ product.product_url }}" target="_blank">Buy Here</a>
+                {% endif %}
+                - Price: {{ product.price }}$
+                - Method of Administration: {{ product.method_of_administration }}
+                - Form: {{ product.presenting_form.name }}
+            </li>
+        {% endfor %}
+    </ul>
+</div>
