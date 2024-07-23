@@ -1,5 +1,8 @@
-<!-- medicine_detail_partial.html -->
 <div id="main-container">
+    <button class="btn btn-secondary mb-4" hx-get="/" hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">
+        Back
+    </button>
+
     <h1 class="text-3xl font-bold">{{ medicine.name }}</h1>
     <p>{{ medicine.description }}</p>
 

@@ -5,6 +5,10 @@ from catalog.models import Medicine
 
 def medicine_list(request):
     medicines = Medicine.objects.all()
+    if request.htmx:
+        return render(
+            request, "catalog/medicine_list_partial.html", {"medicines": medicines}
+        )
     return render(request, "catalog/medicine_list.html", {"medicines": medicines})
 
 
