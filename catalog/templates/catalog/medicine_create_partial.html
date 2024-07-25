@@ -1,0 +1,57 @@
+<div id="main-container">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1>Create Medicine</h1>
+                <form method="post" action="{% url 'catalog:medicine_create' %}">
+                    {% csrf_token %}
+                    <div class="form-group
+                    {% if form.name.errors %} has-error {% endif %}">
+                        <label for="id_name">Name</label>
+                        {{ form.name }}
+                        {% for error in form.name.errors %}
+                            <span class="help-block
+                            {% if forloop.first %} with-errors {% endif %}">
+                                {{ error }}
+                            </span>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group
+                    {% if form.description.errors %} has-error {% endif %}">
+                        <label for="id_description">Description</label>
+                        {{ form.description }}
+                        {% for error in form.description.errors %}
+                            <span class="help-block
+                            {% if forloop.first %} with-errors {% endif %}">
+                                {{ error }}
+                            </span>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group
+                    {% if form.price.errors %} has-error {% endif %}">
+                        <label for="id_price">Price</label>
+                        {{ form.price }}
+                        {% for error in form.price.errors %}
+                            <span class="help-block
+                            {% if forloop.first %} with-errors {% endif %}">
+                                {{ error }}
+                            </span>
+                        {% endfor %}
+                    </div>
+                    <div class="form-group
+                    {% if form.quantity.errors %} has-error {% endif %}">
+                        <label for="id_quantity">Quantity</label>
+                        {{ form.quantity }}
+                        {% for error in form.quantity.errors %}
+                            <span class="help-block
+                            {% if forloop.first %} with-errors {% endif %}">
+                                {{ error }}
+                            </span>
+                        {% endfor %}
+                    </div>
+                    <button type="submit" class="btn btn-primary">Create</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
