@@ -1,7 +1,21 @@
 <div id="main-container">
-    <button class="btn btn-secondary mb-4" hx-get="/" hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">
+    <button class="btn btn-secondary mb-4" hx-get="{% url "catalog:medicine_list" %}" hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">
         Back
     </button>
+    
+    <button class="btn btn-danger mt-4" onclick="delete_modal.showModal()"><i class="fas fa-trash"></i></button>
+    <dialog id="delete_modal" class="modal">
+        <div class="modal-box">
+            <h3 class="text-lg font-bold">Confirm Deletion</h3>
+            <p class="py-4">Are you sure you want to delete {{ medicine.name }}? This action cannot be undone.</p>
+            <div class="modal-action">
+                <form method="dialog">
+                    <button class="btn btn-secondary mr-2">Cancel</button>
+                </form>
+                <button class="btn btn-danger" hx-delete="{% url 'catalog:medicine_delete' medicine.id %}" hx-target="#main-container" hx-swap="innerHTML">Delete</button>
+            </div>
+        </div>
+    </dialog>
 
     <h1 class="text-3xl font-bold">{{ medicine.name }}</h1>
     <p>{{ medicine.description }}</p>

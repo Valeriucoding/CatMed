@@ -1,11 +1,11 @@
 <div class="absolute top-4 right-4">
-        <span class="btn btn-primary flex items-center rounded-full" hx-get="{% url "catalog:medicine_create" %} hx-target="#main-container" hx-swap="outerHTML">
+        <span class="btn btn-primary flex items-center rounded-full" hx-get="{% url "catalog:medicine_create" %}" hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">
             <i class="fas fa-plus"></i>
         </span>
 </div>
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
     {% for medicine in medicines %}
-        <div class="card bg-base-100 w-72 shadow-xl" hx-get="/{{ medicine.id }}" hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">
+        <div class="card bg-base-100 w-72 shadow-xl" hx-get="{% url "catalog:medicine_detail" medicine.id %}" hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">
             <figure>
                 {# <img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="{{ medicine.name }}"/> #}
             </figure>
