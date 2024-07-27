@@ -1,3 +1,4 @@
+from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
@@ -8,13 +9,18 @@ from catalog.models import Medicine
 
 def medicine_list(request):
     medicines = Medicine.objects.all()
+    context = {"medicines": medicines}
+
+    # Check for messages
+    storage = messages.get_messages(request)
+    if storage:
+        # Add the first message to the context
+        context["alert_message"] = list(storage)[0]
+        storage.used = True
+
     if request.htmx:
-        return render(
-            request,
-            "catalog/partials/medicine_list_partial.html",
-            {"medicines": medicines},
-        )
-    return render(request, "catalog/medicine_list.html", {"medicines": medicines})
+        return render(request, "catalog/partials/medicine_list_partial.html", context)
+    return render(request, "catalog/medicine_list.html", context)
 
 
 def medicine_detail(request, medicine_id):
@@ -64,9 +70,10 @@ def medicine_delete(request, medicine_id):
     medicine = get_object_or_404(Medicine, id=medicine_id)
     if request.method == "DELETE":
         medicine.delete()
+        messages.success(request, f"{medicine.name} has been successfully deleted.")
         if request.htmx:
             return HttpResponse(
                 status=200, headers={"HX-Redirect": reverse("catalog:medicine_list")}
             )
         return HttpResponseRedirect(reverse("catalog:medicine_list"))
-    return HttpResponse(status=405)  # Method Not Allowed
+    return HttpResponse(status=405)
