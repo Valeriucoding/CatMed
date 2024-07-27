@@ -8,6 +8,10 @@ class MedicineForm(forms.ModelForm):
         model = Medicine
         fields = ["name", "description"]
         widgets = {
-            "name": forms.TextInput(attrs={"class": "form-control"}),
-            "description": forms.Textarea(attrs={"class": "form-control"}),
+            "name": forms.TextInput(
+                attrs={"class": "input input-bordered w-full max-w-xs"}
+            ),
+            "description": forms.Textarea(
+                attrs={"class": "textarea textarea-bordered"}
+            ),
         }

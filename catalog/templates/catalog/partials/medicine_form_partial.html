@@ -1,33 +1,36 @@
 <div id="main-container">
-    <button class="btn btn-secondary mb-4" hx-get="{% url "catalog:medicine_list" %}" hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">
-        Back
-    </button>
-{#TODO: add alert#}
-    <div class="container">
-        <div class="row">
-            <div class="col-md-12">
-                <h1>Create Medicine</h1>
-                <form hx-post="{% url 'catalog:medicine_create' %}" hx-target="#main-container" hx-swap="innerHTML">
+    <div class="container mx-auto p-4">
+        <div class="flex flex-col items-center">
+            <div class="w-full max-w-lg">
+                <button class="btn btn-secondary mb-4" onclick="goBack()">
+                    <i class="fa fa-arrow-left"></i>
+                </button>
+                <h1 class="text-2xl font-bold mb-4">Create Medicine</h1>
+                <form hx-post="{{ url }}" hx-target="#main-container" hx-swap="innerHTML" class="space-y-4">
                     {% csrf_token %}
-                    <div class="form-group {% if form.name.errors %}has-error{% endif %}">
-                        <label for="id_name">Name</label>
+                    <div class="form-control {% if form.name.errors %}form-control-error{% endif %}">
+                        <label for="id_name" class="label">
+                            <span class="label-text">Name</span>
+                        </label>
                         {{ form.name }}
                         {% for error in form.name.errors %}
-                            <span class="help-block {% if forloop.first %}with-errors{% endif %}">
-                                {{ error }}
-                            </span>
+                            <span class="text-error text-sm mt-1">
+                            {{ error }}
+                        </span>
                         {% endfor %}
                     </div>
-                    <div class="form-group {% if form.description.errors %}has-error{% endif %}">
-                        <label for="id_description">Description</label>
+                    <div class="form-control {% if form.description.errors %}form-control-error{% endif %}">
+                        <label for="id_description" class="label">
+                            <span class="label-text">Description</span>
+                        </label>
                         {{ form.description }}
                         {% for error in form.description.errors %}
-                            <span class="help-block {% if forloop.first %}with-errors{% endif %}">
-                                {{ error }}
-                            </span>
+                            <span class="text-error text-sm mt-1">
+                            {{ error }}
+                        </span>
                         {% endfor %}
                     </div>
-                    <button type="submit" class="btn btn-primary">Create</button>
+                    <button type="submit" class="btn btn-primary w-full">{{ action }}</button>
                 </form>
             </div>
         </div>

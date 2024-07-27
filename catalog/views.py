@@ -36,6 +36,8 @@ def medicine_detail(request, medicine_id):
 
 def medicine_create(request):
     form = MedicineForm(request.POST or None)
+    url = reverse("catalog:medicine_create")
+    context = {"form": form, "action": "create", "url": url}
     if request.method == "POST":
         if form.is_valid():
             medicine = form.save()
@@ -53,17 +55,48 @@ def medicine_create(request):
             )
         else:
             return render(
-                request, "catalog/partials/medicine_form_partial.html", {"form": form}
+                request, "catalog/partials/medicine_form_partial.html", context
             )
 
     if request.htmx:
         return render(
             request,
             "catalog/partials/medicine_form_partial.html",
-            {"form": form},
+            context,
         )
 
-    return render(request, "catalog/medicine_form.html", {"form": form})
+    return render(request, "catalog/medicine_form.html", context)
+
+
+def medicine_update(request, medicine_id):
+    medicine = get_object_or_404(Medicine, id=medicine_id)
+    form = MedicineForm(request.POST or None, instance=medicine)
+    url = reverse("catalog:medicine_update", args=[medicine.id])
+    context = {"form": form, "action": "Update", "url": url}
+    if request.method == "POST":
+        if form.is_valid():
+            form.save()
+            if request.htmx:
+                return HttpResponse(
+                    status=200,
+                    headers={
+                        "HX-Redirect": reverse(
+                            "catalog:medicine_detail", args=[medicine.id]
+                        )
+                    },
+                )
+            return HttpResponseRedirect(
+                reverse("catalog:medicine_detail", args=[medicine.id])
+            )
+        else:
+            return render(
+                request, "catalog/partials/medicine_form_partial.html", context
+            )
+
+    if request.htmx:
+        return render(request, "catalog/partials/medicine_form_partial.html", context)
+
+    return render(request, "catalog/medicine_form.html", context)
 
 
 def medicine_delete(request, medicine_id):
