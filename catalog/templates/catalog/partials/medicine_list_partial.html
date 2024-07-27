@@ -1,7 +1,7 @@
 <div class="absolute top-4 right-4">
-        <a href="/" class="btn btn-primary flex items-center rounded-full" hx-get="/" hx-target="#main-container" hx-swap="outerHTML">
+        <span class="btn btn-primary flex items-center rounded-full" hx-get="{% url "catalog:medicine_create" %} hx-target="#main-container" hx-swap="outerHTML">
             <i class="fas fa-plus"></i>
-        </a>
+        </span>
 </div>
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
     {% for medicine in medicines %}
