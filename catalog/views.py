@@ -37,7 +37,7 @@ def medicine_detail(request, medicine_id):
 def medicine_create(request):
     form = MedicineForm(request.POST or None)
     url = reverse("catalog:medicine_create")
-    context = {"form": form, "action": "create", "url": url}
+    context = {"form": form, "action": "Create", "url": url}
     if request.method == "POST":
         if form.is_valid():
             medicine = form.save()
