@@ -29,6 +29,17 @@
                             {{ error }}
                         </span>
                         {% endfor %}
+                    </div>                    
+                    <div class="form-control {% if form.diseases.errors %}form-control-error{% endif %}">
+                        <label for="id_diseases" class="label">
+                            <span class="label-text">Diseases</span>
+                        </label>
+                        {{ form.diseases }}
+                        {% for error in form.diseases.errors %}
+                            <span class="text-error text-sm mt-1">
+                            {{ error }}
+                        </span>
+                        {% endfor %}
                     </div>
                     <button type="submit" class="btn btn-primary w-full">{{ action }}</button>
                 </form>
