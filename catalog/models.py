@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 
 
 class Disease(models.Model):
@@ -37,6 +38,9 @@ class Medicine(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        return reverse("catalog:medicine_detail", args=[self.id])
 
 
 class PresentingForm(models.Model):

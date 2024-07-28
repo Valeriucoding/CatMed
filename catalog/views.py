@@ -37,7 +37,13 @@ def medicine_detail(request, medicine_id):
 def medicine_create(request):
     form = MedicineForm(request.POST or None)
     url = reverse("catalog:medicine_create")
-    context = {"form": form, "action": "Create", "url": url}
+    context = {
+        "form": form,
+        "title": "Create Medicine",
+        "action": "Create",
+        "url": url,
+        "back_url": reverse("catalog:medicine_list"),
+    }
     if request.method == "POST":
         if form.is_valid():
             medicine = form.save()
@@ -72,7 +78,13 @@ def medicine_update(request, medicine_id):
     medicine = get_object_or_404(Medicine, id=medicine_id)
     form = MedicineForm(request.POST or None, instance=medicine)
     url = reverse("catalog:medicine_update", args=[medicine.id])
-    context = {"form": form, "action": "Update", "url": url}
+    context = {
+        "form": form,
+        "title": "Update Medicine",
+        "action": "Update",
+        "url": url,
+        "back_url": medicine.get_absolute_url(),
+    }
     if request.method == "POST":
         if form.is_valid():
             form.save()
