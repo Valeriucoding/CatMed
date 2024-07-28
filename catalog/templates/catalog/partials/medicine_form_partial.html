@@ -1,0 +1,38 @@
+<div id="main-container">
+    <div class="container mx-auto p-4">
+        <div class="flex flex-col items-center">
+            <div class="w-full max-w-lg">
+                <button class="btn btn-secondary mb-4" onclick="goBack()">
+                    <i class="fa fa-arrow-left"></i>
+                </button>
+                <h1 class="text-2xl font-bold mb-4">Create Medicine</h1>
+                <form hx-post="{{ url }}" hx-target="#main-container" hx-swap="innerHTML" class="space-y-4">
+                    {% csrf_token %}
+                    <div class="form-control {% if form.name.errors %}form-control-error{% endif %}">
+                        <label for="id_name" class="label">
+                            <span class="label-text">Name</span>
+                        </label>
+                        {{ form.name }}
+                        {% for error in form.name.errors %}
+                            <span class="text-error text-sm mt-1">
+                            {{ error }}
+                        </span>
+                        {% endfor %}
+                    </div>
+                    <div class="form-control {% if form.description.errors %}form-control-error{% endif %}">
+                        <label for="id_description" class="label">
+                            <span class="label-text">Description</span>
+                        </label>
+                        {{ form.description }}
+                        {% for error in form.description.errors %}
+                            <span class="text-error text-sm mt-1">
+                            {{ error }}
+                        </span>
+                        {% endfor %}
+                    </div>
+                    <button type="submit" class="btn btn-primary w-full">{{ action }}</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
