@@ -14,9 +14,7 @@ class MedicineForm(forms.ModelForm):
             "description": forms.Textarea(
                 attrs={"class": "textarea textarea-bordered"}
             ),
-            "diseases": forms.SelectMultiple(
-                attrs={"class": "select select-bordered w-full max-w-xs"}
-            ),
+            "diseases": forms.SelectMultiple(),
         }
 
 

@@ -2,7 +2,8 @@
     <div class="container mx-auto p-4">
         <div class="flex flex-col items-center">
             <div class="w-full max-w-lg">
-                <button class="btn btn-secondary mb-4" hx-get="{{ back_url }}" hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">
+                <button class="btn btn-secondary mb-4" hx-get="{{ back_url }}" hx-target="#main-container"
+                        hx-swap="innerHTML" hx-push-url="true">
                     <i class="fa fa-arrow-left"></i>
                 </button>
                 <h1 class="text-2xl font-bold mb-4">{{ title }}</h1>
@@ -29,19 +30,35 @@
                             {{ error }}
                         </span>
                         {% endfor %}
-                    </div>                    
-                    <div class="form-control {% if form.diseases.errors %}form-control-error{% endif %}">
-                        <label for="id_diseases" class="label">
-                            <span class="label-text">Diseases</span>
-                        </label>
-                        {{ form.diseases }}
-                        {% for error in form.diseases.errors %}
-                            <span class="text-error text-sm mt-1">
-                            {{ error }}
-                        </span>
-                        {% endfor %}
                     </div>
-                    <button type="submit" class="btn btn-primary w-full">{{ action }}</button>
+                    <div class="relative w-full max-w-xs">
+                        <button id="dropdownButton" class="select select-bordered w-full text-left" type="button">
+                            Diseases
+                        </button>
+                        <div id="dropdownMenu"
+                             class="absolute hidden mt-1 w-full bg-base-100 border border-base-300 rounded-lg shadow-lg">
+                            {% for disease in form.diseases %}
+                            <div class="p-2">
+                                <label class="flex items-center space-x-2 cursor-pointer">
+                                    <input type="checkbox" class="checkbox" value="{{ disease }}">
+{#                                    <span>{{ disease }}</span>#}
+                                </label>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {#                    <div class="form-control {% if form.diseases.errors %}form-control-error{% endif %}">#}
+                    {#                        <label for="id_diseases" class="label">#}
+                    {#                            <span class="label-text">Diseases</span>#}
+                    {#                        </label>#}
+                    {#                        {{ form.diseases }}#}
+                    {#                        {% for error in form.diseases.errors %}#}
+                    {#                            <span class="text-error text-sm mt-1">#}
+                    {#                            {{ error }}#}
+                    {#                        </span>#}
+                    {#                        {% endfor %}#}
+                    {#                    </div>#}
+                                        <button type="submit" class="btn btn-primary w-full">{{ action }}</button>
                 </form>
             </div>
         </div>

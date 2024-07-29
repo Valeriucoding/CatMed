@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     setTimeout(function () {
         const alert = document.getElementById('customAlert');
-        console.log(alert);
         if (alert) {
             alert.style.transition = 'opacity 0.5s ease-out';
             alert.style.opacity = '0';
@@ -10,4 +9,34 @@ document.addEventListener("DOMContentLoaded", function () {
             }, 500);
         }
     }, 3000);
+
+
+    const dropdownButton = document.getElementById('dropdownButton');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    dropdownButton.addEventListener('click', () => {
+        dropdownMenu.classList.toggle('hidden');
+    });
+
+    document.addEventListener('click', (event) => {
+        if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+            dropdownMenu.classList.add('hidden');
+        }
+    });
+
+    const checkboxes = dropdownMenu.querySelectorAll('input[type="checkbox"]');
+    checkboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', updateButtonText);
+    });
+
+    function updateButtonText() {
+        const selectedOptions = Array.from(checkboxes)
+            .filter(checkbox => checkbox.checked)
+            .map(checkbox => checkbox.value);
+
+        if (selectedOptions.length > 0) {
+            dropdownButton.textContent = selectedOptions.join(', ');
+        } else {
+            dropdownButton.textContent = 'Who shot first? (Select multiple)';
+        }
+    }
 });
