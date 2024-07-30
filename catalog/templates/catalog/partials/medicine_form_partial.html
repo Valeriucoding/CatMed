@@ -9,47 +9,49 @@
                 <h1 class="text-2xl font-bold mb-4">{{ title }}</h1>
                 <form hx-post="{{ url }}" hx-target="#main-container" hx-swap="innerHTML" class="space-y-4">
                     {% csrf_token %}
-                    <div class="form-control {% if form.name.errors %}form-control-error{% endif %}">
+                    {% for field in form %}
+                    <div class="form-control {% if field.errors %}form-control-error{% endif %}">
                         <label for="id_name" class="label">
-                            <span class="label-text">Name</span>
+                            <span class="label-text">{{ field.label }}</span>
                         </label>
-                        {{ form.name }}
-                        {% for error in form.name.errors %}
+                        {{ field }}
+                        {% for error in field.errors %}
                             <span class="text-error text-sm mt-1">
                             {{ error }}
                         </span>
                         {% endfor %}
                     </div>
-                    <div class="form-control {% if form.description.errors %}form-control-error{% endif %}">
-                        <label for="id_description" class="label">
-                            <span class="label-text">Description</span>
-                        </label>
-                        {{ form.description }}
-                        {% for error in form.description.errors %}
-                            <span class="text-error text-sm mt-1">
-                            {{ error }}
-                        </span>
-                        {% endfor %}
-                    </div>
-                    <div class="relative w-full max-w-xs">
-                        <label for="dropdownButton" class="label">
-                            <span class="label-text
-                            {% if form.diseases.errors %}text-error{% endif %}">Diseases</span>
-                        </label>
-                        <button id="dropdownButton" class="select select-bordered w-full text-left" type="button">
-                            Diseases
-                        </button>
-                        <div id="dropdownMenu"
-                             class="absolute hidden mt-1 w-full bg-base-100 border border-base-300 rounded-lg shadow-lg">
-                            {% for disease in form.diseases %}
-                                <div class="p-2">
-                                    <label class="flex items-center space-x-2 cursor-pointer">
-                                        {{ disease }}
-                                    </label>
-                                </div>
-                            {% endfor %}
-                        </div>
-                    </div>
+                    {% endfor %}
+{#                    <div class="form-control {% if form.description.errors %}form-control-error{% endif %}">#}
+{#                        <label for="id_description" class="label">#}
+{#                            <span class="label-text">Description</span>#}
+{#                        </label>#}
+{#                        {{ form.description }}#}
+{#                        {% for error in form.description.errors %}#}
+{#                            <span class="text-error text-sm mt-1">#}
+{#                            {{ error }}#}
+{#                        </span>#}
+{#                        {% endfor %}#}
+{#                    </div>#}
+{#                    <div class="relative w-full max-w-xs">#}
+{#                        <label for="dropdownButton" class="label">#}
+{#                            <span class="label-text#}
+{#                            {% if form.diseases.errors %}text-error{% endif %}">Diseases</span>#}
+{#                        </label>#}
+{#                        <button id="dropdownButton" class="select select-bordered w-full text-left" type="button">#}
+{#                            Diseases#}
+{#                        </button>#}
+{#                        <div id="dropdownMenu"#}
+{#                             class="absolute hidden mt-1 w-full bg-base-100 border border-base-300 rounded-lg shadow-lg">#}
+{#                            {% for disease in form.diseases %}#}
+{#                                <div class="p-2">#}
+{#                                    <label class="flex items-center space-x-2 cursor-pointer">#}
+{#                                        {{ disease }}#}
+{#                                    </label>#}
+{#                                </div>#}
+{#                            {% endfor %}#}
+{#                        </div>#}
+{#                    </div>#}
                     <button type="submit" class="btn btn-primary w-full">{{ action }}</button>
                 </form>
             </div>

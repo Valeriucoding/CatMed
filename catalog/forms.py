@@ -15,7 +15,9 @@ class MedicineForm(forms.ModelForm):
                 attrs={"class": "textarea textarea-bordered"}
             ),
             "diseases": forms.CheckboxSelectMultiple(attrs={"class": "checkbox"}),
-            "medication_types": forms.CheckboxSelectMultiple(attrs={"class": "checkbox"}),
+            "medication_types": forms.CheckboxSelectMultiple(
+                attrs={"class": "checkbox"}
+            ),
             "body_organs": forms.CheckboxSelectMultiple(attrs={"class": "checkbox"}),
         }
 

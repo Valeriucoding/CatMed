@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }, 3000);
 
-    createDropdown('dropdownButton', 'dropdownMenu');
+    // createDropdown('dropdownButton', 'dropdownMenu');
 });
 
 function createDropdown(dropdownButtonId, dropdownMenuId) {
