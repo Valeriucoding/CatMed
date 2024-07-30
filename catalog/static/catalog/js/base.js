@@ -10,10 +10,14 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     }, 3000);
 
+    createDropdown('dropdownButton', 'dropdownMenu');
+});
 
-    const dropdownButton = document.getElementById('dropdownButton');
-    const dropdownMenu = document.getElementById('dropdownMenu');
+function createDropdown(dropdownButtonId, dropdownMenuId) {
+    const dropdownButton = document.getElementById(dropdownButtonId);
+    const dropdownMenu = document.getElementById(dropdownMenuId);
     const dropdownButtonText = dropdownButton.textContent;
+
     dropdownButton.addEventListener('click', () => {
         dropdownMenu.classList.toggle('hidden');
     });
@@ -28,6 +32,7 @@ document.addEventListener("DOMContentLoaded", function () {
     checkboxes.forEach(checkbox => {
         checkbox.addEventListener('change', updateButtonText);
     });
+    updateButtonText();
 
     function updateButtonText() {
         const selectedOptions = Array.from(checkboxes)
@@ -39,4 +44,4 @@ document.addEventListener("DOMContentLoaded", function () {
             dropdownButton.textContent = dropdownButtonText;
         }
     }
-});
+}

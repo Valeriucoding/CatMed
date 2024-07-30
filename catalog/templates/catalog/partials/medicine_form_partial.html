@@ -32,6 +32,10 @@
                         {% endfor %}
                     </div>
                     <div class="relative w-full max-w-xs">
+                        <label for="dropdownButton" class="label">
+                            <span class="label-text
+                            {% if form.diseases.errors %}text-error{% endif %}">Diseases</span>
+                        </label>
                         <button id="dropdownButton" class="select select-bordered w-full text-left" type="button">
                             Diseases
                         </button>
