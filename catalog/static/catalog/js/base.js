@@ -13,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const dropdownButton = document.getElementById('dropdownButton');
     const dropdownMenu = document.getElementById('dropdownMenu');
+    const dropdownButtonText = dropdownButton.textContent;
     dropdownButton.addEventListener('click', () => {
         dropdownMenu.classList.toggle('hidden');
     });
@@ -31,12 +32,11 @@ document.addEventListener("DOMContentLoaded", function () {
     function updateButtonText() {
         const selectedOptions = Array.from(checkboxes)
             .filter(checkbox => checkbox.checked)
-            .map(checkbox => checkbox.value);
-
+            .map(checkbox => checkbox.parentElement.textContent.trim());
         if (selectedOptions.length > 0) {
             dropdownButton.textContent = selectedOptions.join(', ');
         } else {
-            dropdownButton.textContent = 'Who shot first? (Select multiple)';
+            dropdownButton.textContent = dropdownButtonText;
         }
     }
 });
