@@ -13,45 +13,6 @@ document.addEventListener("DOMContentLoaded", function () {
     createDropdowns();
 });
 
-// function createDropdowns() {
-//     const dropdownButtons = document.querySelectorAll('.dropdownButton');
-//     const dropdownMenus = document.querySelectorAll('.dropdownMenu');
-//
-//     dropdownButtons.forEach((dropdownButton, index) => {
-//         const dropdownMenu = dropdownMenus[index];
-//         const dropdownButtonText = dropdownButton.textContent;
-//         console.log(dropdownButtonText);
-//         dropdownButton.addEventListener('click', () => {
-//             dropdownMenu.classList.toggle('hidden');
-//             console.log('click', dropdownButtonText);
-//         });
-//
-//         document.addEventListener('click', (event) => {
-//             if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
-//                 dropdownMenu.classList.add('hidden');
-//                 console.log('click', dropdownButtonText);
-//             }
-//         });
-//
-//         const checkboxes = dropdownMenu.querySelectorAll('input[type="checkbox"]');
-//         checkboxes.forEach(checkbox => {
-//             checkbox.addEventListener('change', updateButtonText);
-//         });
-//         updateButtonText();
-//
-//         function updateButtonText() {
-//             const selectedOptions = Array.from(checkboxes)
-//                 .filter(checkbox => checkbox.checked)
-//                 .map(checkbox => checkbox.parentElement.textContent.trim());
-//             if (selectedOptions.length > 0) {
-//                 dropdownButton.textContent = selectedOptions.join(', ');
-//             } else {
-//                 dropdownButton.textContent = dropdownButtonText;
-//             }
-//         }
-//     });
-// }
-
 
 function createDropdowns() {
     // Find all elements with IDs ending in 'Button'
@@ -67,17 +28,17 @@ function createDropdowns() {
         }
 
         const dropdownButtonText = dropdownButton.textContent;
-        console.log(dropdownButtonText);
 
-        dropdownButton.addEventListener('click', () => {
+        dropdownButton.addEventListener('click', (event) => {
+            closeOtherDropdowns(dropdownButton);
+
             dropdownMenu.classList.toggle('hidden');
-            console.log('click', dropdownButtonText);
+            event.stopPropagation();
         });
 
         document.addEventListener('click', (event) => {
             if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
                 dropdownMenu.classList.add('hidden');
-                console.log('click', dropdownButtonText);
             }
         });
 
@@ -98,6 +59,18 @@ function createDropdowns() {
             } else {
                 dropdownButton.textContent = dropdownButtonText;
             }
+        }
+
+        function closeOtherDropdowns(currentButton) {
+            dropdownButtons.forEach(button => {
+                if (button !== currentButton) {
+                    const baseId = button.id.replace('Button', '');
+                    const menu = document.getElementById(`${baseId}Menu`);
+                    if (menu && !menu.classList.contains('hidden')) {
+                        menu.classList.add('hidden');
+                    }
+                }
+            });
         }
     });
 }

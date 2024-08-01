@@ -16,12 +16,12 @@
                                                 <span class="label-text
                                                 {% if field.errors %}text-error{% endif %}">{{ field.label }}</span>
                                 </label>
-                                <button id="{{ field.label }}Button" class="select select-bordered w-full text-left dropdownButton"
+                                <button id="{{ field.label }}Button" class="select select-bordered w-full text-left dropdownButton "
                                         type="button">
                                     {{ field.label }}
                                 </button>
-                                <div id="{{ field.label }}Button"
-                                     class="absolute hidden mt-1 w-full bg-base-100 border border-base-300 rounded-lg shadow-lg dropdownMenu">
+                                <div id="{{ field.label }}Menu"
+                                     class="absolute hidden mt-1 w-full bg-base-100 border border-base-300 rounded-lg shadow-lg dropdownMenu z-10">
                                     {% for instance in field %}
                                         <div class="p-2">
                                             <label class="flex items-center space-x-2 cursor-pointer">
@@ -30,6 +30,9 @@
                                         </div>
                                     {% endfor %}
                                 </div>
+                                <button class="btn base-100 bg-transparent">
+                                    <i class="fas fa-plus"></i>
+                                </button>
                             </div>
                         {% else %}
                             <div class="form-control {% if field.errors %}form-control-error{% endif %}">
