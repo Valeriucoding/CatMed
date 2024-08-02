@@ -124,9 +124,28 @@ def medicine_delete(request, medicine_id):
     return HttpResponse(status=405)
 
 
-
 def disease_create(request):
     form = DiseaseForm(request.POST or None)
+    if request.method == "POST":
+        if form.is_valid():
+            disease = form.save()
+            if request.htmx:
+                return HttpResponse(
+                    status=200,
+                    headers={
+                        "HX-Trigger": "htmx:refresh",
+                        "HX-Target": "#disease-select",
+                    },
+                )
+
+    if request.htmx:
+        return render(
+            request,
+            "catalog/modals/modal_form.html",
+            {"form": form},
+        )
+
+
 def medicine_create(request):
     form = MedicineForm(request.POST or None)
     url = reverse("catalog:medicine_create")

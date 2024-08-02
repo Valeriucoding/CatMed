@@ -30,7 +30,7 @@
                                         </div>
                                     {% endfor %}
                                 </div>
-                                <button class="btn base-100 bg-transparent">
+                                <button type="button" class="btn base-100 bg-transparent" onclick="disease_modal.showModal()" hx-get="">
                                     <i class="fas fa-plus"></i>
                                 </button>
                             </div>
@@ -48,21 +48,19 @@
                             </div>
                         {% endif %}
                     {% endfor %}
-                    {#                                        <div class="form-control {% if form.description.errors %}form-control-error{% endif %}">#}
-                    {#                                            <label for="id_description" class="label">#}
-                    {#                                                <span class="label-text">Description</span>#}
-                    {#                                            </label>#}
-                    {#                                            {{ form.description }}#}
-                    {#                                            {% for error in form.description.errors %}#}
-                    {#                                                <span class="text-error text-sm mt-1">#}
-                    {#                                                {{ error }}#}
-                    {#                                            </span>#}
-                    {#                                            {% endfor %}#}
-                    {#                                        </div>#}
-
                     <button type="submit" class="btn btn-primary w-full">{{ action }}</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+<dialog id="disease_modal" class="modal">
+  <div class="modal-box">
+    <h3 class="text-lg font-bold">Hello!</h3>
+    <p class="py-4">Press ESC key or click outside to close</p>
+  </div>
+  <form method="dialog" class="modal-backdrop">
+    <button>close</button>
+  </form>
+</dialog>

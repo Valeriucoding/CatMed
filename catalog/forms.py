@@ -1,6 +1,6 @@
 from django import forms
 
-from catalog.models import Medicine
+from catalog.models import Medicine, Disease, BodyOrgan
 
 
 class MedicineForm(forms.ModelForm):
@@ -22,25 +22,34 @@ class MedicineForm(forms.ModelForm):
         }
 
 
-class MedicationTypeForm(forms.Form):
-    name = forms.CharField(
-        label="Name",
-        max_length=255,
-        widget=forms.TextInput(attrs={"class": "input input-bordered w-full max-w-xs"}),
-    )
+class MedicationTypeForm(forms.ModelForm):
+    class Meta:
+        model = Disease
+        fields = ["name"]
+        widgets = {
+            "name": forms.TextInput(
+                attrs={"class": "input input-bordered w-full max-w-xs"}
+            )
+        }
 
 
-class DiseaseForm(forms.Form):
-    name = forms.CharField(
-        label="Name",
-        max_length=255,
-        widget=forms.TextInput(attrs={"class": "input input-bordered w-full max-w-xs"}),
-    )
+class DiseaseForm(forms.ModelForm):
+    class Meta:
+        model = Disease
+        fields = ["name"]
+        widgets = {
+            "name": forms.TextInput(
+                attrs={"class": "input input-bordered w-full max-w-xs"}
+            )
+        }
 
 
-class BodyOrganForm(forms.Form):
-    name = forms.CharField(
-        label="Name",
-        max_length=255,
-        widget=forms.TextInput(attrs={"class": "input input-bordered w-full max-w-xs"}),
-    )
+class BodyOrganForm(forms.ModelForm):
+    class Meta:
+        model = BodyOrgan
+        fields = ["name"]
+        widgets = {
+            "name": forms.TextInput(
+                attrs={"class": "input input-bordered w-full max-w-xs"}
+            )
+        }

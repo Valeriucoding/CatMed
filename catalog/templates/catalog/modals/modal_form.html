@@ -1,0 +1,23 @@
+<dialog id="{{ model }}_modal" class="modal">
+  <div class="modal-box">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+    </form>
+    <form method="post" action="{% url 'your_view_name' %}">
+      {% csrf_token %}
+      {% for field in form %}
+        <div class="form-control {% if field.errors %}form-control-error{% endif %}">
+          <label for="{{ field.id_for_label }}" class="label">
+            <span class="label-text">{{ field.label }}</span>
+          </label>
+          {{ field }}
+          {% for error in field.errors %}
+            <span class="text-error text-sm mt-1">{{ error }}</span>
+          {% endfor %}
+        </div>
+      {% endfor %}
+      
+      <button type="submit" class="btn btn-primary mt-4">Submit</button>
+    </form>
+  </div>
+</dialog>
