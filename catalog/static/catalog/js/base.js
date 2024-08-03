@@ -11,9 +11,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 3000);
 
     createDropdowns();
-    
+
     document.body.addEventListener('htmx:afterOnLoad', function (event) {
-        if (event.detail.elt.id === 'diseaseModalContent') {
+        if (event.detail.elt.id === 'ModalContent') {
             let response = event.detail.xhr.response;
 
             if (typeof response === 'string') {
@@ -21,22 +21,24 @@ document.addEventListener("DOMContentLoaded", function () {
                     response = JSON.parse(response);
                 } catch (e) {
                     console.log('Received HTML response, updating modal content');
-                    document.getElementById('diseaseModalContent').innerHTML = response;
+                    document.getElementById('ModalContent').innerHTML = response;
                     return;
                 }
             }
 
             if (response && response.status === 'success') {
                 console.log('Disease added:', response);
-
-                const dropdownMenu = document.getElementById('DiseasesMenu');
+                // capitalized model name
+                const capitalizedModel = response.model.charAt(0).toUpperCase() + response.model.slice(1);
+                console.log('Capitalized model:', capitalizedModel);
+                const dropdownMenu = document.getElementById(`${capitalizedModel}Menu`);
                 if (dropdownMenu) {
                     const newItem = document.createElement('div');
                     newItem.className = 'p-2';
                     newItem.innerHTML = `
                     <label class="flex items-center space-x-2 cursor-pointer">
-                        <label for="id_diseases_${response.id}">
-                            <input type="checkbox" name="diseases" value="${response.id}" class="checkbox" id="id_diseases_${response.id}">
+                        <label for="id_${response.model}_${response.id}">
+                            <input type="checkbox" name="diseases" value="${response.id}" class="checkbox" id="id_${response.model}_${response.id}">
                             ${response.name}
                         </label>
                     </label>
@@ -52,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     console.error('Dropdown menu element not found');
                 }
 
-                const modal = document.getElementById('disease_modal');
+                const modal = document.getElementById('add_modal');
                 if (modal) {
                     modal.close();
                 } else {
@@ -66,7 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 function loadDiseaseModal() {
-    document.getElementById('disease_modal').showModal();
+    document.getElementById('add_modal').showModal();
 }
 
 function createDropdowns() {

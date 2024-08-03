@@ -127,23 +127,27 @@ def medicine_delete(request, medicine_id):
 
 def disease_create(request):
     form = DiseaseForm(request.POST or None)
+    url = reverse("catalog:disease_create")
+    context = {"form": form, "model": "disease", "url": url}
     if request.method == "POST":
         if form.is_valid():
             disease = form.save()
             return JsonResponse(
-                {"id": disease.id, "name": disease.name, "status": "success"},
+                {
+                    "id": disease.id,
+                    "name": disease.name,
+                    "status": "success",
+                    "model": "diseases",
+                },
                 status=200,
             )
         else:
 
-            context = {"form": form, "model": "disease"}
             html_content = render_to_string(
                 "catalog/modals/modal_form.html", context, request
             )
             return HttpResponse(html_content)
 
-    # Initial GET request
-    context = {"form": form, "model": "disease"}
     html_content = render_to_string("catalog/modals/modal_form.html", context, request)
     return HttpResponse(html_content)
 

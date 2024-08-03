@@ -32,7 +32,7 @@
                                     {% endfor %}
                                 </div>
                                 <button type="button" class="btn base-100 bg-transparent" onclick="loadDiseaseModal()"
-                                        hx-get="{% url 'catalog:disease_create' %}" hx-target="#diseaseModalContent">
+                                        hx-get="{% url 'catalog:disease_create' %}" hx-target="#ModalContent">
                                     <i class="fas fa-plus"></i>
                                 </button>
                             </div>
@@ -57,11 +57,11 @@
     </div>
 </div>
 
-<dialog id="disease_modal" class="modal">
+<dialog id="add_modal" class="modal">
     <div class="modal-box">
         <form method="dialog">
             <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
         </form>
-        <div id="diseaseModalContent"></div>
+        <div id="ModalContent"></div>
     </div>
 </dialog>

@@ -1,4 +1,4 @@
-<form hx-post="{% url 'catalog:disease_create' %}" hx-target="#diseaseModalContent">
+<form hx-post="{{ url }}" hx-target="#ModalContent">
   {% csrf_token %}
   {% for field in form %}
     <div class="form-control {% if field.errors %}form-control-error{% endif %}">
