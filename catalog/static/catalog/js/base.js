@@ -11,8 +11,63 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 3000);
 
     createDropdowns();
+    
+    document.body.addEventListener('htmx:afterOnLoad', function (event) {
+        if (event.detail.elt.id === 'diseaseModalContent') {
+            let response = event.detail.xhr.response;
+
+            if (typeof response === 'string') {
+                try {
+                    response = JSON.parse(response);
+                } catch (e) {
+                    console.log('Received HTML response, updating modal content');
+                    document.getElementById('diseaseModalContent').innerHTML = response;
+                    return;
+                }
+            }
+
+            if (response && response.status === 'success') {
+                console.log('Disease added:', response);
+
+                const dropdownMenu = document.getElementById('DiseasesMenu');
+                if (dropdownMenu) {
+                    const newItem = document.createElement('div');
+                    newItem.className = 'p-2';
+                    newItem.innerHTML = `
+                    <label class="flex items-center space-x-2 cursor-pointer">
+                        <label for="id_diseases_${response.id}">
+                            <input type="checkbox" name="diseases" value="${response.id}" class="checkbox" id="id_diseases_${response.id}">
+                            ${response.name}
+                        </label>
+                    </label>
+                `;
+                    dropdownMenu.appendChild(newItem);
+
+                    const dropdownButton = document.getElementById('DiseasesButton');
+                    if (dropdownButton) {
+                        let currentText = dropdownButton.textContent;
+                        dropdownButton.textContent = currentText ? `${currentText}, ${response.name}` : response.name;
+                    }
+                } else {
+                    console.error('Dropdown menu element not found');
+                }
+
+                const modal = document.getElementById('disease_modal');
+                if (modal) {
+                    modal.close();
+                } else {
+                    console.error('Modal element not found');
+                }
+            } else {
+                console.error('Unexpected response format:', response);
+            }
+        }
+    });
 });
 
+function loadDiseaseModal() {
+    document.getElementById('disease_modal').showModal();
+}
 
 function createDropdowns() {
     const dropdownButtons = Array.from(document.querySelectorAll('[id$="Button"]'));
@@ -73,15 +128,3 @@ function createDropdowns() {
         }
     });
 }
-
-
-function loadDiseaseModal() {
-    document.getElementById('disease_modal').showModal();
-}
-
-// document.body.addEventListener('diseaseAdded', function () {
-//     document.getElementById('disease_modal').close();
-//     console.log('Disease added');
-//     // refresh disease dropdown here
-//     // make an AJAX call to get the updated list of diseases
-// });

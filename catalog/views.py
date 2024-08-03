@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.http import HttpResponse, HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.template.loader import render_to_string
 from django.urls import reverse
@@ -130,14 +130,19 @@ def disease_create(request):
     if request.method == "POST":
         if form.is_valid():
             disease = form.save()
-            if request.htmx:
-                return HttpResponse(
-                    status=200,
-                    headers={
-                        "HX-Trigger": "diseaseAdded",
-                    },
-                )
+            return JsonResponse(
+                {"id": disease.id, "name": disease.name, "status": "success"},
+                status=200,
+            )
+        else:
 
+            context = {"form": form, "model": "disease"}
+            html_content = render_to_string(
+                "catalog/modals/modal_form.html", context, request
+            )
+            return HttpResponse(html_content)
+
+    # Initial GET request
     context = {"form": form, "model": "disease"}
     html_content = render_to_string("catalog/modals/modal_form.html", context, request)
     return HttpResponse(html_content)
