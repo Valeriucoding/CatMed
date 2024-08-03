@@ -16,7 +16,8 @@
                                                 <span class="label-text
                                                 {% if field.errors %}text-error{% endif %}">{{ field.label }}</span>
                                 </label>
-                                <button id="{{ field.label }}Button" class="select select-bordered w-full text-left dropdownButton "
+                                <button id="{{ field.label }}Button"
+                                        class="select select-bordered w-full text-left dropdownButton "
                                         type="button">
                                     {{ field.label }}
                                 </button>
@@ -30,7 +31,8 @@
                                         </div>
                                     {% endfor %}
                                 </div>
-                                <button type="button" class="btn base-100 bg-transparent" onclick="disease_modal.showModal()" hx-get="">
+                                <button type="button" class="btn base-100 bg-transparent" onclick="loadDiseaseModal()"
+                                        hx-get="{% url 'catalog:disease_create' %}" hx-target="#diseaseModalContent">
                                     <i class="fas fa-plus"></i>
                                 </button>
                             </div>
@@ -56,11 +58,10 @@
 </div>
 
 <dialog id="disease_modal" class="modal">
-  <div class="modal-box">
-    <h3 class="text-lg font-bold">Hello!</h3>
-    <p class="py-4">Press ESC key or click outside to close</p>
-  </div>
-  <form method="dialog" class="modal-backdrop">
-    <button>close</button>
-  </form>
+    <div class="modal-box">
+        <form method="dialog">
+            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+        </form>
+        <div id="diseaseModalContent"></div>
+    </div>
 </dialog>

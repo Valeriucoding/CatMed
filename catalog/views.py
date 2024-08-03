@@ -1,6 +1,7 @@
 from django.contrib import messages
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
+from django.template.loader import render_to_string
 from django.urls import reverse
 
 from catalog.forms import MedicineForm, DiseaseForm
@@ -133,54 +134,50 @@ def disease_create(request):
                 return HttpResponse(
                     status=200,
                     headers={
-                        "HX-Trigger": "htmx:refresh",
-                        "HX-Target": "#disease-select",
+                        "HX-Trigger": "diseaseAdded",
                     },
                 )
 
-    if request.htmx:
-        return render(
-            request,
-            "catalog/modals/modal_form.html",
-            {"form": form},
-        )
+    context = {"form": form, "model": "disease"}
+    html_content = render_to_string("catalog/modals/modal_form.html", context, request)
+    return HttpResponse(html_content)
 
 
-def medicine_create(request):
-    form = MedicineForm(request.POST or None)
-    url = reverse("catalog:medicine_create")
-    context = {
-        "form": form,
-        "title": "Create Medicine",
-        "action": "Create",
-        "url": url,
-        "back_url": reverse("catalog:medicine_list"),
-    }
-    if request.method == "POST":
-        if form.is_valid():
-            medicine = form.save()
-            if request.htmx:
-                return HttpResponse(
-                    status=200,
-                    headers={
-                        "HX-Redirect": reverse(
-                            "catalog:medicine_detail", args=[medicine.id]
-                        )
-                    },
-                )
-            return HttpResponseRedirect(
-                reverse("catalog:medicine_detail", args=[medicine.id])
-            )
-        else:
-            return render(
-                request, "catalog/partials/medicine_form_partial.html", context
-            )
-
-    if request.htmx:
-        return render(
-            request,
-            "catalog/partials/medicine_form_partial.html",
-            context,
-        )
-
-    return render(request, "catalog/medicine_form.html", context)
+# def medicine_create(request):
+#     form = MedicineForm(request.POST or None)
+#     url = reverse("catalog:medicine_create")
+#     context = {
+#         "form": form,
+#         "title": "Create Medicine",
+#         "action": "Create",
+#         "url": url,
+#         "back_url": reverse("catalog:medicine_list"),
+#     }
+#     if request.method == "POST":
+#         if form.is_valid():
+#             medicine = form.save()
+#             if request.htmx:
+#                 return HttpResponse(
+#                     status=200,
+#                     headers={
+#                         "HX-Redirect": reverse(
+#                             "catalog:medicine_detail", args=[medicine.id]
+#                         )
+#                     },
+#                 )
+#             return HttpResponseRedirect(
+#                 reverse("catalog:medicine_detail", args=[medicine.id])
+#             )
+#         else:
+#             return render(
+#                 request, "catalog/partials/medicine_form_partial.html", context
+#             )
+#
+#     if request.htmx:
+#         return render(
+#             request,
+#             "catalog/partials/medicine_form_partial.html",
+#             context,
+#         )
+#
+#     return render(request, "catalog/medicine_form.html", context)

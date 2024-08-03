@@ -15,7 +15,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 function createDropdowns() {
-    // Find all elements with IDs ending in 'Button'
     const dropdownButtons = Array.from(document.querySelectorAll('[id$="Button"]'));
 
     dropdownButtons.forEach(dropdownButton => {
@@ -74,3 +73,15 @@ function createDropdowns() {
         }
     });
 }
+
+
+function loadDiseaseModal() {
+    document.getElementById('disease_modal').showModal();
+}
+
+// document.body.addEventListener('diseaseAdded', function () {
+//     document.getElementById('disease_modal').close();
+//     console.log('Disease added');
+//     // refresh disease dropdown here
+//     // make an AJAX call to get the updated list of diseases
+// });
