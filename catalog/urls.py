@@ -9,5 +9,6 @@ urlpatterns = [
     path("create/", views.medicine_create, name="medicine_create"),
     path("<int:medicine_id>/update/", views.medicine_update, name="medicine_update"),
     path("<int:medicine_id>/delete/", views.medicine_delete, name="medicine_delete"),
+    path("diseases/", views.disease_list, name="disease_list"),
     path("disease/create/", views.disease_create, name="disease_create"),
 ]

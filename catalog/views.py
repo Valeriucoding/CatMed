@@ -5,7 +5,7 @@ from django.template.loader import render_to_string
 from django.urls import reverse
 
 from catalog.forms import MedicineForm, DiseaseForm
-from catalog.models import Medicine
+from catalog.models import Medicine, Disease
 
 
 def medicine_list(request):
@@ -152,41 +152,9 @@ def disease_create(request):
     return HttpResponse(html_content)
 
 
-# def medicine_create(request):
-#     form = MedicineForm(request.POST or None)
-#     url = reverse("catalog:medicine_create")
-#     context = {
-#         "form": form,
-#         "title": "Create Medicine",
-#         "action": "Create",
-#         "url": url,
-#         "back_url": reverse("catalog:medicine_list"),
-#     }
-#     if request.method == "POST":
-#         if form.is_valid():
-#             medicine = form.save()
-#             if request.htmx:
-#                 return HttpResponse(
-#                     status=200,
-#                     headers={
-#                         "HX-Redirect": reverse(
-#                             "catalog:medicine_detail", args=[medicine.id]
-#                         )
-#                     },
-#                 )
-#             return HttpResponseRedirect(
-#                 reverse("catalog:medicine_detail", args=[medicine.id])
-#             )
-#         else:
-#             return render(
-#                 request, "catalog/partials/medicine_form_partial.html", context
-#             )
-#
-#     if request.htmx:
-#         return render(
-#             request,
-#             "catalog/partials/medicine_form_partial.html",
-#             context,
-#         )
-#
-#     return render(request, "catalog/medicine_form.html", context)
+def disease_list(request):
+    diseases = Disease.objects.all()
+    context = {"diseases": diseases}
+    if request.htmx:
+        return render(request, "catalog/partials/disease_list_partial.html", context)
+    return render(request, "catalog/disease_list.html", context)
