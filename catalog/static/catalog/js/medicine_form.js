@@ -1,6 +1,9 @@
-htmx.onLoad(function (content) {
-    console.log("add medicine")
+function handleAfterLoad() {
     createDropdowns();
+    handleModalContent();
+}
+
+function handleModalContent() {
     document.body.addEventListener('htmx:afterOnLoad', function (event) {
         if (event.detail.elt.id === 'ModalContent') {
             let response = event.detail.xhr.response;
@@ -17,7 +20,6 @@ htmx.onLoad(function (content) {
 
             if (response && response.status === 'success') {
                 console.log('Disease added:', response);
-                // capitalized model name
                 const capitalizedModel = response.model.charAt(0).toUpperCase() + response.model.slice(1);
                 console.log('Capitalized model:', capitalizedModel);
                 const dropdownMenu = document.getElementById(`${capitalizedModel}Menu`);
@@ -54,12 +56,7 @@ htmx.onLoad(function (content) {
             }
         }
     });
-
-    function loadDiseaseModal() {
-        document.getElementById('add_modal').showModal();
-    }
-
-});
+}
 
 
 function createDropdowns() {
@@ -121,3 +118,10 @@ function createDropdowns() {
         }
     });
 }
+
+function loadDiseaseModal() {
+    document.getElementById('add_modal').showModal();
+}
+
+document.addEventListener('htmx:afterOnLoad', handleAfterLoad);
+document.addEventListener('DOMContentLoaded', handleAfterLoad);

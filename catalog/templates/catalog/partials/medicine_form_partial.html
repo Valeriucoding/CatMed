@@ -66,14 +66,3 @@
         <div id="ModalContent"></div>
     </div>
 </dialog>
-
-<script>
-htmx.onLoad(function(content) {
-    if (content.id === "main-container") {
-        // Load and execute your medicine form script
-        var script = document.createElement('script');
-        script.src = "{% static 'js/medicine_form.js' %}";
-        document.head.appendChild(script);
-    }
-});
-</script>
