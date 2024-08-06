@@ -1,38 +1,68 @@
-<div id="main-container">
+{% load static %}
+<div id="main-container" hx-on="htmx:afterSettle: loadMedicineFormScript()">
     <div class="container mx-auto p-4">
         <div class="flex flex-col items-center">
             <div class="w-full max-w-lg">
-                <button class="btn btn-secondary mb-4" onclick="goBack()">
+                <button class="btn btn-secondary mb-4" hx-get="{{ back_url }}" hx-target="#main-container"
+                        hx-swap="innerHTML" hx-push-url="true">
                     <i class="fa fa-arrow-left"></i>
                 </button>
-                <h1 class="text-2xl font-bold mb-4">Create Medicine</h1>
+                <h1 class="text-2xl font-bold mb-4">{{ title }}</h1>
                 <form hx-post="{{ url }}" hx-target="#main-container" hx-swap="innerHTML" class="space-y-4">
                     {% csrf_token %}
-                    <div class="form-control {% if form.name.errors %}form-control-error{% endif %}">
-                        <label for="id_name" class="label">
-                            <span class="label-text">Name</span>
-                        </label>
-                        {{ form.name }}
-                        {% for error in form.name.errors %}
-                            <span class="text-error text-sm mt-1">
+                    {% for field in form %}
+                        {% if field.field.widget.input_type == 'checkbox' %}
+                            <div class="relative w-full max-w-xs">
+                                <label for="dropdownButton" class="label">
+                                                <span class="label-text
+                                                {% if field.errors %}text-error{% endif %}">{{ field.label }}</span>
+                                </label>
+                                <button id="{{ field.label }}Button"
+                                        class="select select-bordered w-full text-left dropdownButton "
+                                        type="button">
+                                    {{ field.label }}
+                                </button>
+                                <div id="{{ field.label }}Menu"
+                                     class="absolute hidden mt-1 w-full bg-base-100 border border-base-300 rounded-lg shadow-lg dropdownMenu z-10">
+                                    {% for instance in field %}
+                                        <div class="p-2">
+                                            <label class="flex items-center space-x-2 cursor-pointer">
+                                                {{ instance }}
+                                            </label>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                                <button type="button" class="btn base-100 bg-transparent" onclick="loadDiseaseModal()"
+                                        hx-get="{% url 'catalog:disease_create' %}" hx-target="#ModalContent">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                        {% else %}
+                            <div class="form-control {% if field.errors %}form-control-error{% endif %}">
+                                <label for="id_name" class="label">
+                                    <span class="label-text">{{ field.label }}</span>
+                                </label>
+                                {{ field }}
+                                {% for error in field.errors %}
+                                    <span class="text-error text-sm mt-1">
                             {{ error }}
                         </span>
-                        {% endfor %}
-                    </div>
-                    <div class="form-control {% if form.description.errors %}form-control-error{% endif %}">
-                        <label for="id_description" class="label">
-                            <span class="label-text">Description</span>
-                        </label>
-                        {{ form.description }}
-                        {% for error in form.description.errors %}
-                            <span class="text-error text-sm mt-1">
-                            {{ error }}
-                        </span>
-                        {% endfor %}
-                    </div>
+                                {% endfor %}
+                            </div>
+                        {% endif %}
+                    {% endfor %}
                     <button type="submit" class="btn btn-primary w-full">{{ action }}</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
+<dialog id="add_modal" class="modal">
+    <div class="modal-box">
+        <form method="dialog">
+            <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+        </form>
+        <div id="ModalContent"></div>
+    </div>
+</dialog>

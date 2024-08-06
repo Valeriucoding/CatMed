@@ -1,9 +1,12 @@
 <div id="main-container">
-    <button class="btn btn-secondary mb-4" hx-get="{% url "catalog:medicine_list" %}" hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">
+    <button class="btn btn-secondary mb-4" hx-get="{% url "catalog:medicine_list" %}" hx-target="#main-container"
+            hx-swap="innerHTML" hx-push-url="true">
         <i class="fa fa-arrow-left"></i>
     </button>
-    <button class="btn btn-primary mb-4" hx-get="{% url 'catalog:medicine_update' medicine.id %}" hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true"><i class="fas fa-edit"></i></button>
-    
+    <button class="btn btn-primary mb-4" hx-get="{% url 'catalog:medicine_update' medicine.id %}"
+            hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true"
+    ><i class="fas fa-edit"></i></button>
+
     <button class="btn btn-danger mt-4" onclick="delete_modal.showModal()"><i class="fas fa-trash"></i></button>
     <dialog id="delete_modal" class="modal">
         <div class="modal-box">
@@ -13,7 +16,9 @@
                 <form method="dialog">
                     <button class="btn btn-secondary mr-2">Cancel</button>
                 </form>
-                <button class="btn btn-danger" hx-delete="{% url 'catalog:medicine_delete' medicine.id %}" hx-target="#main-container" hx-swap="innerHTML">Delete</button>
+                <button class="btn btn-danger" hx-delete="{% url 'catalog:medicine_delete' medicine.id %}"
+                        hx-target="#main-container" hx-swap="innerHTML">Delete
+                </button>
             </div>
         </div>
     </dialog>
