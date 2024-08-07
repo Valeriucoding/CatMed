@@ -28,5 +28,16 @@ function changeToSelectedState() {
     }
 }
 
+function showDiseaseDeleteModal(button) {
+    const diseaseName = button.getAttribute('data-disease-name');
+
+    const modal = document.getElementById('disease_delete_modal');
+    const messageElement = document.getElementById('delete_modal_message');
+
+    messageElement.textContent = `Are you sure you want to delete ${diseaseName}? This action cannot be undone.`;
+
+    modal.showModal();
+}
+
 document.addEventListener('htmx:pushedIntoHistory', handleBaseAfterLoad);
 document.addEventListener('DOMContentLoaded', handleBaseAfterLoad);

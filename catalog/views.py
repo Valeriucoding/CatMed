@@ -166,6 +166,21 @@ def disease_edit(request, disease_id):
     if request.method == "POST":
         disease.name = request.POST.get("name")
         disease.save()
-        return render(request, "partials/disease_display.html", {"disease": disease})
+        return render(
+            request, "catalog/partials/disease_display.html", {"disease": disease}
+        )
 
-    # return render(request, "partials/disease_form.html", {"disease": disease})
+    return render(request, "catalog/partials/disease_form.html", {"disease": disease})
+
+
+def disease_delete(request, medicine_id):
+    disease = get_object_or_404(Disease, id=medicine_id)
+    if request.method == "DELETE":
+        disease.delete()
+        messages.success(request, f"{disease.name} has been successfully deleted.")
+        if request.htmx:
+            return HttpResponse(
+                status=200, headers={"HX-Redirect": reverse("catalog:disease_list")}
+            )
+        return HttpResponseRedirect(reverse("catalog:disease_list"))
+    return HttpResponse(status=405)

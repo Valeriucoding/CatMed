@@ -28,14 +28,31 @@
             {% for disease in diseases %}
                 <tr>
                     <td id="disease-{{ disease.id }}" class="underline select-none">{{ disease.name }}</td>
-                    <td><i class="fa fa-edit text-primary cursor-pointer"
-                           hx-get="{% url 'edit_disease' disease.id %}"
-                           hx-trigger="edit"
+                    <td>
+                        <i class="fa fa-edit text-primary cursor-pointer"
+                           hx-get="{% url 'catalog:disease_edit' disease.id %}"
                            hx-target="#disease-{{ disease.id }}"
-                           hx-swap="innerHTML"></i><i class="ml-3 fa fa-trash text-warning"></i></td>
+                           hx-swap="innerHTML"></i>
+                        <i class="ml-3 fa fa-trash text-warning" onclick="showDiseaseDeleteModal()"></i>
+                    </td>
                 </tr>
             {% endfor %}
             </tbody>
         </table>
     </div>
 </div>
+
+<dialog id="disease_delete_modal" class="modal">
+    <div class="modal-box">
+        <h3 class="text-lg font-bold">Confirm Deletion</h3>
+        <p class="py-4">Are you sure you want to delete this disease? This action cannot be undone.</p>
+        <div class="modal-action">
+            <form method="dialog">
+                <button class="btn btn-secondary mr-2">Cancel</button>
+            </form>
+            <button class="btn btn-danger" hx-delete="{% url 'catalog:disease_delete' disease.id %}"
+                    hx-target="#main-container" hx-swap="innerHTML">Delete
+            </button>
+        </div>
+    </div>
+</dialog>
