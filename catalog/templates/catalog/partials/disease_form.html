@@ -1,0 +1,7 @@
+<form hx-post="{% url 'edit_disease' disease.id %}"
+      hx-trigger="submit"
+      hx-target="#disease-{{ disease.id }}"
+      hx-swap="innerHTML">
+    <input type="text" name="name" value="{{ disease.name }}" class="form-input">
+    <button type="submit" class="btn btn-primary">Save</button>
+</form>

@@ -19,13 +19,12 @@ function removeAlert() {
 
 function changeToSelectedState() {
     const currentPath = window.location.pathname;
-    // get by id
     const diseaseLink = document.getElementById('disease-sidebar-item');
     console.log(currentPath)
     if (currentPath === "/diseases/") {
-        diseaseLink.classList.add('active');
+        diseaseLink.classList.add('active-nav');
     } else {
-        diseaseLink.classList.remove('active');
+        diseaseLink.classList.remove('active-nav');
     }
 }
 

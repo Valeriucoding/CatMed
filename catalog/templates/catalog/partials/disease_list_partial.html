@@ -1,3 +1,4 @@
+{% block title %}Disease list{% endblock title %}
 {% if alert_message %}
     <div id="customAlert" role="alert" class="alert alert-success mb-4 custom-alert">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
@@ -26,8 +27,12 @@
             <tbody>
             {% for disease in diseases %}
                 <tr>
-                    <td class="underline select-none">{{ disease.name }}</td>
-                    <td><i class="fa fa-edit text-primary"></i><i class="ml-3 fa fa-trash text-warning"></i></td>
+                    <td id="disease-{{ disease.id }}" class="underline select-none">{{ disease.name }}</td>
+                    <td><i class="fa fa-edit text-primary cursor-pointer"
+                           hx-get="{% url 'edit_disease' disease.id %}"
+                           hx-trigger="edit"
+                           hx-target="#disease-{{ disease.id }}"
+                           hx-swap="innerHTML"></i><i class="ml-3 fa fa-trash text-warning"></i></td>
                 </tr>
             {% endfor %}
             </tbody>

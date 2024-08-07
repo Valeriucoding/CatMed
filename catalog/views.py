@@ -158,3 +158,14 @@ def disease_list(request):
     if request.htmx:
         return render(request, "catalog/partials/disease_list_partial.html", context)
     return render(request, "catalog/disease_list.html", context)
+
+
+def disease_edit(request, disease_id):
+    disease = get_object_or_404(Disease, id=disease_id)
+
+    if request.method == "POST":
+        disease.name = request.POST.get("name")
+        disease.save()
+        return render(request, "partials/disease_display.html", {"disease": disease})
+
+    # return render(request, "partials/disease_form.html", {"disease": disease})
