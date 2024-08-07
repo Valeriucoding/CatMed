@@ -1,4 +1,10 @@
-document.addEventListener("DOMContentLoaded", function () {
+function handleBaseAfterLoad() {
+    removeAlert()
+    changeToSelectedState()
+}
+
+
+function removeAlert() {
     setTimeout(function () {
         const alert = document.getElementById('customAlert');
         if (alert) {
@@ -9,5 +15,19 @@ document.addEventListener("DOMContentLoaded", function () {
             }, 500);
         }
     }, 3000);
-});
+}
 
+function changeToSelectedState() {
+    const currentPath = window.location.pathname;
+    // get by id
+    const diseaseLink = document.getElementById('disease-sidebar-item');
+    console.log(currentPath)
+    if (currentPath === "/diseases/") {
+        diseaseLink.classList.add('active');
+    } else {
+        diseaseLink.classList.remove('active');
+    }
+}
+
+document.addEventListener('htmx:pushedIntoHistory', handleBaseAfterLoad);
+document.addEventListener('DOMContentLoaded', handleBaseAfterLoad);

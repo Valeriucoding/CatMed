@@ -13,3 +13,9 @@
     max-width: 250px;
     font-size: 0.875rem;
 }
+
+.nav-link.active {
+    /* Your focus state styles here */
+    font-weight: bold;
+    color: var(--fallback-bc, oklch(var(--bc) / var(--tw-text-opacity)));
+}
