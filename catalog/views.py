@@ -10,12 +10,19 @@ from catalog.models import Medicine, Disease
 
 def medicine_list(request):
     medicines = Medicine.objects.all()
-    context = {"medicines": medicines}
+    disease_ids = request.GET.getlist("disease")
 
-    # Check for messages
+    diseases_params = []
+
+    if disease_ids:
+        medicines = medicines.filter(diseases__id__in=disease_ids).distinct()
+        diseases = Disease.objects.filter(id__in=disease_ids)
+        diseases_params = list(diseases.values_list("name", flat=True))
+
+    context = {"medicines": medicines, "diseases_params": diseases_params}
+
     storage = messages.get_messages(request)
     if storage:
-        # Add the first message to the context
         context["alert_message"] = list(storage)[0]
         storage.used = True
 

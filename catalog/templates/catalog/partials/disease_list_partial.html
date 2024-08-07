@@ -27,7 +27,7 @@
             <tbody>
             {% for disease in diseases %}
                 <tr>
-                    <td id="disease-{{ disease.id }}" class="underline select-none">{{ disease.name }}</td>
+                    <td id="disease-{{ disease.id }}" class="underline"><a href="#" hx-get="{% url "catalog:medicine_list" %}?disease={{ disease.id }}" hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">{{ disease.name }}</a></td>
                     <td>
                         <i class="fa fa-edit text-primary cursor-pointer"
                            hx-get="{% url 'catalog:disease_edit' disease.id %}"

@@ -13,7 +13,11 @@
             <i class="fas fa-plus"></i>
         </span>
 </div>
+{% for disease_param in diseases_params %}
+<div class="badge badge-secondary badge-lg">{{ diseases_param }}</div>
+{% endfor %}
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+
     {% for medicine in medicines %}
         <div class="card bg-base-100 w-72 shadow-xl" hx-get="{% url "catalog:medicine_detail" medicine.id %}" hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">
             <figure>
