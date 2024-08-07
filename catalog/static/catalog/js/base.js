@@ -20,7 +20,6 @@ function removeAlert() {
 function changeToSelectedState() {
     const currentPath = window.location.pathname;
     const diseaseLink = document.getElementById('disease-sidebar-item');
-    console.log(currentPath)
     if (currentPath === "/diseases/") {
         diseaseLink.classList.add('active-nav');
     } else {
@@ -30,11 +29,16 @@ function changeToSelectedState() {
 
 function showDiseaseDeleteModal(button) {
     const diseaseName = button.getAttribute('data-disease-name');
+    const diseaseId = button.getAttribute('data-disease-id');
 
     const modal = document.getElementById('disease_delete_modal');
     const messageElement = document.getElementById('delete_modal_message');
+    const confirmDeleteButton = document.getElementById('confirm_delete_button');
 
-    messageElement.textContent = `Are you sure you want to delete ${diseaseName}? This action cannot be undone.`;
+    messageElement.textContent = `Are you sure you want to delete "${diseaseName}"? This action cannot be undone.`;
+
+    confirmDeleteButton.setAttribute('hx-delete', `/disease/delete/${diseaseId}/`);
+    htmx.process(confirmDeleteButton);
 
     modal.showModal();
 }

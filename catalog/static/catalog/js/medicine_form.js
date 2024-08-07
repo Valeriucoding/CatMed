@@ -123,5 +123,5 @@ function loadDiseaseModal() {
     document.getElementById('add_modal').showModal();
 }
 
-document.addEventListener('htmx:pushedIntoHistory', handleAfterLoad);
+document.addEventListener('htmx:afterOnLoad', handleAfterLoad);
 document.addEventListener('DOMContentLoaded', handleAfterLoad);

@@ -173,8 +173,8 @@ def disease_edit(request, disease_id):
     return render(request, "catalog/partials/disease_form.html", {"disease": disease})
 
 
-def disease_delete(request, medicine_id):
-    disease = get_object_or_404(Disease, id=medicine_id)
+def disease_delete(request, disease_id):
+    disease = get_object_or_404(Disease, id=disease_id)
     if request.method == "DELETE":
         disease.delete()
         messages.success(request, f"{disease.name} has been successfully deleted.")
