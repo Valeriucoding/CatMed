@@ -43,5 +43,14 @@ function showDiseaseDeleteModal(button) {
     modal.showModal();
 }
 
+function clearMedicineListFilter(badge) {
+    console.log("Clearing filter");
+    console.log(badge);
+    const parentDiv = badge.parentElement;
+    if (parentDiv) {
+        parentDiv.remove();
+    }
+}
+
 document.addEventListener('htmx:pushedIntoHistory', handleBaseAfterLoad);
 document.addEventListener('DOMContentLoaded', handleBaseAfterLoad);
