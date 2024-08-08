@@ -26,9 +26,17 @@ def medicine_list(request):
         context["alert_message"] = list(storage)[0]
         storage.used = True
 
-    if request.htmx:
-        return render(request, "catalog/partials/medicine_list_partial.html", context)
-    return render(request, "catalog/medicine_list.html", context)
+    response = render(
+        request,
+        (
+            "catalog/partials/medicine_list_partial.html"
+            if request.htmx
+            else "catalog/medicine_list.html"
+        ),
+        context,
+    )
+    response["HX-Trigger"] = "medicineList"
+    return response
 
 
 def medicine_detail(request, medicine_id):
@@ -82,6 +90,10 @@ def medicine_create(request):
     return render(request, "catalog/medicine_form.html", context)
 
 
+# response = render(request, 'template.html', {...})
+# response['HX-Trigger'] = 'myEvent'
+# return response
+# for triggering js
 def medicine_update(request, medicine_id):
     medicine = get_object_or_404(Medicine, id=medicine_id)
     form = MedicineForm(request.POST or None, instance=medicine)

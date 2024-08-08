@@ -66,5 +66,5 @@ function clearMedicineListFilter(badge) {
     }
 }
 
-document.addEventListener('htmx:pushedIntoHistory', handleBaseAfterLoad);
-document.addEventListener('DOMContentLoaded', handleBaseAfterLoad);
+// document.addEventListener('htmx:pushedIntoHistory', handleBaseAfterLoad);
+// document.addEventListener('DOMContentLoaded', handleBaseAfterLoad);
