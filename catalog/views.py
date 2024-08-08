@@ -18,7 +18,6 @@ def medicine_list(request):
         medicines = medicines.filter(diseases__id__in=disease_ids).distinct()
         diseases = Disease.objects.filter(id__in=disease_ids)
         diseases_params = list(diseases)
-        print(diseases_params)
 
     context = {"medicines": medicines, "diseases_params": diseases_params}
 

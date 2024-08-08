@@ -14,6 +14,7 @@
 	 - [ ] detail list with url search params that should integrate with filters
 * medicine form
 	 - [ ] related model is added twice to the dropdown--prevent that
+		 - [ ] it only works for disease
 
 ##### Later
 * add the other models 

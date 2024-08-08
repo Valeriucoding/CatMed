@@ -44,9 +44,23 @@ function showDiseaseDeleteModal(button) {
 }
 
 function clearMedicineListFilter(badge) {
-    console.log("Clearing filter");
-    console.log(badge);
     const parentDiv = badge.parentElement;
+    const badgeSearchParam = parentDiv.id.split('-')[1];
+    const searchParamName = parentDiv.getAttribute('data-search-param');
+
+    const url = new URL(window.location);
+    const params = url.searchParams.get(searchParamName);
+    if (params) {
+        const values = params.split(',');
+        const newValues = values.filter(value => value !== badgeSearchParam);
+        if (newValues.length > 0) {
+            url.searchParams.set(searchParamName, newValues.join(','));
+        } else {
+            url.searchParams.delete(searchParamName);
+        }
+        window.history.pushState({}, '', url);
+    }
+
     if (parentDiv) {
         parentDiv.remove();
     }
