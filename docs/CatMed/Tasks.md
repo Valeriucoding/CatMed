@@ -13,8 +13,9 @@
 	 - [ ] add modal
 	 - [ ] detail list with url search params that should integrate with filters
 * medicine form
-	 - [ ] related model is added twice to the dropdown--prevent that
+	 - [x] related model is added twice to the dropdown--prevent that
 		 - [ ] it only works for disease
+		 - [ ] remove modal content after successfull add
 
 ##### Later
 * add the other models 

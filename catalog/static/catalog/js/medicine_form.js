@@ -1,7 +1,8 @@
 function handleAfterLoad() {
     createDropdowns();
-    handleModalContent();
 }
+
+handleModalContent();
 
 function handleModalContent() {
     document.body.addEventListener('htmx:afterOnLoad', function (event) {
@@ -12,16 +13,13 @@ function handleModalContent() {
                 try {
                     response = JSON.parse(response);
                 } catch (e) {
-                    console.log('Received HTML response, updating modal content');
                     document.getElementById('ModalContent').innerHTML = response;
                     return;
                 }
             }
 
             if (response && response.status === 'success') {
-                console.log('Disease added:', response);
                 const capitalizedModel = response.model.charAt(0).toUpperCase() + response.model.slice(1);
-                console.log('Capitalized model:', capitalizedModel);
                 const dropdownMenu = document.getElementById(`${capitalizedModel}Menu`);
                 if (dropdownMenu) {
                     const newItem = document.createElement('div');
@@ -119,7 +117,7 @@ function createDropdowns() {
     });
 }
 
-function loadDiseaseModal() {
+function loadCreateModal() {
     document.getElementById('add_modal').showModal();
 }
 

@@ -32,8 +32,13 @@
                                         </div>
                                     {% endfor %}
                                 </div>
-                                <button type="button" class="btn base-100 bg-transparent" onclick="loadDiseaseModal()"
-                                        hx-get="{% url 'catalog:disease_create' %}" hx-target="#ModalContent">
+                                <button type="button" class="btn base-100 bg-transparent" onclick="loadCreateModal()"
+                                        {% if field.label == "Diseases" %}
+                                        hx-get="{% url 'catalog:disease_create' %}"
+                                        {% elif field.label == "Medicine Types" %}
+                                        hx-get="{% url 'catalog:medicine_type_create' %}"
+                                        {% endif %} 
+                                        hx-target="#ModalContent">
                                     <i class="fas fa-plus"></i>
                                 </button>
                             </div>
