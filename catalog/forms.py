@@ -1,6 +1,6 @@
 from django import forms
 
-from catalog.models import Medicine, Disease, BodyOrgan
+from catalog.models import Medicine, Disease, BodyOrgan, MedicationType
 
 
 class MedicineForm(forms.ModelForm):
@@ -24,7 +24,7 @@ class MedicineForm(forms.ModelForm):
 
 class MedicationTypeForm(forms.ModelForm):
     class Meta:
-        model = Disease
+        model = MedicationType
         fields = ["name"]
         widgets = {
             "name": forms.TextInput(

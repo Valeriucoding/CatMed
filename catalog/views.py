@@ -4,7 +4,7 @@ from django.shortcuts import render, get_object_or_404
 from django.template.loader import render_to_string
 from django.urls import reverse
 
-from catalog.forms import MedicineForm, DiseaseForm
+from catalog.forms import MedicineForm, DiseaseForm, MedicationTypeForm, BodyOrganForm
 from catalog.models import Medicine, Disease
 
 
@@ -203,3 +203,56 @@ def disease_delete(request, disease_id):
             )
         return HttpResponseRedirect(reverse("catalog:disease_list"))
     return HttpResponse(status=405)
+
+
+def medication_type_create(request):
+    form = MedicationTypeForm(request.POST or None)
+    url = reverse("catalog:medication_type_create")
+    context = {"form": form, "model": "medication_type", "url": url}
+    if request.method == "POST":
+        if form.is_valid():
+            medication_type = form.save()
+            return JsonResponse(
+                {
+                    "id": medication_type.id,
+                    "name": medication_type.name,
+                    "status": "success",
+                    "model": "medication types",
+                },
+                status=200,
+            )
+        else:
+
+            html_content = render_to_string(
+                "catalog/modals/modal_form.html", context, request
+            )
+            return HttpResponse(html_content)
+
+    html_content = render_to_string("catalog/modals/modal_form.html", context, request)
+    return HttpResponse(html_content)
+
+
+def body_organ_create(request):
+    form = BodyOrganForm(request.POST or None)
+    url = reverse("catalog:body_organ_create")
+    context = {"form": form, "model": "body organ", "url": url}
+    if request.method == "POST":
+        if form.is_valid():
+            body_organ = form.save()
+            return JsonResponse(
+                {
+                    "id": body_organ.id,
+                    "name": body_organ.name,
+                    "status": "success",
+                    "model": "body organs",
+                },
+                status=200,
+            )
+        else:
+
+            html_content = render_to_string(
+                "catalog/modals/modal_form.html", context, request
+            )
+            return HttpResponse(html_content)
+    html_content = render_to_string("catalog/modals/modal_form.html", context, request)
+    return HttpResponse(html_content)

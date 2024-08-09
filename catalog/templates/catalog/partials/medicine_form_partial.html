@@ -35,8 +35,10 @@
                                 <button type="button" class="btn base-100 bg-transparent" onclick="loadCreateModal()"
                                         {% if field.label == "Diseases" %}
                                         hx-get="{% url 'catalog:disease_create' %}"
-                                        {% elif field.label == "Medicine Types" %}
-                                        hx-get="{% url 'catalog:medicine_type_create' %}"
+                                        {% elif field.label == "Medication types" %}
+                                        hx-get="{% url 'catalog:medication_type_create' %}"
+                                        {% elif field.label == "Body organs" %}
+                                        hx-get="{% url 'catalog:body_organ_create' %}"
                                         {% endif %} 
                                         hx-target="#ModalContent">
                                     <i class="fas fa-plus"></i>
