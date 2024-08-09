@@ -2,8 +2,6 @@ function handleAfterLoad() {
     createDropdowns();
 }
 
-handleModalContent();
-
 function handleModalContent() {
     document.body.addEventListener('htmx:afterOnLoad', function (event) {
         if (event.detail.elt.id === 'ModalContent') {
@@ -120,6 +118,47 @@ function createDropdowns() {
 
 function loadCreateModal() {
     document.getElementById('add_modal').showModal();
+}
+
+function diseaseCreateModal() {
+    document.body.addEventListener('htmx:afterOnLoad', function (event) {
+        if (event.detail.elt.id === 'ModalContent') {
+            let response = event.detail.xhr.response;
+
+            if (typeof response === 'string') {
+                try {
+                    response = JSON.parse(response);
+                } catch (e) {
+                    document.getElementById('ModalContent').innerHTML = response;
+                    return;
+                }
+            }
+
+            if (response && response.status === 'success') {
+                const newItem = document.createElement('td');
+                newItem.className = 'underline';
+                //     set the id of the new item
+                newItem.id = `disease-${response.id}`;
+                tableItem.innerHTML = `
+                <td id="disease-{{ disease.id }}" class="underline">
+                        <a href="#"
+                           hx-get="{% url "catalog:medicine_list" %}?disease={{ disease.id }}"
+                           hx-target="#main-container"
+                           hx-swap="innerHTML"
+                           hx-push-url="true">{{ disease.name }}
+                        </a>
+                    </td>
+                    <td>
+                        <i class="fa fa-edit text-primary cursor-pointer"
+                           hx-get="{% url 'catalog:disease_edit' disease.id %}"
+                           hx-target="#disease-{{ disease.id }}"
+                           hx-swap="innerHTML"></i>
+                        <i class="ml-3 fa fa-trash text-warning" data-disease-name="{{ disease.name }}"
+                           data-disease-id="{{ disease.id }}" onclick="showDiseaseDeleteModal(this)"></i>
+                    </td>`;
+            }
+        }
+    });
 }
 
 document.addEventListener('htmx:afterOnLoad', handleAfterLoad);

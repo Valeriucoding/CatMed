@@ -171,6 +171,33 @@ def disease_create(request):
     return HttpResponse(html_content)
 
 
+def disease_list_create(request):
+    form = DiseaseForm(request.POST or None)
+    url = reverse("catalog:disease_list_create")
+    context = {"form": form, "model": "disease", "url": url}
+    if request.method == "POST":
+        if form.is_valid():
+            disease = form.save()
+            return JsonResponse(
+                {
+                    "id": disease.id,
+                    "name": disease.name,
+                    "status": "success",
+                    "model": "diseases",
+                },
+                status=200,
+            )
+        else:
+
+            html_content = render_to_string(
+                "catalog/modals/modal_form.html", context, request
+            )
+            return HttpResponse(html_content)
+
+    html_content = render_to_string("catalog/modals/modal_form.html", context, request)
+    return HttpResponse(html_content)
+
+
 def disease_list(request):
     diseases = Disease.objects.all()
     context = {"diseases": diseases}
