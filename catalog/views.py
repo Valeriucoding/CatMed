@@ -183,6 +183,12 @@ def disease_list_create(request):
             )
             response["HX-Trigger"] = "closeDiseaseCreateModal"
             return response
+        else:
+            # TODO: fix this
+            html_content = render_to_string(
+                "catalog/modals/disease_modal_form.html", context, request
+            )
+            return HttpResponse(html_content, status=400)
 
     html_content = render_to_string(
         "catalog/modals/disease_modal_form.html", context, request
@@ -219,8 +225,9 @@ def disease_delete(request, disease_id):
         disease.delete()
         messages.success(request, f"{disease.name} has been successfully deleted.")
         if request.htmx:
-            return HttpResponse(
-                status=200, headers={"HX-Redirect": reverse("catalog:disease_list")}
+            return JsonResponse(
+                {"status": "success", "disease_id": disease_id},
+                status=200,
             )
         return HttpResponseRedirect(reverse("catalog:disease_list"))
     return HttpResponse(status=405)

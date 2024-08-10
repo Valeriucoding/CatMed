@@ -10,8 +10,9 @@
 		 - [ ] weird line in the disease_form.html
 		 - [ ] it widens the col
 	 - [x] delete confirmation modal with alert
-		 - [ ] stop reloading the whole page to remove the deleted row
-		 - [ ] fix alerts
+		 - [x] stop reloading the whole page to remove the deleted row
+		 - [ ] fix response rendering in the delete button(low prio)
+		 - [ ] fix alerts(low prio)
 	 - [x] add modal
 		 - [ ] display validation errors
 	 - [x] detail list with url search params that should integrate with filters

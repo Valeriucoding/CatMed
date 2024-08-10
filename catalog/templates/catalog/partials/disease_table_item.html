@@ -1,5 +1,5 @@
-<tr>
-    <td id="disease-{{ disease.id }}" class="underline">
+<tr id="disease-{{ disease.id }}">
+    <td class="underline">
         <a href="#"
            hx-get="{% url "catalog:medicine_list" %}?disease={{ disease.id }}"
            hx-target="#main-container"
