@@ -1,0 +1,18 @@
+<tr>
+    <td id="disease-{{ disease.id }}" class="underline">
+        <a href="#"
+           hx-get="{% url "catalog:medicine_list" %}?disease={{ disease.id }}"
+           hx-target="#main-container"
+           hx-swap="innerHTML"
+           hx-push-url="true">{{ disease.name }}
+        </a>
+    </td>
+    <td>
+        <i class="fa fa-edit text-primary cursor-pointer"
+           hx-get="{% url 'catalog:disease_edit' disease.id %}"
+           hx-target="#disease-{{ disease.id }}"
+           hx-swap="innerHTML"></i>
+        <i class="ml-3 fa fa-trash text-warning" data-disease-name="{{ disease.name }}"
+           data-disease-id="{{ disease.id }}" onclick="showDiseaseDeleteModal(this)"></i>
+    </td>
+</tr>

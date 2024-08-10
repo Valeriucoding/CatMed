@@ -66,5 +66,21 @@ function clearMedicineListFilter(badge) {
     }
 }
 
-// document.addEventListener('htmx:pushedIntoHistory', handleBaseAfterLoad);
-// document.addEventListener('DOMContentLoaded', handleBaseAfterLoad);
+document.addEventListener('htmx:pushedIntoHistory', handleBaseAfterLoad);
+document.addEventListener('DOMContentLoaded', handleBaseAfterLoad);
+
+// document.addEventListener('htmx:afterOnLoad', function (event) {
+//     if (event.detail.trigger === 'diseaseCreateSuccess') {
+//         const modal = document.getElementById('disease_create');
+//         console.log(modal);
+//         modal.close();
+//     }
+//
+// });
+document.body.addEventListener('htmx:afterOnLoad', function (event) {
+    if (event.detail.triggerSpec === "diseaseCreateSuccess") {
+        // Your code here to handle the successful disease creation
+        console.log("Disease created successfully");
+        // For example, you might want to show a notification or update some UI element
+    }
+});

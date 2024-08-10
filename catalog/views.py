@@ -26,7 +26,7 @@ def medicine_list(request):
         context["alert_message"] = list(storage)[0]
         storage.used = True
 
-    response = render(
+    return render(
         request,
         (
             "catalog/partials/medicine_list_partial.html"
@@ -35,8 +35,6 @@ def medicine_list(request):
         ),
         context,
     )
-    response["HX-Trigger"] = "medicineList"
-    return response
 
 
 def medicine_detail(request, medicine_id):
@@ -178,23 +176,25 @@ def disease_list_create(request):
     if request.method == "POST":
         if form.is_valid():
             disease = form.save()
-            return JsonResponse(
-                {
-                    "id": disease.id,
-                    "name": disease.name,
-                    "status": "success",
-                    "model": "diseases",
-                },
-                status=200,
+            response = render(
+                request,
+                "catalog/partials/disease_table_item.html",
+                {"disease": disease},
             )
-        else:
-
-            html_content = render_to_string(
-                "catalog/modals/modal_form.html", context, request
-            )
-            return HttpResponse(html_content)
-
-    html_content = render_to_string("catalog/modals/modal_form.html", context, request)
+            response["HX-Trigger"] = "diseaseCreateSuccess"
+            return response
+            # return JsonResponse(
+            #     {
+            #         "id": disease.id,
+            #         "name": disease.name,
+            #         "status": "success",
+            #         "model": "diseases",
+            #     },
+            #     status=200,
+            # )
+    html_content = render_to_string(
+        "catalog/modals/disease_modal_form.html", context, request
+    )
     return HttpResponse(html_content)
 
 
@@ -216,7 +216,9 @@ def disease_edit(request, disease_id):
             request, "catalog/partials/disease_display.html", {"disease": disease}
         )
 
-    return render(request, "catalog/partials/disease_form.html", {"disease": disease})
+    return render(
+        request, "catalog/partials/disease_edit_form.html", {"disease": disease}
+    )
 
 
 def disease_delete(request, disease_id):

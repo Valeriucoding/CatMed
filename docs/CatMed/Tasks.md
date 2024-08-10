@@ -9,13 +9,16 @@
 	 - [ ]  inline editing
 		 - [ ] weird line in the disease_form.html
 		 - [ ] it widens the col
-	 - [ ] delete confirmation modal with alert
+	 - [x] delete confirmation modal with alert
+		 - [ ] stop reloading the whole page to remove the deleted row
 	 - [ ] add modal
 	 - [ ] detail list with url search params that should integrate with filters
 * medicine form
 	 - [x] related model is added twice to the dropdown--prevent that
-		 - [ ] it only works for disease
-		 - [ ] remove modal content after successfull add
+		 - [x] it only works for disease
+		 - [x] remove modal content after successfull add
 
+#### Models
+- [ ] change body organ to just organ
 ##### Later
 * add the other models 

@@ -13,6 +13,11 @@ urlpatterns = [
     # disease
     path("diseases/", views.disease_list, name="disease_list"),
     path("disease/create/", views.disease_create, name="disease_create"),
+    path(
+        "disease/create-table-item",
+        views.disease_list_create,
+        name="disease_list_create",
+    ),
     path("disease/edit/<int:disease_id>/", views.disease_edit, name="disease_edit"),
     path(
         "disease/delete/<int:disease_id>/", views.disease_delete, name="disease_delete"
