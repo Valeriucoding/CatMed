@@ -181,17 +181,9 @@ def disease_list_create(request):
                 "catalog/partials/disease_table_item.html",
                 {"disease": disease},
             )
-            response["HX-Trigger"] = "diseaseCreateSuccess"
+            response["HX-Trigger"] = "closeDiseaseCreateModal"
             return response
-            # return JsonResponse(
-            #     {
-            #         "id": disease.id,
-            #         "name": disease.name,
-            #         "status": "success",
-            #         "model": "diseases",
-            #     },
-            #     status=200,
-            # )
+
     html_content = render_to_string(
         "catalog/modals/disease_modal_form.html", context, request
     )

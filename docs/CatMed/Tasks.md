@@ -6,13 +6,15 @@
 - list view for every related model with ability to delete, update, create
 	- add the links in the sidebar
 - disease list tasks
-	 - [ ]  inline editing
+	 - [x]  inline editing
 		 - [ ] weird line in the disease_form.html
 		 - [ ] it widens the col
 	 - [x] delete confirmation modal with alert
 		 - [ ] stop reloading the whole page to remove the deleted row
-	 - [ ] add modal
-	 - [ ] detail list with url search params that should integrate with filters
+		 - [ ] fix alerts
+	 - [x] add modal
+		 - [ ] display validation errors
+	 - [x] detail list with url search params that should integrate with filters
 * medicine form
 	 - [x] related model is added twice to the dropdown--prevent that
 		 - [x] it only works for disease

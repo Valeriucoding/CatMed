@@ -1,4 +1,4 @@
-<form hx-post="{{ url }}" hx-target="#diseaseTableBody" hx-swap="beforeend">
+<form hx-post="{{ url }}" hx-target="#diseaseTableBody" hx-swap="beforeend" hx-trigger="submit">
   {% csrf_token %}
   {% for field in form %}
     <div class="form-control {% if field.errors %}form-control-error{% endif %}">
