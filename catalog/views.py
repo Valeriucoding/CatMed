@@ -5,7 +5,7 @@ from django.template.loader import render_to_string
 from django.urls import reverse
 
 from catalog.forms import MedicineForm, DiseaseForm, MedicationTypeForm, BodyOrganForm
-from catalog.models import Medicine, Disease
+from catalog.models import Medicine, Disease, MedicationType
 
 
 def medicine_list(request):
@@ -284,3 +284,14 @@ def body_organ_create(request):
             return HttpResponse(html_content)
     html_content = render_to_string("catalog/modals/modal_form.html", context, request)
     return HttpResponse(html_content)
+
+
+def medicine_type_list(request):
+    medication_types = MedicationType.objects.all()
+    context = {"medication_types": medication_types}
+    if request.htmx:
+        return render(
+            request, "catalog/partials/medication_type_list_partial.html", context
+        )
+    return render(request, "catalog/medication_type_list.html", context)
+

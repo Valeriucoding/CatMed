@@ -1,4 +1,4 @@
-{% block title %}Disease list{% endblock title %}
+{% block title %}Medication Type List{% endblock title %}
 {% if alert_message %}
     <div id="customAlert" role="alert" class="alert alert-success mb-4 custom-alert">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
@@ -26,7 +26,7 @@
             </thead>
             <tbody id="diseaseTableBody">
             {% for disease in diseases %}
-                {% include "catalog/partials/disease_table_item.html" with model="disease" disease=disease delete_func="showDiseaseDeleteModal(this)"%}
+                {% include "catalog/partials/disease_table_item.html" with disease=disease %}
             {% endfor %}
             </tbody>
         </table>
