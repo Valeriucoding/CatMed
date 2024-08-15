@@ -179,7 +179,11 @@ def disease_list_create(request):
             response = render(
                 request,
                 "catalog/partials/disease_table_item.html",
-                {"disease": disease},
+                {
+                    "model": "disease",
+                    "object": disease,
+                    "delete_func": "showDiseaseDeleteModal(this)",
+                },
             )
             response["HX-Trigger"] = "closeDiseaseCreateModal"
             return response
@@ -286,7 +290,7 @@ def body_organ_create(request):
     return HttpResponse(html_content)
 
 
-def medicine_type_list(request):
+def medication_type_list(request):
     medication_types = MedicationType.objects.all()
     context = {"medication_types": medication_types}
     if request.htmx:
@@ -294,4 +298,3 @@ def medicine_type_list(request):
             request, "catalog/partials/medication_type_list_partial.html", context
         )
     return render(request, "catalog/medication_type_list.html", context)
-

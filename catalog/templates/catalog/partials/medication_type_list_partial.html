@@ -1,20 +1,12 @@
 {% block title %}Medication Type List{% endblock title %}
-{% if alert_message %}
-    <div id="customAlert" role="alert" class="alert alert-success mb-4 custom-alert">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-        </svg>
-        <span>{{ alert_message }}</span>
-    </div>
-{% endif %}
 
-<div class="absolute top-4 right-4">
-        <span class="btn btn-primary flex items-center rounded-full" onclick="disease_create.showModal()"
-              hx-get="{% url 'catalog:disease_list_create' %}" hx-target="#ModalContent">
-            <i class="fas fa-plus"></i>
-        </span>
-</div>
+{#<div class="absolute top-4 right-4">#}
+{#        <span class="btn btn-primary flex items-center rounded-full" onclick="disease_create.showModal()"#}
+{#              hx-get="{% url 'catalog:disease_list_create' %}" hx-target="#ModalContent">#}
+{#            <i class="fas fa-plus"></i>#}
+{#        </span>#}
+{#</div>#} 
+{#TODO: add modal#}
 <div class="items-start">
     <div class="overflow-x-auto">
         <table class="table">
@@ -24,9 +16,9 @@
                 <th>Operations</th>
             </tr>
             </thead>
-            <tbody id="diseaseTableBody">
-            {% for disease in diseases %}
-                {% include "catalog/partials/disease_table_item.html" with disease=disease %}
+            <tbody id="medicationTypesTableBody">
+            {% for medication_type in medication_types %}
+                {% include "catalog/partials/disease_table_item.html" with model="medication_type" object=medication_type delete_func="showDiseaseDeleteModal(this)"%}
             {% endfor %}
             </tbody>
         </table>
