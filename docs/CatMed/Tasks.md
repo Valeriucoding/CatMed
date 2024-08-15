@@ -13,6 +13,7 @@
 		 - [x] stop reloading the whole page to remove the deleted row
 		 - [ ] fix response rendering in the delete button(low prio)
 		 - [ ] fix alerts(low prio)
+		 - [ ] when deleting a seconds object the response is being printed in the modal(mid prio) related to the first task in the subtask list
 	 - [x] add modal
 		 - [ ] display validation errors
 	 - [x] detail list with url search params that should integrate with filters
