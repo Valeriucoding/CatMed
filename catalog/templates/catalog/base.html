@@ -13,9 +13,6 @@
             crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
-    <script src="{% static 'js/base.js' %}"></script>
-    <script src="{% static "js/medicine_form.js" %}"></script>
-    {% block js %}{% endblock js %}
 
 
 </head>
@@ -24,8 +21,11 @@
     <input id="my-drawer-2" type="checkbox" class="drawer-toggle"/>
     <div class="drawer-content">
         <div class="mt-4">
-            <div class="flex flex-col items-center mx-10 md:mx-20">
-                <h1 class="prose-2xl mb-4 select-none" hx-get="{% url "catalog:medicine_list" %}" hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">CatMed</h1>
+            <div class="flex flex-col mx-10 md:mx-20">
+                <div class="flex flex-col items-center">
+                    <h1 class="prose-2xl mb-4 select-none" hx-get="{% url "catalog:medicine_list" %}"
+                        hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">CatMed</h1>
+                </div>
                 <div id="main-container">
                     {% block content %}
                     {% endblock %}
@@ -36,15 +36,27 @@
             Open drawer
         </label>
     </div>
-{#    <div class="drawer-side">#}
-{#        <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label>#}
-{#        <ul class="menu bg-base-200 text-base-content min-h-full w-80 p-4">#}
-{#            <!-- Sidebar content here -->#}
-            {#            <li><a>Sidebar Item 1</a></li>#}
-            {#            <li><a>Sidebar Item 2</a></li>#}
-{#        </ul>#}
-{#    </div>#}
+    <div class="drawer-side">
+        <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label>
+        <ul class="menu bg-base-200 text-base-content min-h-full w-80 p-4">
+            <!-- Sidebar content here -->
+            <li><a id="disease-sidebar-item" hx-get="{% url "catalog:disease_list" %}"
+                   hx-target="#main-container" hx-swap="innerHTML"
+                   hx-push-url="true">Diseases</a>
+            </li>            
+            <li><a id="medication-type-sidebar-item" hx-get="{% url "catalog:medication_type_list" %}"
+                   hx-target="#main-container" hx-swap="innerHTML"
+                   hx-push-url="true">Medication Types</a>
+            </li>
+        </ul>
+    </div>
 </div>
 
 </body>
+<footer>
+    <script src="{% static 'js/base.js' %}"></script>
+    <script src="{% static 'js/disease_list.js' %}"></script>
+    <script src="{% static "js/medicine_form.js" %}"></script>
+    <script src="{% static "js/medication_type_list.js" %}"></script>
+</footer>
 </html>

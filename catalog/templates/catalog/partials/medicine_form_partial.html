@@ -1,5 +1,5 @@
 {% load static %}
-<div id="main-container" hx-on="htmx:afterSettle: loadMedicineFormScript()">
+<div id="main-container">
     <div class="container mx-auto p-4">
         <div class="flex flex-col items-center">
             <div class="w-full max-w-lg">
@@ -32,8 +32,15 @@
                                         </div>
                                     {% endfor %}
                                 </div>
-                                <button type="button" class="btn base-100 bg-transparent" onclick="loadDiseaseModal()"
-                                        hx-get="{% url 'catalog:disease_create' %}" hx-target="#ModalContent">
+                                <button type="button" class="btn base-100 bg-transparent" onclick="loadCreateModal()"
+                                        {% if field.label == "Diseases" %}
+                                        hx-get="{% url 'catalog:disease_create' %}"
+                                        {% elif field.label == "Medication types" %}
+                                        hx-get="{% url 'catalog:medication_type_create' %}"
+                                        {% elif field.label == "Body organs" %}
+                                        hx-get="{% url 'catalog:body_organ_create' %}"
+                                        {% endif %} 
+                                        hx-target="#ModalContent">
                                     <i class="fas fa-plus"></i>
                                 </button>
                             </div>

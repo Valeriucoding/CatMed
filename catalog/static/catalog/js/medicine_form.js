@@ -1,7 +1,8 @@
 function handleAfterLoad() {
     createDropdowns();
-    handleModalContent();
 }
+
+handleModalContent();
 
 function handleModalContent() {
     document.body.addEventListener('htmx:afterOnLoad', function (event) {
@@ -12,16 +13,13 @@ function handleModalContent() {
                 try {
                     response = JSON.parse(response);
                 } catch (e) {
-                    console.log('Received HTML response, updating modal content');
                     document.getElementById('ModalContent').innerHTML = response;
                     return;
                 }
             }
 
             if (response && response.status === 'success') {
-                console.log('Disease added:', response);
                 const capitalizedModel = response.model.charAt(0).toUpperCase() + response.model.slice(1);
-                console.log('Capitalized model:', capitalizedModel);
                 const dropdownMenu = document.getElementById(`${capitalizedModel}Menu`);
                 if (dropdownMenu) {
                     const newItem = document.createElement('div');
@@ -29,14 +27,14 @@ function handleModalContent() {
                     newItem.innerHTML = `
                     <label class="flex items-center space-x-2 cursor-pointer">
                         <label for="id_${response.model}_${response.id}">
-                            <input type="checkbox" name="diseases" value="${response.id}" class="checkbox" id="id_${response.model}_${response.id}">
+                            <input type="checkbox" name="${response.model}" value="${response.id}" class="checkbox" id="id_${response.model}_${response.id}">
                             ${response.name}
                         </label>
                     </label>
                 `;
                     dropdownMenu.appendChild(newItem);
 
-                    const dropdownButton = document.getElementById('DiseasesButton');
+                    const dropdownButton = document.getElementById(`${capitalizedModel}Button`);
                     if (dropdownButton) {
                         let currentText = dropdownButton.textContent;
                         dropdownButton.textContent = currentText ? `${currentText}, ${response.name}` : response.name;
@@ -48,6 +46,7 @@ function handleModalContent() {
                 const modal = document.getElementById('add_modal');
                 if (modal) {
                     modal.close();
+                    document.getElementById('ModalContent').innerHTML = '';
                 } else {
                     console.error('Modal element not found');
                 }
@@ -119,7 +118,7 @@ function createDropdowns() {
     });
 }
 
-function loadDiseaseModal() {
+function loadCreateModal() {
     document.getElementById('add_modal').showModal();
 }
 

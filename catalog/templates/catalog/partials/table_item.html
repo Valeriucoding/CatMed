@@ -1,0 +1,21 @@
+<tr id="{{ model }}-{{ object.id }}-item">
+    <td id="{{ model }}-{{ object.id }}" class="underline">
+        <a href="#"
+           hx-get="{% url "catalog:medicine_list" %}?{{ model }}={{ object.id }}"
+           hx-target="#main-container"
+           hx-swap="innerHTML"
+           hx-push-url="true">
+            {{ object.name }}
+        </a>
+    </td>
+    <td>
+        <i class="fa fa-edit text-primary cursor-pointer"
+                {% if model == "disease" %}
+           hx-get="{% url 'catalog:disease_edit' object.id %}"
+                {% endif %}
+           hx-target="#{{ model }}-{{ object.id }}"
+           hx-swap="innerHTML"></i>
+        <i class="ml-3 fa fa-trash text-warning" data-{{ model }}-name="{{ object.name }}"
+           data-{{ model }}-id="{{ object.id }}" onclick="{{ delete_func }}"></i>
+    </td>
+</tr>

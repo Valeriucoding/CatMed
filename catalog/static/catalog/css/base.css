@@ -13,3 +13,7 @@
     max-width: 250px;
     font-size: 0.875rem;
 }
+
+.active-nav {
+    background-color: #D1C6A6;
+}

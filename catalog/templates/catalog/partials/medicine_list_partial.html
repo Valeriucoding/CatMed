@@ -1,21 +1,31 @@
-
 {% if alert_message %}
-<div id="customAlert" role="alert" class="alert alert-success mb-4 custom-alert">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-    </svg>
-    <span>{{ alert_message }}</span>
-</div>
+    <div id="customAlert" role="alert" class="alert alert-success mb-4 custom-alert">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                  d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        <span>{{ alert_message }}</span>
+    </div>
 {% endif %}
 
 <div class="absolute top-4 right-4">
-        <span class="btn btn-primary flex items-center rounded-full" hx-get="{% url "catalog:medicine_create" %}" hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">
+        <span class="btn btn-primary flex items-center rounded-full" hx-get="{% url "catalog:medicine_create" %}"
+              hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">
             <i class="fas fa-plus"></i>
         </span>
 </div>
+{% for disease_obj in diseases_params %}
+    <div id="disease-{{ disease_obj.id }}" class="badge badge-secondary badge-lg flex items-center"
+         data-search-param="disease">
+        {{ disease_obj.name }}
+        <i class="ml-3 fas fa-times text-sm relative" style="top: 0.1rem;" onclick="clearMedicineListFilter(this)"></i>
+    </div>
+{% endfor %}
 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+
     {% for medicine in medicines %}
-        <div class="card bg-base-100 w-72 shadow-xl" hx-get="{% url "catalog:medicine_detail" medicine.id %}" hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">
+        <div class="card bg-base-100 w-72 shadow-xl" hx-get="{% url "catalog:medicine_detail" medicine.id %}"
+             hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">
             <figure>
                 {# <img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="{{ medicine.name }}"/> #}
             </figure>
