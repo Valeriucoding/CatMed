@@ -20,11 +20,9 @@ function removeAlert() {
 function changeToSelectedState() {
     const currentPath = window.location.pathname;
     const diseaseLink = document.getElementById('disease-sidebar-item');
-    if (currentPath === "/diseases/") {
-        diseaseLink.classList.add('active-nav');
-    } else {
-        diseaseLink.classList.remove('active-nav');
-    }
+    const medicationTypeLink = document.getElementById('medication-type-sidebar-item');
+    diseaseLink.classList.toggle('active-nav', currentPath === "/diseases/");
+    medicationTypeLink.classList.toggle('active-nav', currentPath === "/medication-types/");
 }
 
 

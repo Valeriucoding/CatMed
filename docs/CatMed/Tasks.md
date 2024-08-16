@@ -21,6 +21,8 @@
 	 - [x] related model is added twice to the dropdown--prevent that
 		 - [x] it only works for disease
 		 - [x] remove modal content after successfull add
+- medication type list
+	- [ ]  medication type add modal
 
 #### Models
 - [ ] change body organ to just organ

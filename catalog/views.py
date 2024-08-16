@@ -178,7 +178,7 @@ def disease_list_create(request):
             disease = form.save()
             response = render(
                 request,
-                "catalog/partials/disease_table_item.html",
+                "catalog/partials/table_item.html",
                 {
                     "model": "disease",
                     "object": disease,
@@ -298,3 +298,19 @@ def medication_type_list(request):
             request, "catalog/partials/medication_type_list_partial.html", context
         )
     return render(request, "catalog/medication_type_list.html", context)
+
+
+def medication_type_delete(request, medication_type_id):
+    medication_type = get_object_or_404(MedicationType, id=medication_type_id)
+    if request.method == "DELETE":
+        medication_type.delete()
+        messages.success(
+            request, f"{medication_type.name} has been successfully deleted."
+        )
+        if request.htmx:
+            return JsonResponse(
+                {"status": "success", "medication_type_id": medication_type_id},
+                status=200,
+            )
+        return HttpResponseRedirect(reverse("catalog:medication_type_list"))
+    return HttpResponse(status=405)

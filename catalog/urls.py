@@ -28,7 +28,12 @@ urlpatterns = [
         views.medication_type_create,
         name="medication_type_create",
     ),
-    path("medication-types", views.medication_type_list, name="medication_type_list"),
+    path("medication-types/", views.medication_type_list, name="medication_type_list"),
+    path(
+        "medication-types/delete/<int:medication_type_id>/",
+        views.medication_type_delete,
+        name="medication_type_delete",
+    ),
     # body_organ
     path("body_organs/create/", views.body_organ_create, name="body_organ_create"),
 ]

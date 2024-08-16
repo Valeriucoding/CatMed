@@ -40,10 +40,14 @@
         <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label>
         <ul class="menu bg-base-200 text-base-content min-h-full w-80 p-4">
             <!-- Sidebar content here -->
-            <li><a id="disease-sidebar-item" class="" hx-get="{% url "catalog:disease_list" %}"
+            <li><a id="disease-sidebar-item" hx-get="{% url "catalog:disease_list" %}"
                    hx-target="#main-container" hx-swap="innerHTML"
-                   hx-push-url="true">Diseases</a></li>
-            {#                        <li><a>Sidebar Item 2</a></li>#}
+                   hx-push-url="true">Diseases</a>
+            </li>            
+            <li><a id="medication-type-sidebar-item" hx-get="{% url "catalog:medication_type_list" %}"
+                   hx-target="#main-container" hx-swap="innerHTML"
+                   hx-push-url="true">Medication Types</a>
+            </li>
         </ul>
     </div>
 </div>
@@ -53,5 +57,6 @@
     <script src="{% static 'js/base.js' %}"></script>
     <script src="{% static 'js/disease_list.js' %}"></script>
     <script src="{% static "js/medicine_form.js" %}"></script>
+    <script src="{% static "js/medication_type_list.js" %}"></script>
 </footer>
 </html>

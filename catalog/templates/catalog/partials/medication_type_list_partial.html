@@ -6,31 +6,33 @@
 {#            <i class="fas fa-plus"></i>#}
 {#        </span>#}
 {#</div>#} 
-{#TODO: add modal#}
-<div class="items-start">
-    <div class="overflow-x-auto">
-        <table class="table">
-            <thead>
-            <tr>
-                <th>Name</th>
-                <th>Operations</th>
-            </tr>
-            </thead>
-            <tbody id="medicationTypesTableBody">
-            {% for medication_type in medication_types %}
-                {% include "catalog/partials/disease_table_item.html" with model="medication_type" object=medication_type delete_func="showDiseaseDeleteModal(this)"%}
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
-</div>
+<h1 class="text-6xl">In work</h1>
+{#TODO: add medication type modal#}
+{#<div class="items-start">#}
+{#    <div class="overflow-x-auto">#}
+{#        <table class="table">#}
+{#            <thead>#}
+{#            <tr>#}
+{#                <th>Name</th>#}
+{#                <th>Operations</th>#}
+{#            </tr>#}
+{#            </thead>#}
+{#            <tbody id="medicationTypesTableBody">#}
+{#            {% for medication_type in medication_types %}#}
+{#                {% include "catalog/partials/table_item.html" with model="medication_type" object=medication_type delete_func="showMedicationTypeDeleteModal(this)"%}#}
+{#            {% endfor %}#}
+{#            </tbody>#}
+{#        </table>#}
+{#    </div>#}
+{#</div>#}
 
 {# modals #}
-<dialog id="disease_delete_modal" class="modal">
+<dialog id="medication_type_delete_modal" class="modal">
     <div class="modal-box">
         <h3 class="text-lg font-bold">Confirm Deletion</h3>
-        <p id="delete_modal_message" class="py-4">Are you sure you want to delete this disease? This action cannot be
-            undone.</p>
+        <p id="delete_modal_message" class="py-4">
+            Are you sure you want to delete this medication type? This action cannot be undone.
+        </p>
         <div class="modal-action">
             <form method="dialog">
                 <button class="btn btn-secondary mr-2">Cancel</button>
@@ -42,7 +44,7 @@
     </div>
 </dialog>
 
-<dialog id="disease_create" class="modal">
+<dialog id="medication_type_create" class="modal">
     <div class="modal-box">
         <form method="dialog">
             <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
