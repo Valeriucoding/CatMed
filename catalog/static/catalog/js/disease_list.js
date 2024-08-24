@@ -17,8 +17,6 @@ function showDiseaseDeleteModal(button) {
 }
 
 document.body.addEventListener('htmx:afterRequest', function (event) {
-    console.log(event.detail);
-    console.log(event.detail.elt.id);
     if (event.detail.elt.id === 'confirm_delete_button' && event.detail.xhr.status === 200) {
         const response = JSON.parse(event.detail.xhr.responseText);
         if (response.status === 'success') {
