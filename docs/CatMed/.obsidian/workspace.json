@@ -20,20 +20,6 @@
             }
           }
         ]
-      },
-      {
-        "id": "ccfd444df53ec89d",
-        "type": "tabs",
-        "children": [
-          {
-            "id": "b02058602cd84d8e",
-            "type": "leaf",
-            "state": {
-              "type": "graph",
-              "state": {}
-            }
-          }
-        ]
       }
     ],
     "direction": "vertical"
@@ -83,7 +69,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 300,
+    "collapsed": true
   },
   "right": {
     "id": "aeb8da8987b1a5ec",
@@ -160,7 +147,7 @@
       "command-palette:Open command palette": false
     }
   },
-  "active": "d989c223ad14577f",
+  "active": "54cc13bd6ea654e3",
   "lastOpenFiles": [
     "Welcome.md",
     "Tasks.md"
