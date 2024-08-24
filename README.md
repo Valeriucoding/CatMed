@@ -31,9 +31,6 @@
 
 [//]: # ([![Render]&#40;https://img.shields.io/badge/Render-46E3B7?style=for-the-badge&logo=render&logoColor=white&#41;]&#40;https://render.com&#41;)
 
-[![Project license](https://img.shields.io/github/license/valeriucoding/CatMed.svg?style=flat-square)](LICENSE)
-
-[![Pull Requests welcome](https://img.shields.io/badge/PRs-welcome-ff69b4.svg?style=flat-square)](https://github.com/valeriucoding/CatMed/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22)
 [![code with love by valeriucoding](https://img.shields.io/badge/%3C%2F%3E%20with%20%E2%99%A5%20by-valeriucoding-ff1414.svg?style=flat-square)](https://github.com/valeriucoding)
 
 </div>
@@ -47,8 +44,6 @@
     - [Prerequisites](#prerequisites)
     - [Installation](#installation)
 - [Usage](#usage)
-- [Roadmap](#roadmap)
-- [License](#license)
 - [Acknowledgements](#acknowledgements)
 
 </details>
@@ -68,6 +63,10 @@ specific condition.
 
 It is part of the Hack Club Summer of Making program of 2024.
 
+### Features to be implemented
+
+* gfgg
+
 <details>
 <summary>Screenshots</summary>
 <br>
@@ -83,10 +82,13 @@ It is part of the Hack Club Summer of Making program of 2024.
 
 ### Built With
 
-* [![Django](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=green)](https://www.djangoproject.com)
-* [![HTMX](https://img.shields.io/badge/%3C/%3E%20htmx-3D72D7?style=for-the-badge&logo=mysl&logoColor=white)](https://htmx.org)
-* [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
-* [![DaisyUI](https://img.shields.io/badge/DaisyUI-FF3E00?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://daisyui.com)
+[![Django](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=green)](https://www.djangoproject.com)
+
+[![HTMX](https://img.shields.io/badge/%3C/%3E%20htmx-3D72D7?style=for-the-badge&logo=mysl&logoColor=white)](https://htmx.org)
+
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
+
+[![DaisyUI](https://img.shields.io/badge/DaisyUI-FF3E00?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://daisyui.com)
 
 ## Getting Started
 
@@ -116,28 +118,6 @@ To get started with the project, you'll need:
    python manage.py runserver
     ```
 
-## Roadmap
-
-See the [open issues](https://github.com/valeriucoding/CatMed/issues) for a list of proposed features (and known
-issues).
-
-- [Top Feature Requests](https://github.com/valeriucoding/CatMed/issues?q=label%3Aenhancement+is%3Aopen+sort%3Areactions-%2B1-desc) (
-  Add your votes using the 👍 reaction)
-- [Top Bugs](https://github.com/valeriucoding/CatMed/issues?q=is%3Aissue+is%3Aopen+label%3Abug+sort%3Areactions-%2B1-desc) (
-  Add your votes using the 👍 reaction)
-- [Newest Bugs](https://github.com/valeriucoding/CatMed/issues?q=is%3Aopen+is%3Aissue+label%3Abug)
-
-Reach out to the maintainer at one of the following places:
-
-- [GitHub issues](https://github.com/valeriucoding/CatMed/issues/new?assignees=&labels=question&template=04_SUPPORT_QUESTION.md&title=support%3A+)
-- Contact options listed on [this GitHub profile](https://github.com/valeriucoding)
-
-## License
-
-This project is licensed under the **MIT license**.
-
-See [LICENSE](LICENSE) for more information.
-
 ## Acknowledgements
 
-> I want to thank Hack Club for motivating me to work on this project every day during summer.
+> I want to thank Hack Club for motivating me to work on this project during summer.

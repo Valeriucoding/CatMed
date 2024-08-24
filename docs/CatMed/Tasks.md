@@ -2,7 +2,7 @@
 
 
 # Urgent
-- [ ] fix main page grid
+- [x] fix main page grid
 	- [ ] remove placeholders or add some models there
 - [ ] fix sidebar make it bigger 
 	- [ ]  add a sidebar item for medicine list
