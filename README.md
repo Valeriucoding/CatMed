@@ -57,16 +57,16 @@
 
 ## About
 
-> This project is all about organizing information related to medicines, diseases, and the body parts they affect. You
-> can create medicines in the system and link them to different organs or categorize them by the types of conditions
-> they
-> treat.
+This project is all about organizing information related to medicines, diseases, and the body parts they affect. You
+can create medicines in the system and link them to different organs or categorize them by the types of conditions they
+treat.
 
-> The idea behind this project is to make it easier to keep track of medicines and how they’re connected to different
-> diseases and body parts. It was created with the intention of helping doctors to quickly find the right medicine for a
-> specific condition.
->
-> It is part of the Hack Club Summer of Making program of 2024.
+The idea behind this project is to make it easier to keep track of medicines and how they’re connected to different
+diseases and body parts.
+It was created with the intention of helping doctors to quickly find the right medicine for a
+specific condition.
+
+It is part of the Hack Club Summer of Making program of 2024.
 
 <details>
 <summary>Screenshots</summary>
