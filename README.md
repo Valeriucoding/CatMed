@@ -52,6 +52,14 @@
 
 ## About
 
+#### Inspiration
+
+A friend of mine who is a doctor asked me to make an app that would help him keep track of medicine using categories of
+different types.
+So that's how the project started.
+
+#### What it does
+
 This project is all about organizing information related to medicines, diseases, and the body parts they affect. You
 can create medicines in the system and link them to different organs or categorize them by the types of conditions they
 treat.
@@ -60,6 +68,12 @@ The idea behind this project is to make it easier to keep track of medicines and
 diseases and body parts.
 It was created with the intention of helping doctors to quickly find the right medicine for a
 specific condition.
+
+#### The goal
+
+The goal of this project is to see it being used by my friend but also by other doctors who might find it useful.
+
+#### Future plans
 
 Eventually, I plan to add more features to the project, such as the ability to add product url links to the medicines
 and scrape the price of the medicine from the website.
@@ -74,9 +88,11 @@ It is part of the Hack Club Summer of Making program of 2024.
 > **[?]**
 > Please provide your screenshots here.
 
-|                                  Home Page                                   |                                    Login Page                                    |
-|:----------------------------------------------------------------------------:|:--------------------------------------------------------------------------------:|
-| <img src="docs/images/medicine_list.png" title="Medicine List" width="100%"> | <img src="docs/images/medicine_detail.png" title="Medicine_detail" width="100%"> |
+|                                   Home Page                                    |                                    Login Page                                    |
+|:------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------:|
+|  <img src="docs/images/medicine_list.png" title="Medicine List" width="100%">  | <img src="docs/images/medicine_detail.png" title="Medicine_detail" width="100%"> |
+|                                  Update Page                                   |                                   Disease List                                   |
+| <img src="docs/images/medicine_update.png" title="Medicine List" width="100%"> |   <img src="docs/images/disease_list.png" title="Medicine List" width="100%">    |
 
 </details>
 

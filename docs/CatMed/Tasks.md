@@ -2,16 +2,9 @@
 
 
 # Urgent
-- [x] fix main page grid
-	- [x] remove placeholders or add some models there
-- [x] fix sidebar make it bigger 
-	- [x]  add a sidebar item for medicine list
-- [x] format the detail view
-	- [x] remove unused fields or add placeholders
-- [ ] create medicine
-	- [ ] there's a weird bug where after opening the add modal the dropdown won't open anymore
-	  delete disease is a bit broken
-- [x] add tests?
+delete disease is a bit broken
+- [ ] display validation errors add modal
+- [ ] pagination for disease list
       
 ### New features
 - Sorting by disease or other models
@@ -24,7 +17,7 @@
 	 - [x] delete confirmation modal with alert
 		 - [ ] fix alerts(low prio)
 	 - [x] add modal
-		 - [ ] display validation errors
+
 - medication type list
 	- [ ]  medication type add modal
 
