@@ -6,11 +6,10 @@
 	- [x] remove placeholders or add some models there
 - [x] fix sidebar make it bigger 
 	- [x]  add a sidebar item for medicine list
-- [ ] format the detail view
+- [x] format the detail view
 	- [x] remove unused fields or add placeholders
-	- [ ] add direct links to related models
 - [ ] create medicine
-	- [ ] 
+	- [ ] there's a weird bug where after opening the add modal the dropdown won't open anymore
 - [ ] add tests?
       
 ### New features
