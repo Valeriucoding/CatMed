@@ -7,6 +7,7 @@ handleModalContent();
 function handleModalContent() {
     document.body.addEventListener('htmx:afterOnLoad', function (event) {
         if (event.detail.elt.id === 'ModalContent') {
+            console.log('htmx:afterOnLoad');
             let response = event.detail.xhr.response;
 
             if (typeof response === 'string') {
@@ -60,7 +61,7 @@ function handleModalContent() {
 
 function createDropdowns() {
     const dropdownButtons = Array.from(document.querySelectorAll('[id$="Button"]'));
-
+    console.log(dropdownButtons);
     dropdownButtons.forEach(dropdownButton => {
         const baseId = dropdownButton.id.replace('Button', '');
         const dropdownMenu = document.getElementById(`${baseId}Menu`);
@@ -122,5 +123,9 @@ function loadCreateModal() {
     document.getElementById('add_modal').showModal();
 }
 
-document.addEventListener('htmx:afterOnLoad', handleAfterLoad);
+document.addEventListener('htmx:afterOnLoad', function (event) {
+    if (event.target.id === 'main-container') {
+        handleAfterLoad();
+    }
+});
 document.addEventListener('DOMContentLoaded', handleAfterLoad);
