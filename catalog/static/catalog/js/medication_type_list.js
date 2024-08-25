@@ -8,7 +8,7 @@ function showMedicationTypeDeleteModal(button) {
     confirmDeleteButton.textContent = "Delete"
     messageElement.textContent = `Are you sure you want to delete "${medicationTypeName}"? This action cannot be undone.`;
 
-    confirmDeleteButton.setAttribute('hx-delete', `/disease/delete/${medicationTypeID}/`);
+    confirmDeleteButton.setAttribute('hx-delete', `/medication-types/delete/${medicationTypeID}/`);
     confirmDeleteButton.setAttribute('hx-target', 'this');
     htmx.process(confirmDeleteButton);
 
@@ -27,6 +27,6 @@ document.body.addEventListener('htmx:afterRequest', function (event) {
         }
     }
 });
-// document.body.addEventListener('closeDiseaseCreateModal', function () {
-//     document.getElementById('disease_create').close();
-// });
+document.body.addEventListener('closeMedicationTypeCreateModal', function () {
+    document.getElementById('medication_type_create').close();
+});

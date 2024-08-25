@@ -12,6 +12,8 @@ from catalog.models import Medicine, Disease, MedicationType
 def medicine_list(request):
     medicines = Medicine.objects.all().prefetch_related("diseases", "medication_types")
     disease_ids = request.GET.getlist("disease")
+    medication_type_ids = request.GET.getlist("medication-type")
+    print(medication_type_ids)
 
     diseases_params = []
 
@@ -20,7 +22,19 @@ def medicine_list(request):
         diseases = Disease.objects.filter(id__in=disease_ids)
         diseases_params = list(diseases)
 
-    context = {"medicines": medicines, "diseases_params": diseases_params}
+    medication_types_params = []
+    if medication_type_ids:
+        medicines = medicines.filter(
+            medication_types__id__in=medication_type_ids
+        ).distinct()
+        medication_types = MedicationType.objects.filter(id__in=medication_type_ids)
+        medication_types_params = list(medication_types)
+    print(medication_types_params)
+    context = {
+        "medicines": medicines,
+        "diseases_params": diseases_params,
+        "medication_types_params": medication_types_params,
+    }
 
     storage = messages.get_messages(request)
     if storage:
@@ -341,14 +355,14 @@ def medication_type_delete(request, medication_type_id):
     return HttpResponse(status=405)
 
 
-def medication_list_create(request):
+def medication_type_list_create(request):
     form = MedicationTypeForm(request.POST or None)
-    url = reverse("catalog:medication_list_create")
+    url = reverse("catalog:medication_type_list_create")
     context = {
         "form": form,
-        "model": "medication type",
+        "model": "medication-type",
         "url": url,
-        "hx_target": "#medicationTypeTableBody",
+        "hx_target": "#medicationTypesTableBody",
     }
     if request.method == "POST":
         if form.is_valid():
@@ -357,7 +371,7 @@ def medication_list_create(request):
                 request,
                 "catalog/partials/table_item.html",
                 {
-                    "model": "medication type",
+                    "model": "medication-type",
                     "object": medication_type,
                     "delete_func": "showMedicationTypeDeleteModal(this)",
                 },
