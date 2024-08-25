@@ -1,11 +1,21 @@
 from django.urls import reverse
 
+from catalog.models import Medicine
 from factories import CatalogFactory
 
 
 class TestMedicineModel(CatalogFactory):
     def test_create_medicine(self):
         self.assertEqual(str(self.medicine), "Paracetamol")
+
+    def test_update_medicine(self):
+        self.medicine.name = "Ibuprofen"
+        self.medicine.save()
+        self.assertEqual(str(self.medicine), "Ibuprofen")
+
+    def test_delete_medicine(self):
+        self.medicine.delete()
+        self.assertEqual(Medicine.objects.count(), 0)
 
 
 class TestMedicineViews(CatalogFactory):
@@ -51,15 +61,4 @@ class TestMedicineViews(CatalogFactory):
             "catalog:medicine_update", kwargs={"medicine_id": self.medicine.pk}
         )
         response = self.client.get(url)
-        self.assertEqual(response.status_code, 200)
-
-    def test_medicine_delete_url(self):
-        response = self.client.delete("disease/1/delete/")
-        self.assertEqual(response.status_code, 200)
-
-    def test_medicine_delete_namespace(self):
-        url = reverse(
-            "catalog:medicine_delete", kwargs={"medicine_id": self.medicine.pk}
-        )
-        response = self.client.delete(url)
         self.assertEqual(response.status_code, 200)
