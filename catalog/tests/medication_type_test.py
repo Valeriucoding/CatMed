@@ -1,7 +1,7 @@
 from django.urls import reverse
 
 from catalog.models import MedicationType
-from factories import CatalogFactory
+from catalog.tests.factories import CatalogFactory
 
 
 class TestMedicationTypeModel(CatalogFactory):
