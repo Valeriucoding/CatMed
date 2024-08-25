@@ -25,7 +25,7 @@ jobs:
 
       - name: Set environment variables
         env:
-          SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+          SECRET_KEY: ${{ secrets.SECRET_KEY }}
 
         run:
           echo "SECRET_KEY=$SECRET_KEY" >> $GITHUB_ENV
