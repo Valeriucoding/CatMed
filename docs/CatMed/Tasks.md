@@ -10,7 +10,8 @@
 	- [x] remove unused fields or add placeholders
 - [ ] create medicine
 	- [ ] there's a weird bug where after opening the add modal the dropdown won't open anymore
-- [ ] add tests?
+	  delete disease is a bit broken
+- [x] add tests?
       
 ### New features
 - Sorting by disease or other models
