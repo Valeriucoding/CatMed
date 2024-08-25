@@ -21,10 +21,16 @@
         <i class="ml-3 fas fa-times text-sm relative" style="top: 0.1rem;" onclick="clearMedicineListFilter(this)"></i>
     </div>
 {% endfor %}
-<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-
+{% for medication_type_obj in medication_types_params %}
+        <div id="medication-type-{{ medication_type_obj.id }}" class="badge badge-secondary badge-lg flex items-center"
+         data-search-param="medication-type">
+        {{ medication_type_obj.name }}
+        <i class="ml-3 fas fa-times text-sm relative" style="top: 0.1rem;" onclick="clearMedicineListFilter(this)"></i>
+    </div>
+{% endfor %}
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
     {% for medicine in medicines %}
-        <div class="card bg-base-100 w-72 shadow-xl" hx-get="{% url "catalog:medicine_detail" medicine.id %}"
+        <div class="card bg-base-100 shadow-xl" hx-get="{% url 'catalog:medicine_detail' medicine.id %}"
              hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">
             <figure>
                 {# <img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="{{ medicine.name }}"/> #}
@@ -34,8 +40,12 @@
                     {{ medicine.name }}
                 </h2>
                 <div class="card-actions justify-end">
-                    <div class="badge badge-outline">Cure</div>
-                    <div class="badge badge-outline">Products</div>
+                    {% for disease in medicine.diseases.all %}
+                        <div class="badge badge-secondary truncate">{{ disease.name }}</div>
+                    {% endfor %}
+                    {% for medication_type in medicine.medication_types.all %}
+                        <div class="badge badge-accent truncate">{{ medication_type.name }}</div>
+                        {% endfor %}
                 </div>
             </div>
         </div>

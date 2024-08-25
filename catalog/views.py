@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.core.paginator import Paginator
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.template.loader import render_to_string
@@ -9,8 +10,10 @@ from catalog.models import Medicine, Disease, MedicationType
 
 
 def medicine_list(request):
-    medicines = Medicine.objects.all()
+    medicines = Medicine.objects.all().prefetch_related("diseases", "medication_types")
     disease_ids = request.GET.getlist("disease")
+    medication_type_ids = request.GET.getlist("medication-type")
+    print(medication_type_ids)
 
     diseases_params = []
 
@@ -19,7 +22,19 @@ def medicine_list(request):
         diseases = Disease.objects.filter(id__in=disease_ids)
         diseases_params = list(diseases)
 
-    context = {"medicines": medicines, "diseases_params": diseases_params}
+    medication_types_params = []
+    if medication_type_ids:
+        medicines = medicines.filter(
+            medication_types__id__in=medication_type_ids
+        ).distinct()
+        medication_types = MedicationType.objects.filter(id__in=medication_type_ids)
+        medication_types_params = list(medication_types)
+    print(medication_types_params)
+    context = {
+        "medicines": medicines,
+        "diseases_params": diseases_params,
+        "medication_types_params": medication_types_params,
+    }
 
     storage = messages.get_messages(request)
     if storage:
@@ -172,7 +187,12 @@ def disease_create(request):
 def disease_list_create(request):
     form = DiseaseForm(request.POST or None)
     url = reverse("catalog:disease_list_create")
-    context = {"form": form, "model": "disease", "url": url}
+    context = {
+        "form": form,
+        "model": "disease",
+        "url": url,
+        "hx_target": "#diseaseTableBody",
+    }
     if request.method == "POST":
         if form.is_valid():
             disease = form.save()
@@ -187,21 +207,18 @@ def disease_list_create(request):
             )
             response["HX-Trigger"] = "closeDiseaseCreateModal"
             return response
-        else:
-            # TODO: fix this
-            html_content = render_to_string(
-                "catalog/modals/disease_modal_form.html", context, request
-            )
-            return HttpResponse(html_content, status=400)
 
     html_content = render_to_string(
-        "catalog/modals/disease_modal_form.html", context, request
+        "catalog/modals/related_models_modal_form.html", context, request
     )
     return HttpResponse(html_content)
 
 
 def disease_list(request):
-    diseases = Disease.objects.all()
+    diseases_list = Disease.objects.all()
+    paginator = Paginator(diseases_list, 20)
+    page_number = request.GET.get("page")
+    diseases = paginator.get_page(page_number)
     context = {"diseases": diseases}
     if request.htmx:
         return render(request, "catalog/partials/disease_list_partial.html", context)
@@ -292,12 +309,34 @@ def body_organ_create(request):
 
 def medication_type_list(request):
     medication_types = MedicationType.objects.all()
+    paginator = Paginator(medication_types, 20)
+    page_number = request.GET.get("page")
+    medication_types = paginator.get_page(page_number)
     context = {"medication_types": medication_types}
     if request.htmx:
         return render(
             request, "catalog/partials/medication_type_list_partial.html", context
         )
     return render(request, "catalog/medication_type_list.html", context)
+
+
+def medication_type_edit(request, medication_type_id):
+    medication_type = get_object_or_404(MedicationType, id=medication_type_id)
+
+    if request.method == "POST":
+        medication_type.name = request.POST.get("name")
+        medication_type.save()
+        return render(
+            request,
+            "catalog/partials/medication_type_display.html",
+            {"medication_type": medication_type},
+        )
+
+    return render(
+        request,
+        "catalog/partials/medication_type_edit_form.html",
+        {"medication_type": medication_type},
+    )
 
 
 def medication_type_delete(request, medication_type_id):
@@ -314,3 +353,32 @@ def medication_type_delete(request, medication_type_id):
             )
         return HttpResponseRedirect(reverse("catalog:medication_type_list"))
     return HttpResponse(status=405)
+
+
+def medication_type_list_create(request):
+    form = MedicationTypeForm(request.POST or None)
+    url = reverse("catalog:medication_type_list_create")
+    context = {
+        "form": form,
+        "model": "medication-type",
+        "url": url,
+        "hx_target": "#medicationTypesTableBody",
+    }
+    if request.method == "POST":
+        if form.is_valid():
+            medication_type = form.save()
+            response = render(
+                request,
+                "catalog/partials/table_item.html",
+                {
+                    "model": "medication-type",
+                    "object": medication_type,
+                    "delete_func": "showMedicationTypeDeleteModal(this)",
+                },
+            )
+            response["HX-Trigger"] = "closeMedicationTypeCreateModal"
+            return response
+    html_content = render_to_string(
+        "catalog/modals/related_models_modal_form.html", context, request
+    )
+    return HttpResponse(html_content)
