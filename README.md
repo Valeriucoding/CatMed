@@ -61,11 +61,11 @@ diseases and body parts.
 It was created with the intention of helping doctors to quickly find the right medicine for a
 specific condition.
 
+Eventually, I plan to add more features to the project, such as the ability to add product url links to the medicines
+and scrape the price of the medicine from the website.
+
 It is part of the Hack Club Summer of Making program of 2024.
 
-### Features to be implemented
-
-* gfgg
 
 <details>
 <summary>Screenshots</summary>
