@@ -13,6 +13,9 @@
                 {% if model == "disease" %}
            hx-get="{% url 'catalog:disease_edit' object.id %}"
                 {% endif %}
+                {% if model == "medication_type" %}
+           hx-get="{% url 'catalog:medication_type_edit' object.id %}"
+                {% endif %}
            hx-target="#{{ model }}-{{ object.id }}"
            hx-swap="innerHTML"></i>
         <i class="ml-3 fa fa-trash text-warning" data-{{ model }}-name="{{ object.name }}"

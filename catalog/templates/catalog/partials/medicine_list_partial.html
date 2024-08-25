@@ -34,10 +34,10 @@
                 </h2>
                 <div class="card-actions justify-end">
                     {% for disease in medicine.diseases.all %}
-                        <div class="badge badge-secondary">{{ disease.name }}</div>
+                        <div class="badge badge-secondary truncate">{{ disease.name }}</div>
                     {% endfor %}
                     {% for medication_type in medicine.medication_types.all %}
-                        <div class="badge badge-accent">{{ medication_type.name }}</div>
+                        <div class="badge badge-accent truncate">{{ medication_type.name }}</div>
                         {% endfor %}
                 </div>
             </div>

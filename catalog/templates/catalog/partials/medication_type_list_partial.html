@@ -5,26 +5,44 @@
 {#              hx-get="{% url 'catalog:disease_list_create' %}" hx-target="#ModalContent">#}
 {#            <i class="fas fa-plus"></i>#}
 {#        </span>#}
-{#</div>#} 
-<h1 class="text-6xl">In work</h1>
-{#TODO: add medication type modal#}
-{#<div class="items-start">#}
-{#    <div class="overflow-x-auto">#}
-{#        <table class="table">#}
-{#            <thead>#}
-{#            <tr>#}
-{#                <th>Name</th>#}
-{#                <th>Operations</th>#}
-{#            </tr>#}
-{#            </thead>#}
-{#            <tbody id="medicationTypesTableBody">#}
-{#            {% for medication_type in medication_types %}#}
-{#                {% include "catalog/partials/table_item.html" with model="medication_type" object=medication_type delete_func="showMedicationTypeDeleteModal(this)"%}#}
-{#            {% endfor %}#}
-{#            </tbody>#}
-{#        </table>#}
-{#    </div>#}
 {#</div>#}
+{#TODO: add medication type modal#}
+<div class="items-start">
+    <div class="overflow-x-auto">
+        <table class="table">
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Operations</th>
+            </tr>
+            </thead>
+            <tbody id="medicationTypesTableBody">
+            {% for medication_type in medication_types %}
+                {% include "catalog/partials/table_item.html" with model="medication_type" object=medication_type delete_func="showMedicationTypeDeleteModal(this)"%}
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Pagination -->
+<div class="flex justify-center mt-4">
+    <div class="join">
+        {% if diseases.has_previous %}
+            <a class="join-item btn" href="?page=1" hx-get="?page=1" hx-target="#main-container">&laquo; first</a>
+            <a class="join-item btn" href="?page={{ medication_types.previous_page_number }}" hx-get="?page={{ medication_types.previous_page_number }}" hx-target="#main-container">previous</a>
+        {% endif %}
+
+        <span class="join-item btn btn-active">
+            Page {{ medication_types.number }} of {{ medication_types.paginator.num_pages }}
+        </span>
+
+        {% if medication_types.has_next %}
+            <a class="join-item btn" href="?page={{ medication_types.next_page_number }}" hx-get="?page={{ medication_types.next_page_number }}" hx-target="#main-container">next</a>
+            <a class="join-item btn" href="?page={{ medication_types.paginator.num_pages }}" hx-get="?page={{ medication_types.paginator.num_pages }}" hx-target="#main-container">last &raquo;</a>
+        {% endif %}
+    </div>
+</div>
 
 {# modals #}
 <dialog id="medication_type_delete_modal" class="modal">

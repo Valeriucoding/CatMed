@@ -18,6 +18,9 @@ class MedicationType(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ["name"]
+
 
 class BodyOrgan(models.Model):
     name = models.CharField(max_length=255, unique=True)

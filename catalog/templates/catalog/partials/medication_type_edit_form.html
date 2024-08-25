@@ -1,0 +1,9 @@
+<form hx-post="{% url 'catalog:medication_type_edit' medication_type.id %}"
+      hx-trigger="submit"
+      hx-target="#medication_type-{{ medication_type.id }}"
+      hx-swap="innerHTML"
+>
+    <input type="text" name="name" value="{{ medication_type.name }}" class="input input-bordered input-sm w-full max-w-[10rem]">
+    <button type="submit" class="btn btn-primary btn-sm">Save</button>
+    <button type="button" class="btn btn-secondary btn-sm" hx-get="{% url 'catalog:medication_type_list' %}" hx-target="#main-container" hx-swap="innerHTML">Cancel</button>
+</form>
