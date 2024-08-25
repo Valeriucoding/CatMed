@@ -14,14 +14,27 @@
                         {% if field.field.widget.input_type == 'checkbox' %}
                             <div class="relative w-full max-w-xs">
                                 <label for="dropdownButton" class="label">
-                                                <span class="label-text
-                                                {% if field.errors %}text-error{% endif %}">{{ field.label }}</span>
+                                    <span class="label-text {% if field.errors %}text-error{% endif %}">{{ field.label }}</span>
                                 </label>
-                                <button id="{{ field.label }}Button"
-                                        class="select select-bordered w-full text-left dropdownButton "
-                                        type="button">
-                                    {{ field.label }}
-                                </button>
+                                <div class="flex">
+                                    <button id="{{ field.label }}Button"
+                                            class="select select-bordered flex-grow text-left dropdownButton"
+                                            type="button">
+                                        {{ field.label }}
+                                    </button>
+                                    <button type="button" class="btn base-100 bg-transparent ml-2"
+                                            onclick="loadCreateModal()"
+                                            {% if field.label == "Diseases" %}
+                                            hx-get="{% url 'catalog:disease_create' %}"
+                                            {% elif field.label == "Medication types" %}
+                                            hx-get="{% url 'catalog:medication_type_create' %}"
+                                            {% elif field.label == "Body organs" %}
+                                            hx-get="{% url 'catalog:body_organ_create' %}"
+                                            {% endif %}
+                                            hx-target="#ModalContent">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                </div>
                                 <div id="{{ field.label }}Menu"
                                      class="absolute hidden mt-1 w-full bg-base-100 border border-base-300 rounded-lg shadow-lg dropdownMenu z-10">
                                     {% for instance in field %}
@@ -32,17 +45,6 @@
                                         </div>
                                     {% endfor %}
                                 </div>
-                                <button type="button" class="btn base-100 bg-transparent" onclick="loadCreateModal()"
-                                        {% if field.label == "Diseases" %}
-                                        hx-get="{% url 'catalog:disease_create' %}"
-                                        {% elif field.label == "Medication types" %}
-                                        hx-get="{% url 'catalog:medication_type_create' %}"
-                                        {% elif field.label == "Body organs" %}
-                                        hx-get="{% url 'catalog:body_organ_create' %}"
-                                        {% endif %} 
-                                        hx-target="#ModalContent">
-                                    <i class="fas fa-plus"></i>
-                                </button>
                             </div>
                         {% else %}
                             <div class="form-control {% if field.errors %}form-control-error{% endif %}">

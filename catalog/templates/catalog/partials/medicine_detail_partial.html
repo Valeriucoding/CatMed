@@ -1,64 +1,84 @@
-<div id="main-container">
-    <button class="btn btn-secondary mb-4" hx-get="{% url "catalog:medicine_list" %}" hx-target="#main-container"
-            hx-swap="innerHTML" hx-push-url="true">
-        <i class="fa fa-arrow-left"></i>
-    </button>
-    <button class="btn btn-primary mb-4" hx-get="{% url 'catalog:medicine_update' medicine.id %}"
-            hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true"
-    ><i class="fas fa-edit"></i></button>
+<div id="main-container" class="container mx-auto px-4 py-8">
+    <div class="flex justify-between items-center mb-6">
+        <button class="btn btn-ghost" hx-get="{% url "catalog:medicine_list" %}" hx-target="#main-container"
+                hx-swap="innerHTML" hx-push-url="true">
+            <i class="fa fa-arrow-left mr-2"></i> Back
+        </button>
+        <div>
+            <button class="btn btn-primary mr-2" hx-get="{% url 'catalog:medicine_update' medicine.id %}"
+                    hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">
+                <i class="fas fa-edit mr-2"></i> Edit
+            </button>
+            <button class="btn btn-error" onclick="delete_modal.showModal()">
+                <i class="fas fa-trash mr-2"></i> Delete
+            </button>
+        </div>
+    </div>
 
-    <button class="btn btn-danger mt-4" onclick="delete_modal.showModal()"><i class="fas fa-trash"></i></button>
+    <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+            <h1 class="card-title text-3xl mb-4">{{ medicine.name }}</h1>
+            <p class="text-lg mb-6">{{ medicine.description }}</p>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <h2 class="text-2xl font-semibold mb-3">Diseases</h2>
+                    <ul class="list-disc list-inside">
+                        {% for disease in medicine.diseases.all %}
+                            <li class="mb-1">{{ disease.name }}</li>
+                        {% empty %}
+                            <li class="text-gray-500">No diseases listed</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-semibold mb-3">Medication Types</h2>
+                    <ul class="list-disc list-inside">
+                        {% for type in medicine.medication_types.all %}
+                            <li class="mb-1">{{ type.name }}</li>
+                        {% empty %}
+                            <li class="text-gray-500">No medication types listed</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <dialog id="delete_modal" class="modal">
         <div class="modal-box">
-            <h3 class="text-lg font-bold">Confirm Deletion</h3>
+            <h3 class="font-bold text-lg">Confirm Deletion</h3>
             <p class="py-4">Are you sure you want to delete {{ medicine.name }}? This action cannot be undone.</p>
             <div class="modal-action">
                 <form method="dialog">
-                    <button class="btn btn-secondary mr-2">Cancel</button>
+                    <button class="btn btn-ghost mr-2">Cancel</button>
                 </form>
-                <button class="btn btn-danger" hx-delete="{% url 'catalog:medicine_delete' medicine.id %}"
+                <button class="btn btn-error" hx-delete="{% url 'catalog:medicine_delete' medicine.id %}"
                         hx-target="#main-container" hx-swap="innerHTML">Delete
                 </button>
             </div>
         </div>
     </dialog>
-
-    <h1 class="text-3xl font-bold">{{ medicine.name }}</h1>
-    <p>{{ medicine.description }}</p>
-
-    <h2 class="text-2xl mt-4">Diseases</h2>
-    <ul>
-        {% for disease in medicine.diseases.all %}
-            <li>{{ disease.name }}</li>
-        {% endfor %}
-    </ul>
-
-    <h2 class="text-2xl mt-4">Medication Types</h2>
-    <ul>
-        {% for type in medicine.medication_types.all %}
-            <li>{{ type.name }}</li>
-        {% endfor %}
-    </ul>
-
-    <h2 class="text-2xl mt-4">Body Organs</h2>
-    <ul>
-        {% for organ in medicine.body_organs.all %}
-            <li>{{ organ.name }}</li>
-        {% endfor %}
-    </ul>
-
-    <h2 class="text-2xl mt-4">Products</h2>
-    <ul>
-        {% for product in medicine.medicine_products.all %}
-            <li>
-                <strong>{{ product.name }}</strong> - {{ product.get_buy_place_display }}
-                {% if product.product_url %}
-                    - <a href="{{ product.product_url }}" target="_blank">Buy Here</a>
-                {% endif %}
-                - Price: {{ product.price }}$
-                - Method of Administration: {{ product.method_of_administration }}
-                - Form: {{ product.presenting_form.name }}
-            </li>
-        {% endfor %}
-    </ul>
 </div>
+{#    <h2 class="text-2xl mt-4">Body Organs</h2>#}
+{#    <ul>#}
+{#        {% for organ in medicine.body_organs.all %}#}
+{#            <li>{{ organ.name }}</li>#}
+{#        {% endfor %}#}
+{#    </ul>#}
+
+{#    <h2 class="text-2xl mt-4">Products</h2>#}
+{#    <ul>#}
+{#        {% for product in medicine.medicine_products.all %}#}
+{#            <li>#}
+{#                <strong>{{ product.name }}</strong> - {{ product.get_buy_place_display }}#}
+{#                {% if product.product_url %}#}
+{#                    - <a href="{{ product.product_url }}" target="_blank">Buy Here</a>#}
+{#                {% endif %}#}
+{#                - Price: {{ product.price }}$#}
+{#                - Method of Administration: {{ product.method_of_administration }}#}
+{#                - Form: {{ product.presenting_form.name }}#}
+{#            </li>#}
+{#        {% endfor %}#}
+{#    </ul>#}
+

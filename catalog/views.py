@@ -9,7 +9,7 @@ from catalog.models import Medicine, Disease, MedicationType
 
 
 def medicine_list(request):
-    medicines = Medicine.objects.all()
+    medicines = Medicine.objects.all().prefetch_related("diseases", "medication_types")
     disease_ids = request.GET.getlist("disease")
 
     diseases_params = []

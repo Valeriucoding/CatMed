@@ -3,11 +3,15 @@
 
 # Urgent
 - [x] fix main page grid
-	- [ ] remove placeholders or add some models there
-- [ ] fix sidebar make it bigger 
-	- [ ]  add a sidebar item for medicine list
+	- [x] remove placeholders or add some models there
+- [x] fix sidebar make it bigger 
+	- [x]  add a sidebar item for medicine list
 - [ ] format the detail view
-	- [ ] remove unused fields or add placeholders
+	- [x] remove unused fields or add placeholders
+	- [ ] add direct links to related models
+- [ ] create medicine
+	- [ ] 
+- [ ] add tests?
       
 ### New features
 - Sorting by disease or other models

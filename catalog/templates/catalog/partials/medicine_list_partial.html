@@ -33,8 +33,12 @@
                     {{ medicine.name }}
                 </h2>
                 <div class="card-actions justify-end">
-                    <div class="badge badge-outline">Cure</div>
-                    <div class="badge badge-outline">Products</div>
+                    {% for disease in medicine.diseases.all %}
+                        <div class="badge badge-secondary">{{ disease.name }}</div>
+                    {% endfor %}
+                    {% for medication_type in medicine.medication_types.all %}
+                        <div class="badge badge-accent">{{ medication_type.name }}</div>
+                        {% endfor %}
                 </div>
             </div>
         </div>
