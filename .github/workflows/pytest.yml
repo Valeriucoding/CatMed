@@ -22,6 +22,14 @@ jobs:
         uses: actions/setup-python@v3
         with:
           python-version: ${{ matrix.python-version }}
+
+      - name: Set environment variables
+        env:
+          SECRET_KEY: ${{ secrets.DJANGO_SECRET_KEY }}
+
+        run:
+          echo "SECRET_KEY=$SECRET_KEY" >> $GITHUB_ENV
+
       - name: Cache pip
         uses: actions/cache@v3
         with:
