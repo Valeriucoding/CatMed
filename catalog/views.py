@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.core.paginator import Paginator
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.template.loader import render_to_string
@@ -201,7 +202,10 @@ def disease_list_create(request):
 
 
 def disease_list(request):
-    diseases = Disease.objects.all()
+    diseases_list = Disease.objects.all()
+    paginator = Paginator(diseases_list, 20)
+    page_number = request.GET.get("page")
+    diseases = paginator.get_page(page_number)
     context = {"diseases": diseases}
     if request.htmx:
         return render(request, "catalog/partials/disease_list_partial.html", context)

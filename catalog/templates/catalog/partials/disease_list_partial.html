@@ -33,6 +33,25 @@
     </div>
 </div>
 
+<!-- Pagination -->
+<div class="flex justify-center mt-4">
+    <div class="join">
+        {% if diseases.has_previous %}
+            <a class="join-item btn" href="?page=1" hx-get="?page=1" hx-target="#main-container">&laquo; first</a>
+            <a class="join-item btn" href="?page={{ diseases.previous_page_number }}" hx-get="?page={{ diseases.previous_page_number }}" hx-target="#main-container">previous</a>
+        {% endif %}
+
+        <span class="join-item btn btn-active">
+            Page {{ diseases.number }} of {{ diseases.paginator.num_pages }}
+        </span>
+
+        {% if diseases.has_next %}
+            <a class="join-item btn" href="?page={{ diseases.next_page_number }}" hx-get="?page={{ diseases.next_page_number }}" hx-target="#main-container">next</a>
+            <a class="join-item btn" href="?page={{ diseases.paginator.num_pages }}" hx-get="?page={{ diseases.paginator.num_pages }}" hx-target="#main-container">last &raquo;</a>
+        {% endif %}
+    </div>
+</div>
+
 {# modals #}
 <dialog id="disease_delete_modal" class="modal">
     <div class="modal-box">

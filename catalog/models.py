@@ -8,6 +8,9 @@ class Disease(models.Model):
     def __str__(self):
         return self.name
 
+    class Meta:
+        ordering = ["name"]
+
 
 class MedicationType(models.Model):
     name = models.CharField(max_length=255, unique=True)
