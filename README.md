@@ -35,20 +35,33 @@
 
 </div>
 
-<details open="open">
-<summary>Table of Contents</summary>
+[//]: # (<details open="open">)
 
-- [About](#about)
-    - [Built With](#built-with)
-- [Getting Started](#getting-started)
-    - [Prerequisites](#prerequisites)
-    - [Installation](#installation)
-- [Usage](#usage)
-- [Acknowledgements](#acknowledgements)
+[//]: # (<summary>Table of Contents</summary>)
 
-</details>
+[//]: # ()
+
+[//]: # (- [About]&#40;#about&#41;)
+
+[//]: # (    - [Built With]&#40;#built-with&#41;)
+
+[//]: # (- [Getting Started]&#40;#getting-started&#41;)
+
+[//]: # (    - [Prerequisites]&#40;#prerequisites&#41;)
+
+[//]: # (    - [Installation]&#40;#installation&#41;)
+
+[//]: # (- [Usage]&#40;#usage&#41;)
+
+[//]: # (- [Acknowledgements]&#40;#acknowledgements&#41;)
+
+[//]: # ()
+
+[//]: # (</details>)
 
 ---
+
+#### **website takes ~60 seconds to load for the first time, please be patient.**
 
 ## About
 
@@ -80,21 +93,42 @@ and scrape the price of the medicine from the website.
 
 It is part of the Hack Club Summer of Making program of 2024.
 
+[//]: # (![Home Page]&#40;docs/images/medicine_list.png&#41;)
 
-<details>
-<summary>Screenshots</summary>
-<br>
+[//]: # (![Medicine Detail]&#40;docs/images/medicine_detail.png&#41;)
 
-> **[?]**
-> Please provide your screenshots here.
+[//]: # (![Update Page]&#40;docs/images/medicine_update.png&#41;)
 
-|                                   Home Page                                    |                                    Login Page                                    |
-|:------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------:|
-|  <img src="docs/images/medicine_list.png" title="Medicine List" width="100%">  | <img src="docs/images/medicine_detail.png" title="Medicine_detail" width="100%"> |
-|                                  Update Page                                   |                                   Disease List                                   |
-| <img src="docs/images/medicine_update.png" title="Medicine List" width="100%"> |   <img src="docs/images/disease_list.png" title="Medicine List" width="100%">    |
+[//]: # (![Disease List]&#40;docs/images/disease_list.png&#41;)
 
-</details>
+<table>
+  <tr>
+    <td><img src="docs/images/medicine_list.png" alt="Home Page" width="300"/></td>
+    <td><img src="docs/images/medicine_detail.png" alt="Medicine Detail" width="300"/></td>
+  </tr>
+  <tr>
+    <td><img src="docs/images/medicine_update.png" alt="Update Page" width="300"/></td>
+    <td><img src="docs/images/disease_list.png" alt="Disease List" width="300"/></td>
+  </tr>
+</table>
+
+[//]: # (<details>)
+
+[//]: # (<summary>Screenshots</summary>)
+
+[//]: # (<br>)
+
+[//]: # (|                                   Home Page                                    |                                    Login Page                                    |)
+
+[//]: # (|:------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------:|)
+
+[//]: # (|  <img src="docs/images/medicine_list.png" title="Medicine List" width="100%">  | <img src="docs/images/medicine_detail.png" title="Medicine_detail" width="100%"> |)
+
+[//]: # (|                                  Update Page                                   |                                   Disease List                                   |)
+
+[//]: # (| <img src="docs/images/medicine_update.png" title="Medicine List" width="100%"> |   <img src="docs/images/disease_list.png" title="Medicine List" width="100%">    |)
+
+[//]: # (</details>)
 
 ### Built With
 
