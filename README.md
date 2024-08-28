@@ -93,24 +93,26 @@ and scrape the price of the medicine from the website.
 
 It is part of the Hack Club Summer of Making program of 2024.
 
-[//]: # (![Home Page]&#40;docs/images/medicine_list.png&#41;)
 
-[//]: # (![Medicine Detail]&#40;docs/images/medicine_detail.png&#41;)
+[//]: # (<table>)
 
-[//]: # (![Update Page]&#40;docs/images/medicine_update.png&#41;)
+[//]: # (  <tr>)
 
-[//]: # (![Disease List]&#40;docs/images/disease_list.png&#41;)
+[//]: # (    <td><img src="docs/images/medicine_list.png" alt="Home Page" width="300"/></td>)
 
-<table>
-  <tr>
-    <td><img src="docs/images/medicine_list.png" alt="Home Page" width="300"/></td>
-    <td><img src="docs/images/medicine_detail.png" alt="Medicine Detail" width="300"/></td>
-  </tr>
-  <tr>
-    <td><img src="docs/images/medicine_update.png" alt="Update Page" width="300"/></td>
-    <td><img src="docs/images/disease_list.png" alt="Disease List" width="300"/></td>
-  </tr>
-</table>
+[//]: # (    <td><img src="docs/images/medicine_detail.png" alt="Medicine Detail" width="300"/></td>)
+
+[//]: # (  </tr>)
+
+[//]: # (  <tr>)
+
+[//]: # (    <td><img src="docs/images/medicine_update.png" alt="Update Page" width="300"/></td>)
+
+[//]: # (    <td><img src="docs/images/disease_list.png" alt="Disease List" width="300"/></td>)
+
+[//]: # (  </tr>)
+
+[//]: # (</table>)
 
 [//]: # (<details>)
 
@@ -139,6 +141,11 @@ It is part of the Hack Club Summer of Making program of 2024.
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
 
 [![DaisyUI](https://img.shields.io/badge/DaisyUI-FF3E00?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://daisyui.com)
+
+![Home Page](docs/images/medicine_list.png)
+![Medicine Detail](docs/images/medicine_detail.png)
+![Update Page](docs/images/medicine_update.png)
+![Disease List](docs/images/disease_list.png)
 
 ## Getting Started
 
