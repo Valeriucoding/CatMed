@@ -101,6 +101,13 @@
                     <i class="fas fa-pills fa-fw mr-2"></i> Medication Types
                 </a>
             </li>
+            <li>
+                <a id="organ-sidebar-item" hx-get="{% url "catalog:organ_list" %}"
+                   hx-target="#main-container" hx-swap="innerHTML"
+                   hx-push-url="true" class="py-4">
+                    <i class="fas fa-lungs fa-fw mr-2"></i> Organs
+                </a>
+            </li>
         </ul>
     </div>
 </div>

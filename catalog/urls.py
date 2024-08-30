@@ -44,6 +44,10 @@ urlpatterns = [
         views.medication_type_list_create,
         name="medication_type_list_create",
     ),
-    # body_organ
+    # organ
+    path("organs/", views.organ_list, name="organ_list"),
+    path("organs/edit/<int:organ_id>/", views.organ_edit, name="organ_edit"),
+    path("organs/delete/<int:organ_id>/", views.organ_delete, name="organ_delete"),
+    path("organs/create-table-item", views.organ_list_create, name="organ_list_create"),
     path("organs/create/", views.organ_create, name="organ_create"),
 ]

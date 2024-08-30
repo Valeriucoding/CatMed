@@ -12,9 +12,10 @@
         <i class="fa fa-edit text-primary cursor-pointer"
                 {% if model == "disease" %}
            hx-get="{% url 'catalog:disease_edit' object.id %}"
-                {% endif %}
-                {% if model == "medication_type" %}
+                {% elif model == "medication_type" %}
            hx-get="{% url 'catalog:medication_type_edit' object.id %}"
+           {% elif model == "organ" %}
+              hx-get="{% url 'catalog:organ_edit' object.id %}"
                 {% endif %}
            hx-target="#{{ model }}-{{ object.id }}"
            hx-swap="innerHTML"></i>

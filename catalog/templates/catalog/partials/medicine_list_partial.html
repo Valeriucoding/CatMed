@@ -28,6 +28,14 @@
         <i class="ml-3 fas fa-times text-sm relative" style="top: 0.1rem;" onclick="clearMedicineListFilter(this)"></i>
     </div>
 {% endfor %}
+
+{% for organ_obj in organs_params %}
+        <div id="organ-{{ organ_obj.id }}" class="badge badge-secondary badge-lg flex items-center"
+         data-search-param="organ">
+        {{ organ_obj.name }}
+        <i class="ml-3 fas fa-times text-sm relative" style="top: 0.1rem;" onclick="clearMedicineListFilter(this)"></i>
+    </div>
+{% endfor %}
 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
     {% for medicine in medicines %}
         <div class="card bg-base-100 shadow-xl" hx-get="{% url 'catalog:medicine_detail' medicine.id %}"

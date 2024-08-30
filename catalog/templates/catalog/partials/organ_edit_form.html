@@ -1,0 +1,9 @@
+<form hx-post="{% url 'catalog:organ_edit' organ.id %}"
+      hx-trigger="submit"
+      hx-target="#organ-{{ organ.id }}"
+      hx-swap="innerHTML"
+>
+    <input type="text" name="name" value="{{ organ.name }}" class="input input-bordered input-sm w-full max-w-[10rem]">
+    <button type="submit" class="btn btn-primary btn-sm">Save</button>
+    <button type="button" class="btn btn-secondary btn-sm" hx-get="{% url 'catalog:organ_list' %}" hx-target="#main-container" hx-swap="innerHTML">Cancel</button>
+</form>

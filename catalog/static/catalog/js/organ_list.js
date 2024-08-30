@@ -8,8 +8,7 @@ function showOrganDeleteModal(button) {
     confirmDeleteButton.textContent = "Delete"
     messageElement.textContent = `Are you sure you want to delete "${organName}"? This action cannot be undone.`;
 
-    confirmDeleteButton.setAttribute('hx-delete', `/medication-types/delete/${organID}/`);
-    // TODO: update url
+    confirmDeleteButton.setAttribute('hx-delete', `/organs/delete/${organID}/`);
     confirmDeleteButton.setAttribute('hx-target', 'this');
     htmx.process(confirmDeleteButton);
 

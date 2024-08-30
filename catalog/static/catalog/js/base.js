@@ -22,17 +22,20 @@ function changeToSelectedState() {
     const medicineLink = document.getElementById('medicine-sidebar-item');
     const diseaseLink = document.getElementById('disease-sidebar-item');
     const medicationTypeLink = document.getElementById('medication-type-sidebar-item');
+    const organLink = document.getElementById('organ-sidebar-item');
     medicineLink.classList.toggle('active-nav', currentPath === "/");
     diseaseLink.classList.toggle('active-nav', currentPath === "/diseases/");
     medicationTypeLink.classList.toggle('active-nav', currentPath === "/medication-types/");
+    organLink.classList.toggle('active-nav', currentPath === "/organs/");
+
 }
 
 
 function clearMedicineListFilter(badge) {
+    console.log(badge);
     const parentDiv = badge.parentElement;
     const badgeSearchParam = parentDiv.id.split('-')[1];
     const searchParamName = parentDiv.getAttribute('data-search-param');
-    console.log(badgeSearchParam, searchParamName);
 
     const url = new URL(window.location);
     const params = url.searchParams.get(searchParamName);
@@ -44,7 +47,6 @@ function clearMedicineListFilter(badge) {
         if (newValues.length > 0) {
             url.searchParams.set(searchParamName, newValues.join(','));
         } else {
-            console.log(searchParamName)
             url.searchParams.delete(searchParamName);
         }
         window.history.pushState({}, '', url);

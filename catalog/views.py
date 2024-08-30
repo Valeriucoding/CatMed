@@ -13,6 +13,7 @@ def medicine_list(request):
     medicines = Medicine.objects.all().prefetch_related("diseases", "medication_types")
     disease_ids = request.GET.getlist("disease")
     medication_type_ids = request.GET.getlist("medication-type")
+    organ_ids = request.GET.getlist("organ")
 
     diseases_params = []
 
@@ -28,10 +29,18 @@ def medicine_list(request):
         ).distinct()
         medication_types = MedicationType.objects.filter(id__in=medication_type_ids)
         medication_types_params = list(medication_types)
+
+    organs_params = []
+    if organ_ids:
+        medicines = medicines.filter(organs__id__in=organ_ids).distinct()
+        organs = Organ.objects.filter(id__in=organ_ids)
+        organs_params = list(organs)
+
     context = {
         "medicines": medicines,
         "diseases_params": diseases_params,
         "medication_types_params": medication_types_params,
+        "organs_params": organs_params,
     }
 
     storage = messages.get_messages(request)
@@ -238,7 +247,7 @@ def disease_delete(request, disease_id):
     disease = get_object_or_404(Disease, id=disease_id)
     if request.method == "DELETE":
         disease.delete()
-        messages.success(request, f"{disease.name} has been successfully deleted.")
+        # messages.success(request, f"{disease.name} has been successfully deleted.")
         if request.htmx:
             return JsonResponse(
                 {"status": "success", "disease_id": disease_id},
@@ -311,9 +320,9 @@ def medication_type_delete(request, medication_type_id):
     medication_type = get_object_or_404(MedicationType, id=medication_type_id)
     if request.method == "DELETE":
         medication_type.delete()
-        messages.success(
-            request, f"{medication_type.name} has been successfully deleted."
-        )
+        # messages.success(
+        #     request, f"{medication_type.name} has been successfully deleted."
+        # )
         if request.htmx:
             return JsonResponse(
                 {"status": "success", "medication_type_id": medication_type_id},
@@ -434,7 +443,7 @@ def organ_delete(request, organ_id):
     organ = get_object_or_404(Organ, id=organ_id)
     if request.method == "DELETE":
         organ.delete()
-        messages.success(request, f"{organ.name} has been successfully deleted.")
+        # messages.success(request, f"{organ.name} has been successfully deleted.")
         if request.htmx:
             return JsonResponse(
                 {"status": "success", "organ_id": organ_id},
