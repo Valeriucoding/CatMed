@@ -5,7 +5,7 @@ from django.shortcuts import render, get_object_or_404
 from django.template.loader import render_to_string
 from django.urls import reverse
 
-from catalog.forms import MedicineForm, DiseaseForm, MedicationTypeForm, BodyOrganForm
+from catalog.forms import MedicineForm, DiseaseForm, MedicationTypeForm, OrganForm
 from catalog.models import Medicine, Disease, MedicationType
 
 
@@ -13,7 +13,6 @@ def medicine_list(request):
     medicines = Medicine.objects.all().prefetch_related("diseases", "medication_types")
     disease_ids = request.GET.getlist("disease")
     medication_type_ids = request.GET.getlist("medication-type")
-    print(medication_type_ids)
 
     diseases_params = []
 
@@ -29,7 +28,6 @@ def medicine_list(request):
         ).distinct()
         medication_types = MedicationType.objects.filter(id__in=medication_type_ids)
         medication_types_params = list(medication_types)
-    print(medication_types_params)
     context = {
         "medicines": medicines,
         "diseases_params": diseases_params,
@@ -281,19 +279,19 @@ def medication_type_create(request):
     return HttpResponse(html_content)
 
 
-def body_organ_create(request):
-    form = BodyOrganForm(request.POST or None)
-    url = reverse("catalog:body_organ_create")
+def organ_create(request):
+    form = OrganForm(request.POST or None)
+    url = reverse("catalog:organ_create")
     context = {"form": form, "model": "body organ", "url": url}
     if request.method == "POST":
         if form.is_valid():
-            body_organ = form.save()
+            organ = form.save()
             return JsonResponse(
                 {
-                    "id": body_organ.id,
-                    "name": body_organ.name,
+                    "id": organ.id,
+                    "name": organ.name,
                     "status": "success",
-                    "model": "body organs",
+                    "model": "organs",
                 },
                 status=200,
             )

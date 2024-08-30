@@ -3,7 +3,7 @@ from django.contrib import admin
 from .models import (
     Disease,
     MedicationType,
-    BodyOrgan,
+    Organ,
     Medicine,
     PresentingForm,
     MedicineProduct,
@@ -16,7 +16,7 @@ class DiseaseAdmin(admin.ModelAdmin):
 
 
 admin.site.register(MedicationType)
-admin.site.register(BodyOrgan)
+admin.site.register(Organ)
 admin.site.register(Medicine)
 admin.site.register(PresentingForm)
 admin.site.register(MedicineProduct)

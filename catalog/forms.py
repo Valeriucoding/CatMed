@@ -1,12 +1,12 @@
 from django import forms
 
-from catalog.models import Medicine, Disease, BodyOrgan, MedicationType
+from catalog.models import Medicine, Disease, MedicationType, Organ
 
 
 class MedicineForm(forms.ModelForm):
     class Meta:
         model = Medicine
-        fields = ["name", "description", "diseases", "medication_types", "body_organs"]
+        fields = ["name", "description", "diseases", "medication_types", "organs"]
         widgets = {
             "name": forms.TextInput(
                 attrs={"class": "input input-bordered w-full max-w-xs"}
@@ -18,7 +18,7 @@ class MedicineForm(forms.ModelForm):
             "medication_types": forms.CheckboxSelectMultiple(
                 attrs={"class": "checkbox"}
             ),
-            "body_organs": forms.CheckboxSelectMultiple(attrs={"class": "checkbox"}),
+            "organs": forms.CheckboxSelectMultiple(attrs={"class": "checkbox"}),
         }
 
 
@@ -44,9 +44,9 @@ class DiseaseForm(forms.ModelForm):
         }
 
 
-class BodyOrganForm(forms.ModelForm):
+class OrganForm(forms.ModelForm):
     class Meta:
-        model = BodyOrgan
+        model = Organ
         fields = ["name"]
         widgets = {
             "name": forms.TextInput(

@@ -22,7 +22,7 @@ class MedicationType(models.Model):
         ordering = ["name"]
 
 
-class BodyOrgan(models.Model):
+class Organ(models.Model):
     name = models.CharField(max_length=255, unique=True)
 
     def __str__(self):
@@ -36,9 +36,7 @@ class Medicine(models.Model):
     medication_types = models.ManyToManyField(
         MedicationType, related_name="medicines", blank=True
     )
-    body_organs = models.ManyToManyField(
-        BodyOrgan, related_name="medicines", blank=True
-    )
+    organs = models.ManyToManyField(Organ, related_name="medicines", blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
