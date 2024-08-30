@@ -35,20 +35,33 @@
 
 </div>
 
-<details open="open">
-<summary>Table of Contents</summary>
+[//]: # (<details open="open">)
 
-- [About](#about)
-    - [Built With](#built-with)
-- [Getting Started](#getting-started)
-    - [Prerequisites](#prerequisites)
-    - [Installation](#installation)
-- [Usage](#usage)
-- [Acknowledgements](#acknowledgements)
+[//]: # (<summary>Table of Contents</summary>)
 
-</details>
+[//]: # ()
+
+[//]: # (- [About]&#40;#about&#41;)
+
+[//]: # (    - [Built With]&#40;#built-with&#41;)
+
+[//]: # (- [Getting Started]&#40;#getting-started&#41;)
+
+[//]: # (    - [Prerequisites]&#40;#prerequisites&#41;)
+
+[//]: # (    - [Installation]&#40;#installation&#41;)
+
+[//]: # (- [Usage]&#40;#usage&#41;)
+
+[//]: # (- [Acknowledgements]&#40;#acknowledgements&#41;)
+
+[//]: # ()
+
+[//]: # (</details>)
 
 ---
+
+#### **website takes ~60 seconds to load for the first time, please be patient.**
 
 ## About
 
@@ -80,21 +93,66 @@ and scrape the price of the medicine from the website.
 
 It is part of the Hack Club Summer of Making program of 2024.
 
+|                                                                                       |                                                                                           |
+|:-------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------:|
+| ![Medicine List](https://cloud-fec29y3cv-hack-club-bot.vercel.app/0medicine_list.png) | ![Medicine Detail](https://cloud-disxcrtjb-hack-club-bot.vercel.app/0medicine_detail.png) |
+| ![Update Page](https://cloud-6k1do4g83-hack-club-bot.vercel.app/0medicine_update.png) |    ![Disease List](https://cloud-oje1dihmm-hack-club-bot.vercel.app/0disease_list.png)    |
 
-<details>
-<summary>Screenshots</summary>
-<br>
+[//]: # (<table>)
 
-> **[?]**
-> Please provide your screenshots here.
+[//]: # (  <tr>)
 
-|                                   Home Page                                    |                                    Login Page                                    |
-|:------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------:|
-|  <img src="docs/images/medicine_list.png" title="Medicine List" width="100%">  | <img src="docs/images/medicine_detail.png" title="Medicine_detail" width="100%"> |
-|                                  Update Page                                   |                                   Disease List                                   |
-| <img src="docs/images/medicine_update.png" title="Medicine List" width="100%"> |   <img src="docs/images/disease_list.png" title="Medicine List" width="100%">    |
+[//]: # ()
 
-</details>
+[//]: # (    <td><img src="docs/images/medicine_list.png" alt="Home Page" width="300"/></td>)
+
+[//]: # ()
+
+[//]: # (    <td><img src="docs/images/medicine_detail.png" alt="Medicine Detail" width="300"/></td>)
+
+[//]: # ()
+
+[//]: # (  </tr>)
+
+[//]: # ()
+
+[//]: # (  <tr>)
+
+[//]: # ()
+
+[//]: # (    <td><img src="docs/images/medicine_update.png" alt="Update Page" width="300"/></td>)
+
+[//]: # ()
+
+[//]: # (    <td><img src="docs/images/disease_list.png" alt="Disease List" width="300"/></td>)
+
+[//]: # ()
+
+[//]: # (  </tr>)
+
+[//]: # (</table>)
+
+[//]: # (<details>)
+
+[//]: # ()
+
+[//]: # (<summary>Screenshots</summary>)
+
+[//]: # ()
+
+[//]: # (<br>)
+
+[//]: # (|                                   Home Page                                    |                                    Login Page                                    |)
+
+[//]: # (|:------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------:|)
+
+[//]: # (|  <img src="docs/images/medicine_list.png" title="Medicine List" width="100%">  | <img src="docs/images/medicine_detail.png" title="Medicine_detail" width="100%"> |)
+
+[//]: # (|                                  Update Page                                   |                                   Disease List                                   |)
+
+[//]: # (| <img src="docs/images/medicine_update.png" title="Medicine List" width="100%"> |   <img src="docs/images/disease_list.png" title="Medicine List" width="100%">    |)
+
+[//]: # (</details>)
 
 ### Built With
 
@@ -105,6 +163,14 @@ It is part of the Hack Club Summer of Making program of 2024.
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind%20CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
 
 [![DaisyUI](https://img.shields.io/badge/DaisyUI-FF3E00?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://daisyui.com)
+
+[//]: # (![Home Page]&#40;docs/images/medicine_list.png&#41;)
+
+[//]: # (![Medicine Detail]&#40;docs/images/medicine_detail.png&#41;)
+
+[//]: # (![Update Page]&#40;docs/images/medicine_update.png&#41;)
+
+[//]: # (![Disease List]&#40;docs/images/disease_list.png&#41;)
 
 ## Getting Started
 

@@ -1,6 +1,6 @@
 from django.test import TestCase
 
-from catalog.models import Medicine, Disease, MedicationType
+from catalog.models import Medicine, Disease, MedicationType, Organ
 
 
 class CatalogFactory(TestCase):
@@ -11,6 +11,7 @@ class CatalogFactory(TestCase):
             description="A common painkiller",
         )
         cls.disease = Disease.objects.create(name="Headache")
-        cls.medicine.diseases.add(cls.disease)
         cls.medication_type = MedicationType.objects.create(name="Tablet")
+        cls.organ = Organ.objects.create(name="Head")
+        cls.medicine.diseases.add(cls.disease)
         cls.medicine.medication_types.add(cls.medication_type)

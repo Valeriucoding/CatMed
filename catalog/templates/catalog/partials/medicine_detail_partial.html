@@ -20,7 +20,7 @@
             <h1 class="card-title text-3xl mb-4">{{ medicine.name }}</h1>
             <p class="text-lg mb-6">{{ medicine.description }}</p>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
                 <div>
                     <h2 class="text-2xl font-semibold mb-3">Diseases</h2>
                     <ul class="list-disc list-inside">
@@ -38,6 +38,16 @@
                             <li class="mb-1">{{ type.name }}</li>
                         {% empty %}
                             <li class="text-gray-500">No medication types listed</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div>
+                    <h2 class="text-2xl font-semibold mb-3">Organs</h2>
+                    <ul class="list-disc list-inside">
+                        {% for organ in medicine.organs.all %}
+                            <li class="mb-1">{{ organ.name }}</li>
+                        {% empty %}
+                            <li class="text-gray-500">No organs listed</li>
                         {% endfor %}
                     </ul>
                 </div>
@@ -60,25 +70,3 @@
         </div>
     </dialog>
 </div>
-{#    <h2 class="text-2xl mt-4">Body Organs</h2>#}
-{#    <ul>#}
-{#        {% for organ in medicine.body_organs.all %}#}
-{#            <li>{{ organ.name }}</li>#}
-{#        {% endfor %}#}
-{#    </ul>#}
-
-{#    <h2 class="text-2xl mt-4">Products</h2>#}
-{#    <ul>#}
-{#        {% for product in medicine.medicine_products.all %}#}
-{#            <li>#}
-{#                <strong>{{ product.name }}</strong> - {{ product.get_buy_place_display }}#}
-{#                {% if product.product_url %}#}
-{#                    - <a href="{{ product.product_url }}" target="_blank">Buy Here</a>#}
-{#                {% endif %}#}
-{#                - Price: {{ product.price }}$#}
-{#                - Method of Administration: {{ product.method_of_administration }}#}
-{#                - Form: {{ product.presenting_form.name }}#}
-{#            </li>#}
-{#        {% endfor %}#}
-{#    </ul>#}
-
