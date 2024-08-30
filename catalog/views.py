@@ -6,7 +6,7 @@ from django.template.loader import render_to_string
 from django.urls import reverse
 
 from catalog.forms import MedicineForm, DiseaseForm, MedicationTypeForm, OrganForm
-from catalog.models import Medicine, Disease, MedicationType
+from catalog.models import Medicine, Disease, MedicationType, Organ
 
 
 def medicine_list(request):
@@ -101,10 +101,6 @@ def medicine_create(request):
     return render(request, "catalog/medicine_form.html", context)
 
 
-# response = render(request, 'template.html', {...})
-# response['HX-Trigger'] = 'myEvent'
-# return response
-# for triggering js
 def medicine_update(request, medicine_id):
     medicine = get_object_or_404(Medicine, id=medicine_id)
     form = MedicineForm(request.POST or None, instance=medicine)
@@ -279,32 +275,6 @@ def medication_type_create(request):
     return HttpResponse(html_content)
 
 
-def organ_create(request):
-    form = OrganForm(request.POST or None)
-    url = reverse("catalog:organ_create")
-    context = {"form": form, "model": "body organ", "url": url}
-    if request.method == "POST":
-        if form.is_valid():
-            organ = form.save()
-            return JsonResponse(
-                {
-                    "id": organ.id,
-                    "name": organ.name,
-                    "status": "success",
-                    "model": "organs",
-                },
-                status=200,
-            )
-        else:
-
-            html_content = render_to_string(
-                "catalog/modals/modal_form.html", context, request
-            )
-            return HttpResponse(html_content)
-    html_content = render_to_string("catalog/modals/modal_form.html", context, request)
-    return HttpResponse(html_content)
-
-
 def medication_type_list(request):
     medication_types = MedicationType.objects.all()
     paginator = Paginator(medication_types, 20)
@@ -380,3 +350,95 @@ def medication_type_list_create(request):
         "catalog/modals/related_models_modal_form.html", context, request
     )
     return HttpResponse(html_content)
+
+
+def organ_create(request):
+    form = OrganForm(request.POST or None)
+    url = reverse("catalog:organ_create")
+    context = {"form": form, "model": "body organ", "url": url}
+    if request.method == "POST":
+        if form.is_valid():
+            organ = form.save()
+            return JsonResponse(
+                {
+                    "id": organ.id,
+                    "name": organ.name,
+                    "status": "success",
+                    "model": "organs",
+                },
+                status=200,
+            )
+        else:
+
+            html_content = render_to_string(
+                "catalog/modals/modal_form.html", context, request
+            )
+            return HttpResponse(html_content)
+    html_content = render_to_string("catalog/modals/modal_form.html", context, request)
+    return HttpResponse(html_content)
+
+
+def organ_list_create(request):
+    form = OrganForm(request.POST or None)
+    url = reverse("catalog:organ_list_create")
+    context = {
+        "form": form,
+        "model": "organ",
+        "url": url,
+        "hx_target": "#organTableBody",
+    }
+
+    if request.method == "POST":
+        if form.is_valid():
+            organ = form.save()
+            response = render(
+                request,
+                "catalog/partials/table_item.html",
+                {
+                    "model": "organ",
+                    "object": organ,
+                    "delete_func": "showOrganDeleteModal(this)",
+                },
+            )
+            response["HX-Trigger"] = "closeOrganCreateModal"
+            return response
+    html_content = render_to_string(
+        "catalog/modals/related_models_modal_form.html", context, request
+    )
+    return HttpResponse(html_content)
+
+
+def organ_list(request):
+    organs_list = Organ.objects.all()
+    paginator = Paginator(organs_list, 20)
+    page_number = request.GET.get("page")
+    organs = paginator.get_page(page_number)
+    context = {"organs": organs}
+    if request.htmx:
+        return render(request, "catalog/partials/organ_list_partial.html", context)
+    return render(request, "catalog/organ_list.html", context)
+
+
+def organ_edit(request, organ_id):
+    organ = get_object_or_404(Organ, id=organ_id)
+
+    if request.method == "POST":
+        organ.name = request.POST.get("name")
+        organ.save()
+        return render(request, "catalog/partials/organ_display.html", {"organ": organ})
+
+    return render(request, "catalog/partials/organ_edit_form.html", {"organ": organ})
+
+
+def organ_delete(request, organ_id):
+    organ = get_object_or_404(Organ, id=organ_id)
+    if request.method == "DELETE":
+        organ.delete()
+        messages.success(request, f"{organ.name} has been successfully deleted.")
+        if request.htmx:
+            return JsonResponse(
+                {"status": "success", "organ_id": organ_id},
+                status=200,
+            )
+        return HttpResponseRedirect(reverse("catalog:organ_list"))
+    return HttpResponse(status=405)
