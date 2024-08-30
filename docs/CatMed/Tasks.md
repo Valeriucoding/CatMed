@@ -1,10 +1,10 @@
 - [ ] add modal doesn't work after a creation error
+- [ ] add organs display to medicine cards
 
 
 # Urgent
 delete disease is a bit broken
 - [ ] display validation errors add modal
-- [x] pagination for disease list
       
 ### New features
 - Sorting by disease or other models
@@ -15,8 +15,6 @@ delete disease is a bit broken
 	 - [x] delete confirmation modal with alert
 		 - [ ] fix alerts(low prio)
 
-#### Models
-- [x] change body organ to just organ
 ##### Later
 * add the other models 
 * add coverage

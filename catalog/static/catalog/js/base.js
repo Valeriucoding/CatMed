@@ -48,9 +48,8 @@ function clearMedicineListFilter(badge) {
             url.searchParams.delete(searchParamName);
         }
         window.history.pushState({}, '', url);
-        console.log(url.href);
 
-        htmx.ajax('GET', url.href, {
+        htmx.ajax('GET', url.toString(), {
             target: '#main-container',
             swap: 'innerHTML',
             pushUrl: true
