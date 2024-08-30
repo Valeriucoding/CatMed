@@ -32,7 +32,6 @@ function changeToSelectedState() {
 
 
 function clearMedicineListFilter(badge) {
-    console.log(badge);
     const parentDiv = badge.parentElement;
     const badgeSearchParam = parentDiv.id.split('-')[1];
     const searchParamName = parentDiv.getAttribute('data-search-param');
@@ -43,13 +42,19 @@ function clearMedicineListFilter(badge) {
         console.log(params);
         const values = params.split(',');
         const newValues = values.filter(value => value !== badgeSearchParam);
-        console.log(newValues);
         if (newValues.length > 0) {
             url.searchParams.set(searchParamName, newValues.join(','));
         } else {
             url.searchParams.delete(searchParamName);
         }
         window.history.pushState({}, '', url);
+        console.log(url.href);
+
+        htmx.ajax('GET', url.href, {
+            target: '#main-container',
+            swap: 'innerHTML',
+            pushUrl: true
+        });
     }
 
     if (parentDiv) {
