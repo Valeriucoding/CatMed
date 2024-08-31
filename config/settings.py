@@ -59,6 +59,11 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = "config.urls"
 
+
+def posthog_api_key(request):
+    return {"POSTHOG_API_KEY": env("POSTHOG_API_KEY")}
+
+
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
@@ -70,6 +75,7 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "config.settings.posthog_api_key",
             ],
         },
     },

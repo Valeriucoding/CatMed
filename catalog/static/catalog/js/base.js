@@ -1,8 +1,14 @@
 function handleBaseAfterLoad() {
     removeAlert()
     changeToSelectedState()
+    posthog.capture('$pageview')
+//     if url changes there should be a page leave event
+
 }
 
+window.addEventListener('beforeunload', function (e) {
+    posthog.capture('$pageleave')
+});
 
 function removeAlert() {
     setTimeout(function () {
