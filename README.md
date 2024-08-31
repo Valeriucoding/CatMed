@@ -93,10 +93,10 @@ and scrape the price of the medicine from the website.
 
 It is part of the Hack Club Summer of Making program of 2024.
 
-|                                                                                       |                                                                                           |
-|:-------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------:|
-| ![Medicine List](https://cloud-fec29y3cv-hack-club-bot.vercel.app/0medicine_list.png) | ![Medicine Detail](https://cloud-disxcrtjb-hack-club-bot.vercel.app/0medicine_detail.png) |
-| ![Update Page](https://cloud-6k1do4g83-hack-club-bot.vercel.app/0medicine_update.png) |    ![Disease List](https://cloud-oje1dihmm-hack-club-bot.vercel.app/0disease_list.png)    |
+|                                                                                                                          |                                                                                           |
+|:------------------------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------:|
+| ![Medicine List](https://cloud-kaashtgnt-hack-club-bot.vercel.app/0screencapture-localhost-8000-2024-08-31-15_09_30.png) | ![Medicine Detail](https://cloud-disxcrtjb-hack-club-bot.vercel.app/0medicine_detail.png) |
+|                  ![Update Page](https://cloud-6k1do4g83-hack-club-bot.vercel.app/0medicine_update.png)                   |    ![Disease List](https://cloud-oje1dihmm-hack-club-bot.vercel.app/0disease_list.png)    |
 
 [//]: # (<table>)
 

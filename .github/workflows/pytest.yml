@@ -26,6 +26,7 @@ jobs:
       - name: Set environment variables
         run:
           echo "SECRET_KEY=$(openssl rand -hex 32)" >> $GITHUB_ENV
+          echo "POSTHOG_API_KEY=phak_1234567890" >> $GITHUB_ENV
 
       - name: Cache pip
         uses: actions/cache@v3
