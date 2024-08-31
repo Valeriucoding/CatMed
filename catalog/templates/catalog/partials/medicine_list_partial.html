@@ -22,7 +22,7 @@
     </div>
 {% endfor %}
 {% for medication_type_obj in medication_types_params %}
-        <div id="medication-type-{{ medication_type_obj.id }}" class="badge badge-secondary badge-lg flex items-center"
+    <div id="medication-type-{{ medication_type_obj.id }}" class="badge badge-secondary badge-lg flex items-center"
          data-search-param="medication-type">
         {{ medication_type_obj.name }}
         <i class="ml-3 fas fa-times text-sm relative" style="top: 0.1rem;" onclick="clearMedicineListFilter(this)"></i>
@@ -30,7 +30,7 @@
 {% endfor %}
 
 {% for organ_obj in organs_params %}
-        <div id="organ-{{ organ_obj.id }}" class="badge badge-secondary badge-lg flex items-center"
+    <div id="organ-{{ organ_obj.id }}" class="badge badge-secondary badge-lg flex items-center"
          data-search-param="organ">
         {{ organ_obj.name }}
         <i class="ml-3 fas fa-times text-sm relative" style="top: 0.1rem;" onclick="clearMedicineListFilter(this)"></i>
@@ -53,7 +53,10 @@
                     {% endfor %}
                     {% for medication_type in medicine.medication_types.all %}
                         <div class="badge badge-accent truncate">{{ medication_type.name }}</div>
-                        {% endfor %}
+                    {% endfor %}
+                    {% for organ in medicine.organs.all %}
+                        <div class="badge badge-primary truncate">{{ organ.name }}</div>
+                    {% endfor %}
                 </div>
             </div>
         </div>
