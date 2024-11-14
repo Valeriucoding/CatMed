@@ -91,8 +91,6 @@ The goal of this project is to see it being used by my friend but also by other 
 Eventually, I plan to add more features to the project, such as the ability to add product url links to the medicines
 and scrape the price of the medicine from the website.
 
-It is part of the Hack Club Summer of Making program of 2024.
-
 |                                                                                                                          |                                                                                           |
 |:------------------------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------:|
 | ![Medicine List](https://cloud-kaashtgnt-hack-club-bot.vercel.app/0screencapture-localhost-8000-2024-08-31-15_09_30.png) | ![Medicine Detail](https://cloud-disxcrtjb-hack-club-bot.vercel.app/0medicine_detail.png) |
@@ -202,4 +200,3 @@ To get started with the project, you'll need:
 
 ## Acknowledgements
 
-> I want to thank Hack Club for motivating me to work on this project during summer.
