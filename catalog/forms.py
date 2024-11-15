@@ -28,7 +28,7 @@ class MedicationTypeForm(forms.ModelForm):
         fields = ["name"]
         widgets = {
             "name": forms.TextInput(
-                attrs={"class": "input input-bordered w-full max-w-xs"}
+                attrs={"class": "input input-bordered w-full"}
             )
         }
 
@@ -39,7 +39,7 @@ class DiseaseForm(forms.ModelForm):
         fields = ["name"]
         widgets = {
             "name": forms.TextInput(
-                attrs={"class": "input input-bordered w-full max-w-xs"}
+                attrs={"class": "input input-bordered w-full"}
             )
         }
 
@@ -50,6 +50,6 @@ class OrganForm(forms.ModelForm):
         fields = ["name"]
         widgets = {
             "name": forms.TextInput(
-                attrs={"class": "input input-bordered w-full max-w-xs"}
+                attrs={"class": "input input-bordered w-full"}
             )
         }
