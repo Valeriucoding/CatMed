@@ -61,7 +61,7 @@ ROOT_URLCONF = "config.urls"
 
 
 def posthog_api_key(request):
-    return {"POSTHOG_API_KEY": env("POSTHOG_API_KEY")}
+    return {"POSTHOG_API_KEY": env("POSTHOG_API_KEY", default="")}
 
 
 TEMPLATES = [

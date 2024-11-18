@@ -31,3 +31,8 @@ document.body.addEventListener('htmx:afterRequest', function (event) {
 document.body.addEventListener('closeDiseaseCreateModal', function () {
     document.getElementById('disease_create').close();
 });
+
+document.body.addEventListener("updateDiseaseTable", function (event) {
+    const tableBody = document.querySelector("#diseaseTableBody");
+    tableBody.insertAdjacentHTML("beforeend", event.detail.html);
+});

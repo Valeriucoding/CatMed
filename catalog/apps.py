@@ -9,5 +9,5 @@ class CatalogConfig(AppConfig):
     name = "catalog"
 
     def ready(self):
-        posthog.api_key = env("POSTHOG_API_KEY")
+        posthog.api_key = env("POSTHOG_API_KEY", default="")
         posthog.host = "https://eu.i.posthog.com"

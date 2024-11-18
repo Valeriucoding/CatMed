@@ -1,3 +1,5 @@
+import json
+
 from django.contrib import messages
 from django.core.paginator import Paginator
 from django.http import HttpResponse, HttpResponseRedirect, JsonResponse
@@ -188,32 +190,33 @@ def disease_create(request):
 
 
 def disease_list_create(request):
-    form = DiseaseForm(request.POST or None)
-    url = reverse("catalog:disease_list_create")
-    context = {
-        "form": form,
-        "model": "disease",
-        "url": url,
-        "hx_target": "#diseaseTableBody",
-    }
     if request.method == "POST":
+        form = DiseaseForm(request.POST)
         if form.is_valid():
             disease = form.save()
-            response = render(
-                request,
+
+            # Render the new row
+            new_row_html = render_to_string(
                 "catalog/partials/table_item.html",
                 {
                     "model": "disease",
                     "object": disease,
                     "delete_func": "showDiseaseDeleteModal(this)",
                 },
+                request=request,
             )
-            response["HX-Trigger"] = "closeDiseaseCreateModal"
-            return response
 
-    html_content = render_to_string(
-        "catalog/modals/related_models_modal_form.html", context, request
-    )
+            response = HttpResponse(new_row_html)
+            response["HX-Trigger"] = json.dumps({
+                "updateDiseaseTable": {"html": new_row_html},
+                "closeDiseaseCreateModal": {}
+            })
+            return response
+    else:
+        form = DiseaseForm()
+
+    context = {"form": form,}
+    html_content = render_to_string("catalog/modals/related_models_modal_form.html", context, request)
     return HttpResponse(html_content)
 
 
@@ -333,32 +336,35 @@ def medication_type_delete(request, medication_type_id):
 
 
 def medication_type_list_create(request):
-    form = MedicationTypeForm(request.POST or None)
-    url = reverse("catalog:medication_type_list_create")
-    context = {
-        "form": form,
-        "model": "medication-type",
-        "url": url,
-        "hx_target": "#medicationTypesTableBody",
-    }
     if request.method == "POST":
+        form = MedicationTypeForm(request.POST)
         if form.is_valid():
             medication_type = form.save()
-            response = render(
-                request,
+
+            # Render the new row
+            new_row_html = render_to_string(
                 "catalog/partials/table_item.html",
                 {
                     "model": "medication-type",
                     "object": medication_type,
                     "delete_func": "showMedicationTypeDeleteModal(this)",
                 },
+                request=request,
             )
-            response["HX-Trigger"] = "closeMedicationTypeCreateModal"
+
+            response = HttpResponse(new_row_html)
+            response["HX-Trigger"] = json.dumps({
+                "updateMedicationTypesTable": {"html": new_row_html},
+                "closeMedicationTypeCreateModal": {}
+            })
             return response
-    html_content = render_to_string(
-        "catalog/modals/related_models_modal_form.html", context, request
-    )
+    else:
+        form = MedicationTypeForm()
+
+    context = {"form": form}
+    html_content = render_to_string("catalog/modals/related_models_modal_form.html", context, request)
     return HttpResponse(html_content)
+
 
 
 def organ_create(request):
@@ -388,32 +394,30 @@ def organ_create(request):
 
 
 def organ_list_create(request):
-    form = OrganForm(request.POST or None)
-    url = reverse("catalog:organ_list_create")
-    context = {
-        "form": form,
-        "model": "organ",
-        "url": url,
-        "hx_target": "#organTableBody",
-    }
-
     if request.method == "POST":
+        form = OrganForm(request.POST)
         if form.is_valid():
             organ = form.save()
-            response = render(
-                request,
+
+            # Render the new row
+            new_row_html = render_to_string(
                 "catalog/partials/table_item.html",
                 {
                     "model": "organ",
                     "object": organ,
                     "delete_func": "showOrganDeleteModal(this)",
                 },
+                request=request,
             )
-            response["HX-Trigger"] = "closeOrganCreateModal"
+
+            response = HttpResponse(new_row_html)
+            response["HX-Trigger"] = json.dumps({"updateOrganTable": {"html": new_row_html}, "closeOrganCreateModal": {}})
             return response
-    html_content = render_to_string(
-        "catalog/modals/related_models_modal_form.html", context, request
-    )
+    else:
+        form = OrganForm()
+
+    context = {"form": form}
+    html_content = render_to_string("catalog/modals/related_models_modal_form.html", context, request)
     return HttpResponse(html_content)
 
 
