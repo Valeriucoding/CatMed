@@ -2,8 +2,5 @@
       hx-trigger="submit"
       hx-target="#disease-{{ disease.id }}"
       hx-swap="innerHTML"
->
-    <input type="text" name="name" value="{{ disease.name }}" class="input input-bordered input-sm w-full max-w-[10rem]">
-    <button type="submit" class="btn btn-primary btn-sm">Save</button>
-    <button type="button" class="btn btn-secondary btn-sm" hx-get="{% url 'catalog:disease_list' %}" hx-target="#main-container" hx-swap="innerHTML">Cancel</button>
+><input type="text" name="name" value="{{ disease.name }}" class="input input-bordered input-sm w-full max-w-[10rem]"><button type="submit" class="btn btn-primary btn-sm mx-1">Save</button><button type="button" class="btn btn-secondary btn-sm" hx-get="{% url 'catalog:disease_list' %}" hx-target="#main-container" hx-swap="innerHTML">Cancel</button>
 </form>
