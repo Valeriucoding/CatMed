@@ -30,3 +30,8 @@ document.body.addEventListener('htmx:afterRequest', function (event) {
 document.body.addEventListener('closeMedicationTypeCreateModal', function () {
     document.getElementById('medication_type_create').close();
 });
+
+document.body.addEventListener("updateMedicationTypesTable", function (event) {
+    const tableBody = document.querySelector("#medicationTypesTableBody");
+    tableBody.insertAdjacentHTML("beforeend", event.detail.html);
+});

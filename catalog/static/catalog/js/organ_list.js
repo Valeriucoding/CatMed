@@ -30,3 +30,10 @@ document.body.addEventListener('htmx:afterRequest', function (event) {
 document.body.addEventListener('closeOrganCreateModal', function () {
     document.getElementById('organ_create').close();
 });
+
+
+document.body.addEventListener("updateOrganTable", function (event) {
+    const tableBody = document.querySelector("#organTableBody");
+    tableBody.insertAdjacentHTML("beforeend", event.detail.html);
+});
+
