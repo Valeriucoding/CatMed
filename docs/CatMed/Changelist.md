@@ -1,2 +1,1 @@
-
-* renamed BodyOrgan model to Organ
+* Enhanced the layout of the create modal for disease, medication type, and organ, and added a backdrop for improved usability and design consistency.
