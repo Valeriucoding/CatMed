@@ -26,7 +26,7 @@
             </thead>
             <tbody id="organTableBody">
             {% for organ in organs %}
-                {% include "catalog/partials/table_item.html" with model="organ" object=organ delete_func="showOrganDeleteModal(this)" %}
+                {% include "catalog/components/table_item.html" with model="organ" object=organ delete_func="showOrganDeleteModal(this)" %}
             {% endfor %}
             </tbody>
         </table>

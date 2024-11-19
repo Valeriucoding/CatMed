@@ -26,7 +26,7 @@
             </thead>
             <tbody id="diseaseTableBody">
             {% for disease in diseases %}
-                {% include "catalog/partials/table_item.html" with model="disease" object=disease delete_func="showDiseaseDeleteModal(this)" %}
+                {% include "catalog/components/table_item.html" with model="disease" object=disease delete_func="showDiseaseDeleteModal(this)" %}
             {% endfor %}
             </tbody>
         </table>

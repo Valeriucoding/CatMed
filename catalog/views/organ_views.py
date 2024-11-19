@@ -44,7 +44,7 @@ def organ_list_create(request):
 
             # Render the new row
             new_row_html = render_to_string(
-                "catalog/partials/table_item.html",
+                "catalog/components/table_item.html",
                 {
                     "model": "organ",
                     "object": organ,
@@ -66,7 +66,7 @@ def organ_list_create(request):
 
 def organ_list(request):
     organs_list = Organ.objects.all()
-    paginator = Paginator(organs_list, 20)
+    paginator = Paginator(organs_list, 17)
     page_number = request.GET.get("page")
     organs = paginator.get_page(page_number)
     context = {"organs": organs}

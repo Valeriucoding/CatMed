@@ -39,7 +39,7 @@ def medication_type_create(request):
 
 def medication_type_list(request):
     medication_types = MedicationType.objects.all()
-    paginator = Paginator(medication_types, 20)
+    paginator = Paginator(medication_types, 17)
     page_number = request.GET.get("page")
     medication_types = paginator.get_page(page_number)
     context = {"medication_types": medication_types}
@@ -93,7 +93,7 @@ def medication_type_list_create(request):
 
             # Render the new row
             new_row_html = render_to_string(
-                "catalog/partials/table_item.html",
+                "catalog/components/table_item.html",
                 {
                     "model": "medication-type",
                     "object": medication_type,

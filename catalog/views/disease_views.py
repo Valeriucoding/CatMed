@@ -45,7 +45,7 @@ def disease_list_create(request):
 
             # Render the new row
             new_row_html = render_to_string(
-                "catalog/partials/table_item.html",
+                "catalog/components/table_item.html",
                 {
                     "model": "disease",
                     "object": disease,
@@ -70,7 +70,7 @@ def disease_list_create(request):
 
 def disease_list(request):
     diseases_list = Disease.objects.all()
-    paginator = Paginator(diseases_list, 20)
+    paginator = Paginator(diseases_list, 17)
     page_number = request.GET.get("page")
     diseases = paginator.get_page(page_number)
     context = {"diseases": diseases}
