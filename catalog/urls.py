@@ -13,6 +13,7 @@ app_name = "catalog"
 urlpatterns = [
     # medicine
     path("", catalog.views.medicine_views.medicine_list, name="medicine_list"),
+    path("search/", catalog.views.medicine_views.medicine_search, name="medicine_search"),
     path("<int:medicine_id>/", catalog.views.medicine_views.medicine_detail, name="medicine_detail"),
     path("create/", catalog.views.medicine_views.medicine_create, name="medicine_create"),
     path("<int:medicine_id>/update/", catalog.views.medicine_views.medicine_update, name="medicine_update"),

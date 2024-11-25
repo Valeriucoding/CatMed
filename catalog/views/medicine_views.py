@@ -156,3 +156,15 @@ def medicine_delete(request, medicine_id):
             )
         return HttpResponseRedirect(reverse("catalog:medicine_list"))
     return HttpResponse(status=405)
+
+
+def medicine_search(request):
+    q = request.GET.get("q")
+
+    if q:
+        medicines = Medicine.objects.filter(name__icontains=q)
+    else:
+        medicines = Medicine.objects.all()
+
+    context = {"medicines": medicines}
+    return render(request, "catalog/components/medicine_card.html", context)

@@ -21,6 +21,10 @@
       type="text"
       class="grow bg-transparent placeholder-gray-500 text-sm focus:outline-none"
       placeholder="Search"
+      name="q"
+      hx-get="{% url 'catalog:medicine_search' %}"
+      hx-trigger="keyup changed delay:500ms"
+      hx-target="#medicines-container"
     />
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -126,8 +130,6 @@
     </div>
 {% endfor %}
 
-<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-    {% for medicine in medicines %}
-        {% include 'catalog/components/medicine_card.html' %}
-    {% endfor %}
+<div id="medicines-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      {% include 'catalog/components/medicine_card.html' %}
 </div>
