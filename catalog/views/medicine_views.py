@@ -34,11 +34,18 @@ def medicine_list(request):
         organs = Organ.objects.filter(id__in=organ_ids)
         organs_params = list(organs)
 
+    diseases = Disease.objects.all()
+    medication_types = MedicationType.objects.all()
+    organs = Organ.objects.all()
+
     context = {
         "medicines": medicines,
         "diseases_params": diseases_params,
         "medication_types_params": medication_types_params,
         "organs_params": organs_params,
+        "diseases": diseases,
+        "medication_types": medication_types,
+        "organs": organs,
     }
 
     storage = messages.get_messages(request)
@@ -159,12 +166,25 @@ def medicine_delete(request, medicine_id):
 
 
 def medicine_search(request):
+    query_params = {}
     q = request.GET.get("q")
+    disease = request.GET.get("disease")
+    medication_type = request.GET.get("medication_type")
+    organ = request.GET.get("organ")
+    buy_place = request.GET.get("buy_place")
 
     if q:
-        medicines = Medicine.objects.filter(name__icontains=q)
-    else:
-        medicines = Medicine.objects.all()
+        query_params["name__icontains"] = q
+    if disease:
+        query_params["diseases__id"] = disease
+    if medication_type:
+        query_params["medication_types__id"] = medication_type
+    if organ:
+        query_params["organs__id"] = organ
+    if buy_place:
+        query_params["buy_place"] = buy_place
+
+    medicines = Medicine.objects.filter(**query_params)
 
     context = {"medicines": medicines}
     return render(request, "catalog/components/medicine_card.html", context)
