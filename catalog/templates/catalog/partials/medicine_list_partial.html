@@ -54,53 +54,49 @@
     </div>
     <div class="collapse-content">
       <div class="flex flex-wrap gap-4">
-        <!-- Select 1 -->
         <div class="form-control">
           <label class="label">
             <span class="label-text">Select Disease</span>
           </label>
           <select class="select select-bordered" name="disease" hx-get="{% url 'catalog:medicine_search' %}"
                       hx-trigger="change" hx-target="#medicines-container">
-            <option disabled selected>Select disease</option>
+            <option selected value="">Select disease</option>
             {% for disease in diseases %}
               <option value="{{ disease.id }}">{{ disease.name }}</option>
             {% endfor %}
           </select>
         </div>
-        <!-- Select 2 -->
         <div class="form-control">
           <label class="label">
             <span class="label-text">Medication Type</span>
           </label>
           <select class="select select-bordered" name="medication_type" hx-get="{% url 'catalog:medicine_search' %}"
                       hx-trigger="change" hx-target="#medicines-container">
-            <option disabled selected>Select medication type</option>
+            <option selected value="">Select medication type</option>
             {% for medication_type in medication_types %}
               <option value="{{ medication_type.id }}">{{ medication_type.name }}</option>
             {% endfor %}
           </select>
         </div>
-        <!-- Select 3 -->
         <div class="form-control">
           <label class="label">
             <span class="label-text">Select Organ</span>
           </label>
           <select class="select select-bordered" name="organ" hx-get="{% url 'catalog:medicine_search' %}"
                   hx-trigger="change" hx-target="#medicines-container">
-            <option disabled selected>Select organ</option>
+            <option selected value="">Select organ</option>
             {% for organ in organs %}
               <option value="{{ organ.id }}">{{ organ.name }}</option>
             {% endfor %}
           </select>
         </div>
-        <!-- Select 4 -->
         <div class="form-control">
           <label class="label">
             <span class="label-text">Buy Place</span>
           </label>
           <select class="select select-bordered" name="buy_place" hx-get="{% url 'catalog:medicine_search' %}"
                       hx-trigger="change" hx-target="#medicines-container">
-            <option disabled selected>Buy place</option>
+            <option selected value="">Buy place</option>
             <option value="farmacie">Farmacie</option>
             <option value="plafar">Plafar</option>
             <option value="site">Site</option>
