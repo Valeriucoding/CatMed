@@ -34,9 +34,9 @@ def medicine_list(request):
         organs = Organ.objects.filter(id__in=organ_ids)
         organs_params = list(organs)
 
-    diseases = Disease.objects.all()
-    medication_types = MedicationType.objects.all()
-    organs = Organ.objects.all()
+    diseases = Disease.objects.annotate(medicine_count=Count('medicines')).filter(medicine_count__gt=0)
+    medication_types = MedicationType.objects.annotate(medicine_count=Count('medicines')).filter(medicine_count__gt=0)
+    organs = Organ.objects.annotate(medicine_count=Count('medicines')).filter(medicine_count__gt=0)
 
     context = {
         "medicines": medicines,
@@ -165,26 +165,38 @@ def medicine_delete(request, medicine_id):
     return HttpResponse(status=405)
 
 
+from django.db.models import Q, Count
+
+
 def medicine_search(request):
-    query_params = {}
-    q = request.GET.get("q")
-    disease = request.GET.get("disease")
-    medication_type = request.GET.get("medication_type")
-    organ = request.GET.get("organ")
-    buy_place = request.GET.get("buy_place")
+    q = request.GET.get("q", "").strip()
+    disease_id = request.GET.get("disease", "")
+    medication_type_id = request.GET.get("medication_type", "")
+    organ_id = request.GET.get("organ", "")
+    # buy_place = request.GET.get("buy_place", "")
+
+    medicines = Medicine.objects.all()
 
     if q:
-        query_params["name__icontains"] = q
-    if disease:
-        query_params["diseases__id"] = disease
-    if medication_type:
-        query_params["medication_types__id"] = medication_type
-    if organ:
-        query_params["organs__id"] = organ
-    if buy_place:
-        query_params["buy_place"] = buy_place
+        medicines = medicines.filter(
+            Q(name__icontains=q)
+            # | Q(description__icontains=q)
+        )
 
-    medicines = Medicine.objects.filter(**query_params)
+    if disease_id:
+        medicines = medicines.filter(diseases__id=disease_id)
+
+    if medication_type_id:
+        medicines = medicines.filter(medication_types__id=medication_type_id)
+
+    if organ_id:
+        medicines = medicines.filter(organs__id=organ_id)
+
+    # if buy_place:
+    #     medicines = medicines.filter(buy_place=buy_place)
+
+    # Remove duplicates if using multiple filters with many-to-many relationships
+    medicines = medicines.distinct()
 
     context = {"medicines": medicines}
     return render(request, "catalog/components/medicine_card.html", context)
