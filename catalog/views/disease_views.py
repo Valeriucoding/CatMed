@@ -27,7 +27,6 @@ def disease_create(request):
                 status=200,
             )
         else:
-
             html_content = render_to_string(
                 "catalog/modals/modal_form.html", context, request
             )
@@ -55,16 +54,22 @@ def disease_list_create(request):
             )
 
             response = HttpResponse(new_row_html)
-            response["HX-Trigger"] = json.dumps({
-                "updateDiseaseTable": {"html": new_row_html},
-                "closeDiseaseCreateModal": {}
-            })
+            response["HX-Trigger"] = json.dumps(
+                {
+                    "updateDiseaseTable": {"html": new_row_html},
+                    "closeDiseaseCreateModal": {},
+                }
+            )
             return response
     else:
         form = DiseaseForm()
 
-    context = {"form": form,}
-    html_content = render_to_string("catalog/modals/related_models_modal_form.html", context, request)
+    context = {
+        "form": form,
+    }
+    html_content = render_to_string(
+        "catalog/modals/related_models_modal_form.html", context, request
+    )
     return HttpResponse(html_content)
 
 

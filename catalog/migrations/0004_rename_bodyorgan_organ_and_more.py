@@ -4,7 +4,6 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("catalog", "0003_alter_medicationtype_options"),
     ]

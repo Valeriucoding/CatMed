@@ -7,7 +7,6 @@ import catalog.views.disease_views
 import catalog.views.medication_type_views
 
 import catalog.views.organ_views
-from catalog import views
 
 app_name = "catalog"
 urlpatterns = [

@@ -5,70 +5,159 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='BodyOrgan',
+            name="BodyOrgan",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255, unique=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=255, unique=True)),
             ],
         ),
         migrations.CreateModel(
-            name='Disease',
+            name="Disease",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255, unique=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=255, unique=True)),
             ],
         ),
         migrations.CreateModel(
-            name='MedicationType',
+            name="MedicationType",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255, unique=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=255, unique=True)),
             ],
         ),
         migrations.CreateModel(
-            name='Medicine',
+            name="Medicine",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255, unique=True)),
-                ('description', models.TextField(blank=True, null=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('body_organs', models.ManyToManyField(blank=True, related_name='medicines', to='catalog.bodyorgan')),
-                ('diseases', models.ManyToManyField(blank=True, related_name='medicines', to='catalog.disease')),
-                ('medication_types', models.ManyToManyField(blank=True, related_name='medicines', to='catalog.medicationtype')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=255, unique=True)),
+                ("description", models.TextField(blank=True, null=True)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                (
+                    "body_organs",
+                    models.ManyToManyField(
+                        blank=True, related_name="medicines", to="catalog.bodyorgan"
+                    ),
+                ),
+                (
+                    "diseases",
+                    models.ManyToManyField(
+                        blank=True, related_name="medicines", to="catalog.disease"
+                    ),
+                ),
+                (
+                    "medication_types",
+                    models.ManyToManyField(
+                        blank=True,
+                        related_name="medicines",
+                        to="catalog.medicationtype",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='PresentingForm',
+            name="PresentingForm",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255, unique=True)),
-                ('capsules', models.IntegerField(blank=True, null=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=255, unique=True)),
+                ("capsules", models.IntegerField(blank=True, null=True)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
             ],
         ),
         migrations.CreateModel(
-            name='MedicineProduct',
+            name="MedicineProduct",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255, unique=True)),
-                ('buy_place', models.CharField(blank=True, choices=[('F', 'farmacie'), ('P', 'plafar'), ('S', 'site')], max_length=100, null=True)),
-                ('product_url', models.CharField(blank=True, max_length=100, null=True)),
-                ('price', models.IntegerField(blank=True, null=True)),
-                ('method_of_administration', models.TextField(blank=True, null=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('updated_at', models.DateTimeField(auto_now=True)),
-                ('medicine', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='medicine_products', to='catalog.medicine')),
-                ('presenting_form', models.ForeignKey(blank=True, null=True, on_delete=django.db.models.deletion.CASCADE, to='catalog.presentingform')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=255, unique=True)),
+                (
+                    "buy_place",
+                    models.CharField(
+                        blank=True,
+                        choices=[("F", "farmacie"), ("P", "plafar"), ("S", "site")],
+                        max_length=100,
+                        null=True,
+                    ),
+                ),
+                (
+                    "product_url",
+                    models.CharField(blank=True, max_length=100, null=True),
+                ),
+                ("price", models.IntegerField(blank=True, null=True)),
+                ("method_of_administration", models.TextField(blank=True, null=True)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("updated_at", models.DateTimeField(auto_now=True)),
+                (
+                    "medicine",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="medicine_products",
+                        to="catalog.medicine",
+                    ),
+                ),
+                (
+                    "presenting_form",
+                    models.ForeignKey(
+                        blank=True,
+                        null=True,
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="catalog.presentingform",
+                    ),
+                ),
             ],
         ),
     ]

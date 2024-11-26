@@ -27,7 +27,6 @@ def organ_create(request):
                 status=200,
             )
         else:
-
             html_content = render_to_string(
                 "catalog/modals/modal_form.html", context, request
             )

@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.db.models import Q, Count
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
@@ -163,9 +164,6 @@ def medicine_delete(request, medicine_id):
             )
         return HttpResponseRedirect(reverse("catalog:medicine_list"))
     return HttpResponse(status=405)
-
-
-from django.db.models import Q, Count
 
 
 def medicine_search(request):
