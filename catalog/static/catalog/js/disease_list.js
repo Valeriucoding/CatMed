@@ -34,5 +34,6 @@ document.body.addEventListener('closeDiseaseCreateModal', function () {
 
 document.body.addEventListener("updateDiseaseTable", function (event) {
     const tableBody = document.querySelector("#diseaseTableBody");
+    Alpine.store('toastManager').addToast("Disease Created", "Disease has been created successfully", "success");
     tableBody.insertAdjacentHTML("beforeend", event.detail.html);
 });

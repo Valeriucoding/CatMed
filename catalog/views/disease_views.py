@@ -75,7 +75,7 @@ def disease_list_create(request):
 
 def disease_list(request):
     diseases_list = Disease.objects.all()
-    paginator = Paginator(diseases_list, 17)
+    paginator = Paginator(diseases_list, 13)
     page_number = request.GET.get("page")
     diseases = paginator.get_page(page_number)
     context = {"diseases": diseases}
