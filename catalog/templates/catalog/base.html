@@ -17,7 +17,7 @@
 </head>
 <body hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'>
 <div x-data="Alpine.store('toastManager', toastManager())" class="relative">
-    <div class="toast toast-end toast-bottom toast-fade-out">
+    <div class="toast toast-end toast-bottom toast-fade-out z-50">
         <template x-for="toast in Alpine.store('toastManager').toasts" :key="toast.id">
             <div
                 class="alert"

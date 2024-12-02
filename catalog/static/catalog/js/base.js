@@ -88,7 +88,7 @@ function toastManager() {
                 title,
                 message,
                 type,
-                icon: icon || icons[type]
+                icon: icon ? icons[icon] : icons[type]
             });
 
             setTimeout(() => {

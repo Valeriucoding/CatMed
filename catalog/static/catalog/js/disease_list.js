@@ -21,6 +21,7 @@ document.body.addEventListener('htmx:afterRequest', function (event) {
         const response = JSON.parse(event.detail.xhr.responseText);
         if (response.status === 'success') {
             const row = document.getElementById(`disease-${response.disease_id}-item`);
+            Alpine.store("toastManager").addToast("Disease Deleted", "Disease has been deleted successfully", "default", "info");
             if (row) {
                 row.remove();
             }

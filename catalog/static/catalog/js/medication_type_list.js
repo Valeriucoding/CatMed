@@ -20,6 +20,7 @@ document.body.addEventListener('htmx:afterRequest', function (event) {
         const response = JSON.parse(event.detail.xhr.responseText);
         if (response.status === 'success') {
             const row = document.getElementById(`medication-type-${response.medication_type_id}-item`);
+            Alpine.store("toastManager").addToast("Medication Type Deleted", "Medication Type has been deleted successfully", "default", "info");
             if (row) {
                 row.remove();
             }
@@ -33,5 +34,6 @@ document.body.addEventListener('closeMedicationTypeCreateModal', function () {
 
 document.body.addEventListener("updateMedicationTypesTable", function (event) {
     const tableBody = document.querySelector("#medicationTypesTableBody");
+    Alpine.store('toastManager').addToast("Medication Type Created", "Medication Type has been created successfully", "success");
     tableBody.insertAdjacentHTML("beforeend", event.detail.html);
 });
