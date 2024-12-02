@@ -20,6 +20,7 @@ document.body.addEventListener('htmx:afterRequest', function (event) {
         const response = JSON.parse(event.detail.xhr.responseText);
         if (response.status === 'success') {
             const row = document.getElementById(`organ-${response.organ_id}-item`);
+            Alpine.store("toastManager").addToast("Organ Deleted", "Organ has been deleted successfully", "default", "info");
             if (row) {
                 row.remove();
             }
@@ -34,6 +35,7 @@ document.body.addEventListener('closeOrganCreateModal', function () {
 
 document.body.addEventListener("updateOrganTable", function (event) {
     const tableBody = document.querySelector("#organTableBody");
+    Alpine.store('toastManager').addToast("Organ Created", "Organ has been created successfully", "success");
     tableBody.insertAdjacentHTML("beforeend", event.detail.html);
 });
 

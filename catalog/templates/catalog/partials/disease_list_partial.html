@@ -26,7 +26,7 @@
             </thead>
             <tbody id="diseaseTableBody">
             {% for disease in diseases %}
-                {% include "catalog/partials/table_item.html" with model="disease" object=disease delete_func="showDiseaseDeleteModal(this)" %}
+                {% include "catalog/components/table_item.html" with model="disease" object=disease delete_func="showDiseaseDeleteModal(this)" %}
             {% endfor %}
             </tbody>
         </table>
@@ -34,23 +34,8 @@
 </div>
 
 <!-- Pagination -->
-<div class="flex justify-center mt-4">
-    <div class="join">
-        {% if diseases.has_previous %}
-            <a class="join-item btn" href="?page=1" hx-get="?page=1" hx-target="#main-container">&laquo; first</a>
-            <a class="join-item btn" href="?page={{ diseases.previous_page_number }}" hx-get="?page={{ diseases.previous_page_number }}" hx-target="#main-container">previous</a>
-        {% endif %}
+{% include "catalog/components/pagination.html" with page_obj=diseases %}
 
-        <span class="join-item btn btn-active">
-            Page {{ diseases.number }} of {{ diseases.paginator.num_pages }}
-        </span>
-
-        {% if diseases.has_next %}
-            <a class="join-item btn" href="?page={{ diseases.next_page_number }}" hx-get="?page={{ diseases.next_page_number }}" hx-target="#main-container">next</a>
-            <a class="join-item btn" href="?page={{ diseases.paginator.num_pages }}" hx-get="?page={{ diseases.paginator.num_pages }}" hx-target="#main-container">last &raquo;</a>
-        {% endif %}
-    </div>
-</div>
 
 {# modals #}
 <dialog id="disease_delete_modal" class="modal">

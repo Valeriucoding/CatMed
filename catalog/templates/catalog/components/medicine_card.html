@@ -1,0 +1,24 @@
+{% for medicine in medicines %}
+  <div class="card bg-base-100 shadow-xl" hx-get="{% url 'catalog:medicine_detail' medicine.id %}"
+       hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">
+    <figure>
+      {# <img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="{{ medicine.name }}"/> #}
+    </figure>
+    <div class="card-body">
+      <h2 class="card-title">
+        {{ medicine.name }}
+      </h2>
+      <div class="card-actions justify-end">
+        {% for disease in medicine.diseases.all %}
+          <div class="badge badge-secondary truncate">{{ disease.name }}</div>
+        {% endfor %}
+        {% for medication_type in medicine.medication_types.all %}
+          <div class="badge badge-accent truncate">{{ medication_type.name }}</div>
+        {% endfor %}
+        {% for organ in medicine.organs.all %}
+          <div class="badge badge-primary truncate">{{ organ.name }}</div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endfor %}
