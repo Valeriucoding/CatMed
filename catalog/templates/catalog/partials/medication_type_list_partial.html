@@ -26,23 +26,7 @@
 </div>
 
 <!-- Pagination -->
-<div class="flex justify-center mt-4">
-    <div class="join">
-        {% if diseases.has_previous %}
-            <a class="join-item btn" href="?page=1" hx-get="?page=1" hx-target="#main-container">&laquo; first</a>
-            <a class="join-item btn" href="?page={{ medication_types.previous_page_number }}" hx-get="?page={{ medication_types.previous_page_number }}" hx-target="#main-container">previous</a>
-        {% endif %}
-
-        <span class="join-item btn btn-active">
-            Page {{ medication_types.number }} of {{ medication_types.paginator.num_pages }}
-        </span>
-
-        {% if medication_types.has_next %}
-            <a class="join-item btn" href="?page={{ medication_types.next_page_number }}" hx-get="?page={{ medication_types.next_page_number }}" hx-target="#main-container">next</a>
-            <a class="join-item btn" href="?page={{ medication_types.paginator.num_pages }}" hx-get="?page={{ medication_types.paginator.num_pages }}" hx-target="#main-container">last &raquo;</a>
-        {% endif %}
-    </div>
-</div>
+{% include "catalog/components/pagination.html" with page_obj=medication_types %}
 
 {# modals #}
 <dialog id="medication_type_delete_modal" class="modal">

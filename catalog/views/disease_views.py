@@ -103,7 +103,6 @@ def disease_delete(request, disease_id):
     disease = get_object_or_404(Disease, id=disease_id)
     if request.method == "DELETE":
         disease.delete()
-        # messages.success(request, f"{disease.name} has been successfully deleted.")
         if request.htmx:
             return JsonResponse(
                 {"status": "success", "disease_id": disease_id},
