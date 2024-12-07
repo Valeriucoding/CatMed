@@ -51,20 +51,20 @@ class Medicine(models.Model):
 
 
 class PresentingForm(models.Model):
-    name = models.CharField(max_length=255, unique=True)
+    name = models.CharField(max_length=255, unique=True, blank=True, null=True)
     capsules = models.IntegerField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.name
+        return str(self.capsules)
 
 
 class MedicineProduct(models.Model):
     BUY_PLACES = (
-        ("F", "farmacie"),
-        ("P", "plafar"),
-        ("S", "site"),
+        ("pharmacy", "Pharmacy"),
+        ("herbal_shop", "Herbal Shop"),
+        ("website", "Website"),
     )
     medicine = models.ForeignKey(
         Medicine, on_delete=models.CASCADE, related_name="medicine_products"
