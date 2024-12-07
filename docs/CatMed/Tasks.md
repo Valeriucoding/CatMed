@@ -1,16 +1,12 @@
 # Urgent
 
 ### New features
-
-- disease list tasks
-    - [x] delete confirmation modal with alert
-        - [x] fix alerts(low prio)
+- [] implement table for medicine products
 
 ##### Later
-
-- [x] add alerts for delete, create and update
+* add the other models
+- [] medicine delete notification
 - [] use tailwind cli for the production build
 
-* add the other models
-* add coverage
-- [] medicine delete notification
+## Models
+do we need name for PresentingForm?
