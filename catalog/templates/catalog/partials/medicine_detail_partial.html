@@ -55,37 +55,45 @@
         </div>
     </div>
 
-<!-- Medicine Products Card -->
-<div class="card bg-base-100 shadow-xl mt-6">
-    <div class="card-body">
-        <div class="flex justify-between items-center mb-4">
-            <h2 class="card-title text-2xl font-semibold">Medicine Products</h2>
-            <button class="btn btn-success" hx-get="#"
-                    hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">
-                <i class="fas fa-plus"></i>
-            </button>
-        </div>
-        <div class="overflow-x-auto">
-            <table class="table w-full">
-                <thead>
+    <!-- Medicine Products Card -->
+    <div class="card bg-base-100 shadow-xl mt-6">
+        <div class="card-body">
+            <div class="flex justify-between items-center mb-4">
+                <h2 class="card-title text-2xl font-semibold">Medicine Products</h2>
+                <button class="btn btn-success" hx-get="#"
+                        hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">
+                    <i class="fas fa-plus"></i>
+                </button>
+            </div>
+            <div class="overflow-x-auto">
+                <table class="table w-full">
+                    <thead>
                     <tr>
                         <th>Name</th>
                         <th>Price</th>
                         <th>Actions</th>
                     </tr>
-                </thead>
-                <tbody>
+                    </thead>
+                    <tbody>
                     {% for product in medicine.medicine_products.all %}
-                        <tr>
-                            <td><a href="{{ product.product_url }}" class="underline-link">{{ product.name }}</a></td>
-                            <td>{{ product.price }}</td>
+                        <tr id="medicine-product-{{ product.pk }}">
                             <td>
-                                <button class="btn btn-primary btn-sm" hx-get="#"
-                                        hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">
-                                    <i class="fas fa-edit"></i>
-                                </button>
-                                <button class="btn btn-error btn-sm" hx-get="#"
-                                        hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">
+                                {% if product.product_url %}
+                                    <a href="{{ product.product_url }}" class="underline">{{ product.name }}</a>
+                                {% else %}
+                                    {{ product.name }}
+                                {% endif %}
+                            </td>
+                            <td>{% if product.price %}{{ product.price }}{% else %}&nbsp;{% endif %}</td>
+                            <td>
+                                {#                                <button class="btn btn-primary btn-sm" hx-get="#"#}
+                                {#                                        hx-target="#medicine-product-{{ product.pk }}" hx-swap="innerHTML" hx-push-url="true">#}
+                                {#                                    <i class="fas fa-edit"></i>#}
+                                {#                                </button>#}
+                                <button class="btn btn-error btn-sm" data-medicine-product-name="{{ product.name }}"
+                                        data-medicine-product-pk="{{ product.pk }}"
+                                        onclick="showMedicineProductDeleteModal(this)"
+                                >
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </td>
@@ -95,23 +103,41 @@
                             <td colspan="4" class="text-center text-gray-500">No products listed</td>
                         </tr>
                     {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
-    <dialog id="delete_modal" class="modal">
-        <div class="modal-box">
-            <h3 class="font-bold text-lg">Confirm Deletion</h3>
-            <p class="py-4">Are you sure you want to delete {{ medicine.name }}? This action cannot be undone.</p>
-            <div class="modal-action">
-                <form method="dialog">
-                    <button class="btn btn-ghost mr-2">Cancel</button>
-                </form>
-                <button class="btn btn-error" hx-delete="{% url 'catalog:medicine_delete' medicine.id %}"
-                        hx-target="#main-container" hx-swap="innerHTML">Delete
-                </button>
+                    </tbody>
+                </table>
             </div>
         </div>
-    </dialog>
+
+
+    </div>
+
 </div>
+<dialog id="delete_modal" class="modal">
+    <div class="modal-box">
+        <h3 class="font-bold text-lg">Confirm Deletion</h3>
+        <p class="py-4">Are you sure you want to delete {{ medicine.name }}? This action cannot be undone.</p>
+        <div class="modal-action">
+            <form method="dialog">
+                <button class="btn btn-ghost mr-2">Cancel</button>
+            </form>
+            <button class="btn btn-error" hx-delete="{% url 'catalog:medicine_delete' medicine.id %}"
+                    hx-target="#main-container" hx-swap="innerHTML">Delete
+            </button>
+        </div>
+    </div>
+</dialog>
+<dialog id="medicine_product_delete_modal" class="modal">
+    <div class="modal-box">
+        <h3 class="text-lg font-bold">Confirm Deletion</h3>
+        <p id="delete_modal_message" class="py-4">Are you sure you want to delete this organ? This action cannot be
+            undone.</p>
+        <div class="modal-action">
+            <form method="dialog">
+                <button class="btn btn-secondary mr-2">Cancel</button>
+            </form>
+            <button class="btn btn-danger" id="confirm_medicine_product_delete_button"
+                    hx-target="#main-container" hx-swap="innerHTML">Delete
+            </button>
+        </div>
+    </div>
+</dialog>
