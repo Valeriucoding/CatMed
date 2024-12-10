@@ -1,5 +1,4 @@
 function showMedicineProductDeleteModal(button) {
-    console.log("showMedicineProductDeleteModal")
     const medicineProductName = button.getAttribute('data-medicine-product-name');
     const medicineProductPK = button.getAttribute('data-medicine-product-pk');
 
@@ -28,4 +27,11 @@ document.body.addEventListener('htmx:afterRequest', function (event) {
             document.getElementById("medicine_product_delete_modal").close();
         }
     }
+});
+
+document.body.addEventListener('updateMedicineProductTable', function (event) {
+    document.getElementById("medicine_product_create_modal").close();
+    const tableBody = document.querySelector("#medicineProductTableBody");
+    Alpine.store('toastManager').addToast("Medicine Product Created", "Medicine Product has been created successfully", "success");
+    tableBody.insertAdjacentHTML("beforeend", event.detail.html);
 });
