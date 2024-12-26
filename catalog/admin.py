@@ -9,14 +9,18 @@ from .models import (
     MedicineProduct,
 )
 
+@admin.register(Medicine)
+class MedicineAdmin(admin.ModelAdmin):
+    list_display = ("id", "name")
+    autocomplete_fields = ("diseases",)
 
 @admin.register(Disease)
 class DiseaseAdmin(admin.ModelAdmin):
     list_display = ("id", "name")
+    search_fields = ("name",)
 
 
 admin.site.register(MedicationType)
 admin.site.register(Organ)
-admin.site.register(Medicine)
 admin.site.register(PresentingForm)
 admin.site.register(MedicineProduct)

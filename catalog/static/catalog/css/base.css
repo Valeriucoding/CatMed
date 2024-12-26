@@ -17,3 +17,23 @@
 .active-nav {
     background-color: #D1C6A6;
 }
+
+/* Select2 css variables for autocomplete */
+:root {
+    /* Base colors */
+    --body-bg: #ffffff;
+    --body-fg: #444444;
+    --body-quiet-color: #999999;
+    --border-color: #aaaaaa;
+
+    /* Background states */
+    --darkened-bg: #eeeeee;
+    --selected-bg: #dddddd;
+
+    /* Primary colors for highlighting/focus */
+    --primary: #5897fb;
+    --primary-fg: #ffffff;
+
+    /* Error state */
+    --error-fg: #dc3545;
+}
