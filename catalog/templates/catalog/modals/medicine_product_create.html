@@ -1,0 +1,19 @@
+<form hx-post="{{ url }}" hx-target="#ModalContent">
+    {% csrf_token %}
+    <p>Supported websites for url and name fetch: <span class="text-red-500">zenyth.ro</span></p>
+    {% for field in form %}
+        <div class="form-control {% if field.errors %}form-control-error{% endif %}">
+            <label for="{{ field.id_for_label }}" class="label">
+                <span class="label-text">{{ field.label }}</span>
+            </label>
+            {{ field }}
+            {% for error in field.errors %}
+                <span class="text-error text-sm mt-1">{{ error }}</span>
+            {% endfor %}
+        </div>
+    {% endfor %}
+
+    <div class="flex justify-end">
+        <button type="submit" class="btn btn-primary mt-4">Submit</button>
+    </div>
+</form>
