@@ -61,7 +61,7 @@
             <div class="flex justify-between items-center mb-4">
                 <h2 class="card-title text-2xl font-semibold">Medicine Products</h2>
                 <button class="btn btn-success" onclick="medicine_product_create_modal.showModal()"
-                hx-get="{% url 'catalog:medicine_product_create' medicine.id %}" hx-target="#ModalContent"
+                        hx-get="{% url 'catalog:medicine_product_create' medicine.id %}" hx-target="#ModalContent"
                 >
                     <i class="fas fa-plus"></i>
                 </button>
@@ -127,6 +127,7 @@
         </div>
     </div>
 </dialog>
+
 <dialog id="medicine_product_create_modal" class="modal">
     <div class="modal-box">
         <form method="dialog">
@@ -134,11 +135,9 @@
         </form>
         <h3 class="text-lg font-bold">Create Medicine Product</h3>
         <div id="ModalContent"></div>
-        <div class="modal-action">
-            <form method="dialog">
-                <button class="btn btn-ghost mr-2" onclick="medicine_product_create_modal.close()">Cancel</button>
-            </form>
-        </div>
         <div id="medicine_product_create_modal_content"></div>
     </div>
+    <form method="dialog" class="modal-backdrop">
+        <button>close</button>
+    </form>
 </dialog>

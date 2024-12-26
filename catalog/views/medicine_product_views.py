@@ -28,7 +28,7 @@ def medicine_product_create(request, medicine_pk):
                 "catalog/modals/modal_form.html", context, request
             )
             return HttpResponse(html_content)
-    html_content = render_to_string("catalog/modals/modal_form.html", context, request)
+    html_content = render_to_string("catalog/modals/medicine_product_create.html", context, request)
     return HttpResponse(html_content)
 
 def medicine_product_delete(request, medicine_product_pk):
