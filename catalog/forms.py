@@ -50,11 +50,12 @@ class OrganForm(forms.ModelForm):
 
 
 class MedicineProductForm(forms.ModelForm):
+    name = forms.CharField(required=False, widget=forms.TextInput(attrs={"class": "input input-bordered w-full"}))
+
     class Meta:
         model = MedicineProduct
         fields = ["name", "product_url", "price"]
         widgets = {
-            "name": forms.TextInput(attrs={"class": "input input-bordered w-full"}),
             "product_url": forms.URLInput(attrs={"class": "input input-bordered w-full"}),
             "price": forms.NumberInput(attrs={"class": "input input-bordered w-full"}),
         }

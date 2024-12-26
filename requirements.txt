@@ -20,3 +20,5 @@ uvicorn==0.30.3
 gunicorn==22.0.0
 pytest-django==4.8.0
 posthog==3.6.0
+requests~=2.32.3
+beautifulsoup4~=4.12.3

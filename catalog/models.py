@@ -1,6 +1,8 @@
 from django.db import models
 from django.urls import reverse
 
+from catalog.services import get_medicine_product_info
+
 
 class Disease(models.Model):
     name = models.CharField(max_length=255, unique=True)
@@ -84,3 +86,7 @@ class MedicineProduct(models.Model):
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        get_medicine_product_info(self)
+        super(MedicineProduct, self).save(*args, **kwargs)
