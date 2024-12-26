@@ -1,5 +1,5 @@
 from catalog.models import MedicineProduct
-from factories import CatalogFactory
+from catalog.tests.factories import CatalogFactory
 
 
 class TestMedicineProduct(CatalogFactory):

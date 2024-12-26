@@ -1,7 +1,6 @@
 # Urgent
 
 ### New features
-- [] implement table for medicine products
 
 ##### Later
 * add the other models
