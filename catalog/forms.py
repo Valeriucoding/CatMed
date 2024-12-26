@@ -1,6 +1,6 @@
 from django import forms
 
-from catalog.models import Medicine, Disease, MedicationType, Organ
+from catalog.models import Medicine, Disease, MedicationType, Organ, MedicineProduct
 
 
 class MedicineForm(forms.ModelForm):
@@ -46,4 +46,16 @@ class OrganForm(forms.ModelForm):
         fields = ["name"]
         widgets = {
             "name": forms.TextInput(attrs={"class": "input input-bordered w-full"})
+        }
+
+
+class MedicineProductForm(forms.ModelForm):
+    name = forms.CharField(required=False, widget=forms.TextInput(attrs={"class": "input input-bordered w-full"}))
+
+    class Meta:
+        model = MedicineProduct
+        fields = ["name", "product_url", "price"]
+        widgets = {
+            "product_url": forms.URLInput(attrs={"class": "input input-bordered w-full"}),
+            "price": forms.NumberInput(attrs={"class": "input input-bordered w-full"}),
         }

@@ -6,4 +6,5 @@
 * fixed the inline editing visual line bug
 * add search bar to medicine list
 * add filters to medicine list
-* ad toast notifications
+* add toast notifications
+* Add support for medicine products in the medicine list + get price and name from supported sites

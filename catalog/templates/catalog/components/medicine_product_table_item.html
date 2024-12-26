@@ -1,0 +1,23 @@
+<tr id="medicine-product-{{ product.pk }}">
+    <td>
+        {% if product.product_url %}
+            <a href="{{ product.product_url }}" class="underline">{{ product.name }}</a>
+        {% else %}
+            {{ product.name }}
+        {% endif %}
+    </td>
+    <td>{% if product.price %}{{ product.price }}{% else %}&nbsp;{% endif %}</td>
+    <td>
+        {#                                <button class="btn btn-primary btn-sm" hx-get="#"#}
+        {#                                        hx-target="#medicine-product-{{ product.pk }}" hx-swap="innerHTML"#}
+        {#                                        hx-push-url="true">#}
+        {#                                    <i class="fas fa-edit"></i>#}
+        {#                                </button>#}
+        <button class="btn btn-error btn-sm" data-medicine-product-name="{{ product.name }}"
+                data-medicine-product-pk="{{ product.pk }}"
+                onclick="showMedicineProductDeleteModal(this)"
+        >
+            <i class="fas fa-trash"></i>
+        </button>
+    </td>
+</tr>
