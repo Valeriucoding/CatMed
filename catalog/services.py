@@ -13,9 +13,9 @@ def get_zenyth_info(self):
     soup = BeautifulSoup(html, 'html.parser')
     price = soup.find_all(class_='woocommerce-Price-amount')
     price = price[0].text
-    price = price.split(',')[0]
+    price = price.split(',')[0] if price else None
     name = soup.find_all(class_='post_title')
-    name = name[0].text
+    name = name[0].text if name else ''
     if not self.name:
         self.name = name
     self.price = int(price)
