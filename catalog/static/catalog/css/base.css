@@ -18,22 +18,15 @@
     background-color: #D1C6A6;
 }
 
-/* Select2 css variables for autocomplete */
+/* Select2 css variables for autocomplete (retro theme) */
 :root {
-    /* Base colors */
-    --body-bg: #ffffff;
-    --body-fg: #444444;
-    --body-quiet-color: #999999;
-    --border-color: #aaaaaa;
-
-    /* Background states */
-    --darkened-bg: #eeeeee;
-    --selected-bg: #dddddd;
-
-    /* Primary colors for highlighting/focus */
-    --primary: #5897fb;
-    --primary-fg: #ffffff;
-
-    /* Error state */
-    --error-fg: #dc3545;
+    --body-bg: #ece3ca;
+    --body-fg: #282425;
+    --body-quiet-color: #2E282A;
+    --border-color: #DBCA9A;
+    --darkened-bg: #e4d8b4;
+    --selected-bg: #ef9995;
+    --primary: #ef9995;
+    --primary-fg: #282425;
+    --error-fg: oklch(65.72% 0.199 27.33);
 }
