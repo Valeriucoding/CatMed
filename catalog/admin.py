@@ -12,15 +12,30 @@ from .models import (
 @admin.register(Medicine)
 class MedicineAdmin(admin.ModelAdmin):
     list_display = ("id", "name")
-    autocomplete_fields = ("diseases",)
+    autocomplete_fields = ("diseases", "medication_types", "organs")
 
 @admin.register(Disease)
 class DiseaseAdmin(admin.ModelAdmin):
     list_display = ("id", "name")
     search_fields = ("name",)
 
+@admin.register(MedicationType)
+class MedicationTypeAdmin(admin.ModelAdmin):
+    list_display = ("id", "name")
+    search_fields = ("name",)
 
-admin.site.register(MedicationType)
-admin.site.register(Organ)
-admin.site.register(PresentingForm)
-admin.site.register(MedicineProduct)
+@admin.register(Organ)
+class OrganAdmin(admin.ModelAdmin):
+    list_display = ("id", "name")
+    search_fields = ("name",)
+
+@admin.register(PresentingForm)
+class PresentingFormAdmin(admin.ModelAdmin):
+    list_display = ("id", "name")
+    search_fields = ("name",)
+
+@admin.register(MedicineProduct)
+class MedicineProductAdmin(admin.ModelAdmin):
+    list_display = ("id", "name")
+    search_fields = ("name",)
+
