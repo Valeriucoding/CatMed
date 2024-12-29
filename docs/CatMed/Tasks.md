@@ -1,6 +1,7 @@
 # Urgent
 
 ### New features
+card should pop when hovering over the card
 
 ##### Later
 * add the other models

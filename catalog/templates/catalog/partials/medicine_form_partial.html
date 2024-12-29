@@ -1,69 +1,64 @@
 {% load static %}
-{#{{ form.media }}#}
-<div id="main-container">
-    <div class="container mx-auto p-4">
-        <div class="flex flex-col items-center">
-            <div class="w-full max-w-lg">
-                <button class="btn btn-secondary mb-4" hx-get="{{ back_url }}" hx-target="#main-container"
-                        hx-swap="innerHTML" hx-push-url="true">
-                    <i class="fa fa-arrow-left"></i>
-                </button>
-                <h1 class="text-2xl font-bold mb-4">{{ title }}</h1>
-                <form hx-post="{{ url }}" hx-target="#main-container" hx-swap="innerHTML" class="space-y-4">
+<div id="main-container" class="min-h-screen bg-base-100">
+    <div class="container mx-auto px-2 sm:px-4 py-4 sm:py-8">
+        <div class="flex flex-col">
+            <div class="w-full bg-base-200 rounded-lg shadow-lg p-3 sm:p-6">
+                <!-- Header Section -->
+                <div class="flex items-center gap-2 sm:gap-4 mb-4 sm:mb-6">
+                    <button class="btn btn-ghost btn-sm sm:btn-md btn-circle" hx-get="{{ back_url }}"
+                            hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">
+                        <i class="fa fa-arrow-left text-base sm:text-lg"></i>
+                    </button>
+                    <h1 class="text-xl sm:text-3xl font-bold text-base-content">{{ title }}</h1>
+                </div>
+
+                <!-- Form Section -->
+                <form hx-post="{{ url }}" hx-target="#main-container" hx-swap="innerHTML"
+                      class="space-y-4 sm:space-y-6">
                     {% csrf_token %}
                     {% for field in form %}
-                        {% if field.field.widget.input_type == 'checkbox' %}
-{#                            <div class="relative w-full max-w-xs">#}
-{#                                <label for="dropdownButton" class="label">#}
-{#                                    <span class="label-text {% if field.errors %}text-error{% endif %}">{{ field.label }}</span>#}
-{#                                </label>#}
-{#                                <div class="flex">#}
-{#                                    <button id="{{ field.label }}Button"#}
-{#                                            class="select select-bordered flex-grow text-left dropdownButton"#}
-{#                                            type="button">#}
-{#                                        {{ field.label }}#}
-{#                                    </button>#}
-{#                                    <button type="button" class="btn base-100 bg-transparent ml-2"#}
-{#                                            onclick="loadCreateModal()"#}
-{#                                            {% if field.label == "Diseases" %}#}
-{#                                            hx-get="{% url 'catalog:disease_create' %}"#}
-{#                                            {% elif field.label == "Medication types" %}#}
-{#                                            hx-get="{% url 'catalog:medication_type_create' %}"#}
-{#                                            {% elif field.label == "Organs" %}#}
-{#                                            hx-get="{% url 'catalog:organ_create' %}"#}
-{#                                            {% endif %}#}
-{#                                            hx-target="#ModalContent">#}
-{#                                        <i class="fas fa-plus"></i>#}
-{#                                    </button>#}
-{#                                </div>#}
-{#                                <div id="{{ field.label }}Menu"#}
-{#                                     class="absolute hidden mt-1 w-full bg-base-100 border border-base-300 rounded-lg shadow-lg dropdownMenu z-10">#}
-{#                                    <div class="dropdown-scroll">#}
-{#                                        {% for instance in field %}#}
-{#                                            <div class="p-2">#}
-{#                                                <label class="flex items-center space-x-2 cursor-pointer">#}
-{#                                                    {{ instance }}#}
-{#                                                </label>#}
-{#                                            </div>#}
-{#                                        {% endfor %}#}
-{#                                    </div>#}
-{#                                </div>#}
-{#                            </div>#}
-                        {% else %}
-                            <div class="form-control {% if field.errors %}form-control-error{% endif %}">
-                                <label for="id_name" class="label">
-                                    <span class="label-text">{{ field.label }}</span>
-                                </label>
+                    <div class="form-control {% if field.errors %}error{% endif %}">
+                        <label for="{{ field.id_for_label }}" class="label">
+                            <span class="label-text text-sm sm:text-base font-medium">{{ field.label }}</span>
+                        </label>
+
+                        {% if field.name == 'description' %}
+                            <textarea name="{{ field.name }}" id="{{ field.id_for_label }}"
+                                    class="textarea textarea-bordered h-24 sm:h-32 w-full focus:textarea-primary text-sm sm:text-base"
+                                    placeholder="Enter {{ field.label|lower }}">{{ field.value|default:'' }}</textarea>
+                        {% elif field.name == 'name' %}
+                            <input type="text" name="{{ field.name }}" id="{{ field.id_for_label }}"
+                                   class="input input-bordered w-full focus:input-primary text-sm sm:text-base"
+                                   placeholder="Enter {{ field.label|lower }}"
+                                   value="{{ field.value|default:'' }}">
+                        {% elif field.name in 'diseases,medication_types,organs' %}
+                            <div class="grid gap-4 p-4 bg-base-100 rounded-lg">
                                 {{ field }}
-                                {% for error in field.errors %}
-                                    <span class="text-error text-sm mt-1">
-                            {{ error }}
-                        </span>
-                                {% endfor %}
                             </div>
+                        {% else %}
+                            {{ field }}
                         {% endif %}
+
+                        {% if field.errors %}
+                            {% for error in field.errors %}
+                                <span class="label-text-alt text-error mt-1 text-xs sm:text-sm">{{ error }}</span>
+                            {% endfor %}
+                        {% endif %}
+
+                        {% if field.help_text %}
+                            <span class="label-text-alt text-base-content/70 mt-1 text-xs sm:text-sm">
+                                {{ field.help_text }}
+                            </span>
+                        {% endif %}
+                    </div>
                     {% endfor %}
-                    <button type="submit" class="btn btn-primary w-full">{{ action }}</button>
+
+                    <div class="pt-2 sm:pt-4">
+                        <button type="submit" class="btn btn-primary w-full">
+                            {{ action }}
+                            <i class="fa fa-arrow-right ml-2"></i>
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
@@ -71,39 +66,10 @@
 </div>
 
 <dialog id="add_modal" class="modal">
-    <div class="modal-box">
+    <div class="modal-box w-11/12 max-w-5xl mx-auto">
         <form method="dialog">
             <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
         </form>
         <div id="ModalContent"></div>
     </div>
 </dialog>
-
-{#<style>#}
-{#    .dropdownMenu {#}
-{#        max-height: 200px;#}
-{#        overflow-y: auto;#}
-{#    }#}
-{##}
-{#    .dropdown-scroll {#}
-{#        max-height: 100%;#}
-{#        overflow-y: auto;#}
-{#    }#}
-{##}
-{#    .dropdown-scroll::-webkit-scrollbar {#}
-{#        width: 8px;#}
-{#    }#}
-{##}
-{#    .dropdown-scroll::-webkit-scrollbar-track {#}
-{#        background: #f1f1f1;#}
-{#    }#}
-{##}
-{#    .dropdown-scroll::-webkit-scrollbar-thumb {#}
-{#        background: #888;#}
-{#        border-radius: 4px;#}
-{#    }#}
-{##}
-{#    .dropdown-scroll::-webkit-scrollbar-thumb:hover {#}
-{#        background: #555;#}
-{#    }#}
-{#</style>#}
