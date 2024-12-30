@@ -4,10 +4,15 @@ import catalog.views.medicine_views
 import catalog.views.disease_views
 import catalog.views.medication_type_views
 import catalog.views.organ_views
+from catalog.admin import public_admin
 from catalog.views import medicine_product_views
+from catalog.views.admin_views import PublicAutocompleteJsonView
 
 app_name = "catalog"
 urlpatterns = [
+    # admin autocomplete
+    path("public-admin/autocomplete/", PublicAutocompleteJsonView.as_view(admin_site=public_admin),
+         name="public_admin_autocomplete"),
     # medicine
     path("", catalog.views.medicine_views.medicine_list, name="medicine_list"),
     path("search/", catalog.views.medicine_views.medicine_search, name="medicine_search"),

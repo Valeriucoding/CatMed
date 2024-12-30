@@ -101,3 +101,16 @@ function toastManager() {
         }
     };
 }
+
+
+document.addEventListener('htmx:afterSwap', function (event) {
+    // Reinitialize form media
+    const scripts = document.querySelectorAll('script[data-form-media]');
+    scripts.forEach(script => {
+        const newScript = document.createElement('script');
+        newScript.src = script.src;
+        newScript.setAttribute('data-form-media', '');
+        document.body.appendChild(newScript);
+        script.remove();
+    });
+});

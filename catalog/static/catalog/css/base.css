@@ -17,3 +17,16 @@
 .active-nav {
     background-color: #D1C6A6;
 }
+
+/* Select2 css variables for autocomplete (retro theme) */
+:root {
+    --body-bg: #ece3ca;
+    --body-fg: #282425;
+    --body-quiet-color: #2E282A;
+    --border-color: #DBCA9A;
+    --darkened-bg: #e4d8b4;
+    --selected-bg: #ef9995;
+    --primary: #ef9995;
+    --primary-fg: #282425;
+    --error-fg: oklch(65.72% 0.199 27.33);
+}
