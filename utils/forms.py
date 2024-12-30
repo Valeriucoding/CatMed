@@ -11,7 +11,7 @@ class CustomAutocompleteSelect(AutocompleteSelect):
         super().__init__(field, admin_site, attrs=default_attrs)
 
     def get_url(self):
-        return reverse("admin:autocomplete")
+        return reverse("catalog:public_admin_autocomplete")
 
 
 class AutocompleteModelChoiceField(forms.ModelChoiceField):
@@ -38,7 +38,7 @@ class CustomAutocompleteSelectMultiple(AutocompleteSelectMultiple):
         super().__init__(field, admin_site, attrs=default_attrs)
 
     def get_url(self):
-        return reverse("admin:autocomplete")
+        return reverse("catalog:public_admin_autocomplete")
 
 
 class AutocompleteModelMultipleChoiceField(forms.ModelMultipleChoiceField):
