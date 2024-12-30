@@ -1,9 +1,13 @@
 from django import forms
 
 from catalog.models import Medicine, Disease, MedicationType, Organ, MedicineProduct
+from utils.forms import AutocompleteModelMultipleChoiceField
 
 
 class MedicineForm(forms.ModelForm):
+    diseases = AutocompleteModelMultipleChoiceField(field_model=Disease, form_model=Medicine, related_field_name="diseases", required=False)
+    medication_types = AutocompleteModelMultipleChoiceField(field_model=MedicationType, form_model=Medicine, related_field_name="medication_types", required=False)
+    organs = AutocompleteModelMultipleChoiceField(field_model=Organ, form_model=Medicine, related_field_name="organs", required=False)
     class Meta:
         model = Medicine
         fields = ["name", "description", "diseases", "medication_types", "organs"]
@@ -14,7 +18,6 @@ class MedicineForm(forms.ModelForm):
             "description": forms.Textarea(
                 attrs={"class": "textarea textarea-bordered"}
             ),
-            "diseases": forms.CheckboxSelectMultiple(attrs={"class": "checkbox"}),
             "medication_types": forms.CheckboxSelectMultiple(
                 attrs={"class": "checkbox"}
             ),
