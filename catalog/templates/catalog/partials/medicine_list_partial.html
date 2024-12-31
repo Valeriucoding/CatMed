@@ -23,51 +23,54 @@
     <!-- Search Bar -->
     <label class="input input-bordered flex items-center gap-2 bg-base-100 px-2 py-1 text-sm w-full lg:w-64">
       <input
-          type="text"
-          class="grow bg-transparent placeholder-gray-500 text-sm focus:outline-none"
-          placeholder="Search"
-          name="q"
-          hx-get="{% url 'catalog:medicine_search' %}"
-          hx-trigger="keyup changed delay:500ms"
-          hx-target="#medicines-container"
-          hx-include="[name='disease'], [name='medication_type'], [name='organ'], [name='buy_place']"
+        type="text"
+        class="grow bg-transparent placeholder-gray-500 text-sm focus:outline-none"
+        placeholder="Search"
+        name="q"
+        hx-get="{% url 'catalog:medicine_search' %}"
+        hx-trigger="keyup changed delay:500ms"
+        hx-target="#medicines-container"
+        hx-include="[name='disease'], [name='medication_type'], [name='organ'], [name='buy_place']"
       />
       <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 16 16"
-          fill="currentColor"
-          class="h-4 w-4 opacity-70"
+        xmlns="http://www.w3.org/2000/svg"
+        viewBox="0 0 16 16"
+        fill="currentColor"
+        class="h-4 w-4 opacity-70"
       >
         <path
-            fill-rule="evenodd"
-            d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-            clip-rule="evenodd"></path>
+          fill-rule="evenodd"
+          d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+          clip-rule="evenodd"></path>
       </svg>
     </label>
 
+
+
+
     <!-- Filters Dropdown -->
-    <div class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box w-full lg:w-auto">
-      <input type="checkbox" class="peer"/>
-      <div class="collapse-title flex items-center gap-2 text-lg font-medium">
-        <svg class="h-4 w-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-          <path d="M3 6h18M3 12h18M3 18h18"></path>
-        </svg>
-        Filters
-        <svg class="h-4 w-4 transform peer-checked:rotate-180 transition-transform" fill="none" stroke="currentColor"
-             stroke-width="2" viewBox="0 0 24 24">
-          <path d="M6 9l6 6 6-6"></path>
-        </svg>
-      </div>
-      <div class="collapse-content space-y-4">
-        <div class="flex flex-wrap gap-4">
+{#    <div class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box w-full lg:w-auto">#}
+{#      <input type="checkbox" />#}
+  {#      <div class="collapse-title flex items-center gap-2 text-sm font-medium p-2">#}
+{#        <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">#}
+{#          <path d="M3 6h18M3 12h18M3 18h18"></path>#}
+{#        </svg>#}
+{#        Filters#}
+{#        <svg class="h-3 w-3 transform peer-checked:rotate-180 transition-transform" fill="none" stroke="currentColor"#}
+{#             stroke-width="2" viewBox="0 0 24 24">#}
+{#          <path d="M6 9l6 6 6-6"></path>#}
+{#        </svg>#}
+{#      </div>#}
+{#      <div class="collapse-content">#}
+<div class="flex gap-1 flex-wrap ">
           <!-- Disease Filter -->
           <div class="form-control">
-            <label class="label">
-              <span class="label-text">Select Disease</span>
-            </label>
-            <select class="select select-bordered" name="disease" 
+{#            <label class="label">#}
+{#              <span class="label-text">Select Disease</span>#}
+{#            </label>#}
+            <select class="select select-bordered" name="disease"
                     hx-get="{% url 'catalog:medicine_search' %}"
-                    hx-trigger="change" 
+                    hx-trigger="change"
                     hx-target="#medicines-container"
                     hx-include="[name='q'], [name='disease'], [name='medication_type'], [name='organ'], [name='buy_place']">
               <option selected value="">Select disease</option>
@@ -76,15 +79,15 @@
               {% endfor %}
             </select>
           </div>
-
+{##}
           <!-- Medication Type Filter -->
           <div class="form-control">
-            <label class="label">
-              <span class="label-text">Medication Type</span>
-            </label>
-            <select class="select select-bordered" name="medication_type" 
+{#            <label class="label">#}
+{#              <span class="label-text">Medication Type</span>#}
+{#            </label>#}
+            <select class="select select-bordered" name="medication_type"
                     hx-get="{% url 'catalog:medicine_search' %}"
-                    hx-trigger="change" 
+                    hx-trigger="change"
                     hx-target="#medicines-container"
                     hx-include="[name='q'], [name='disease'], [name='medication_type'], [name='organ'], [name='buy_place']">
               <option selected value="">Select medication type</option>
@@ -93,15 +96,15 @@
               {% endfor %}
             </select>
           </div>
-
-          <!-- Organ Filter -->
+{##}
+{#          <!-- Organ Filter -->#}
           <div class="form-control">
-            <label class="label">
-              <span class="label-text">Select Organ</span>
-            </label>
-            <select class="select select-bordered" name="organ" 
+{#            <label class="label">#}
+{#              <span class="label-text">Select Organ</span>#}
+{#            </label>#}
+            <select class="select select-bordered" name="organ"
                     hx-get="{% url 'catalog:medicine_search' %}"
-                    hx-trigger="change" 
+                    hx-trigger="change"
                     hx-target="#medicines-container"
                     hx-include="[name='q'], [name='disease'], [name='medication_type'], [name='organ'], [name='buy_place']">
               <option selected value="">Select organ</option>
@@ -111,8 +114,8 @@
             </select>
           </div>
         </div>
-      </div>
-    </div>
+{#      </div>#}
+{#    </div>#}
   </div>
 
   <!-- Selected Filters -->
