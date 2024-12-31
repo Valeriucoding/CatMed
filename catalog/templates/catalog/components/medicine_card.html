@@ -1,5 +1,6 @@
 {% for medicine in medicines %}
-  <div class="card bg-base-100 shadow-xl" hx-get="{% url 'catalog:medicine_detail' medicine.id %}"
+  <div class="card bg-base-100 shadow-xl transition-transform transform hover:scale-105"
+       hx-get="{% url 'catalog:medicine_detail' medicine.id %}"
        hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">
     <figure>
       {# <img src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg" alt="{{ medicine.name }}"/> #}
