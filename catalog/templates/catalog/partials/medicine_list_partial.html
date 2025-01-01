@@ -1,3 +1,4 @@
+{% load static %}
 <div class="p-4 space-y-4">
   <!-- Alert Message -->
   {% if alert_message %}
@@ -148,3 +149,5 @@
     {% include 'catalog/components/medicine_card.html' %}
   </div>
 </div>
+
+<script src="{% static 'js/medicine_list.js' %}"></script>

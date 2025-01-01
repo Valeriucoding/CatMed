@@ -157,10 +157,10 @@ def medicine_delete(request, medicine_id):
     medicine = get_object_or_404(Medicine, id=medicine_id)
     if request.method == "DELETE":
         medicine.delete()
-        messages.success(request, f"{medicine.name} has been successfully deleted.")
+        # messages.success(request, f"{medicine.name} has been successfully deleted.")
         if request.htmx:
             return HttpResponse(
-                status=200, headers={"HX-Redirect": reverse("catalog:medicine_list")}
+                status=200, headers={"HX-Redirect": reverse("catalog:medicine_list"), "HX-Trigger": "medicine-deleted"}
             )
         return HttpResponseRedirect(reverse("catalog:medicine_list"))
     return HttpResponse(status=405)
