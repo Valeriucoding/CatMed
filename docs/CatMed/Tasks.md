@@ -1,10 +1,10 @@
 # Urgent
 
 ### New features
+backdrop on medicine delete modal inside medicine detail
 
 ### Bugs
 - [] medicine delete notification
-  admin autocomplete still not working if not logged in
 
 ##### Later
 * add the other models
