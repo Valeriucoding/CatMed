@@ -1,3 +1,4 @@
+{% load static %}
 {% block title %}Organ list{% endblock title %}
 {% if alert_message %}
     <div id="customAlert" role="alert" class="alert alert-success mb-4 custom-alert">
@@ -64,3 +65,5 @@
         <button>close</button>
     </form>
 </dialog>
+
+<script src="{% static "js/organ_list.js" %}"></script>

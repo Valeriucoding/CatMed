@@ -114,3 +114,15 @@ document.addEventListener('htmx:afterSwap', function (event) {
         script.remove();
     });
 });
+
+// load medicine list after a medicine is deleted
+document.body.addEventListener("htmx:afterSwap", function (event) {
+    if (event.detail.xhr && event.detail.xhr.getResponseHeader("HX-Trigger") === "medicine-deleted") {
+        htmx.ajax('GET', '/', {
+            target: '#main-container',
+            swap: 'innerHTML',
+        });
+        history.pushState({}, '', '/');
+        Alpine.store("toastManager").addToast("Medicine Deleted", "Medicine has been successfully deleted", "default", "info");
+    }
+});

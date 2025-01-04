@@ -19,33 +19,40 @@ class PublicAdminSite(AdminSite):
 
 public_admin = PublicAdminSite(name='public_admin')
 
-@admin.register(Medicine, site=public_admin)
 class MedicineAdmin(admin.ModelAdmin):
     list_display = ("id", "name")
     autocomplete_fields = ("diseases", "medication_types", "organs")
 
-@admin.register(Disease, site=public_admin)
 class DiseaseAdmin(admin.ModelAdmin):
     list_display = ("id", "name")
     search_fields = ("name",)
 
-@admin.register(MedicationType, site=public_admin)
 class MedicationTypeAdmin(admin.ModelAdmin):
     list_display = ("id", "name")
     search_fields = ("name",)
 
-@admin.register(Organ, site=public_admin)
 class OrganAdmin(admin.ModelAdmin):
     list_display = ("id", "name")
     search_fields = ("name",)
 
-@admin.register(PresentingForm, site=public_admin)
 class PresentingFormAdmin(admin.ModelAdmin):
     list_display = ("id", "name")
     search_fields = ("name",)
 
-@admin.register(MedicineProduct, site=public_admin)
 class MedicineProductAdmin(admin.ModelAdmin):
     list_display = ("id", "name")
     search_fields = ("name",)
 
+admin.site.register(Medicine, MedicineAdmin)
+admin.site.register(Disease, DiseaseAdmin)
+admin.site.register(MedicationType, MedicationTypeAdmin)
+admin.site.register(Organ, OrganAdmin)
+admin.site.register(PresentingForm, PresentingFormAdmin)
+admin.site.register(MedicineProduct, MedicineProductAdmin)
+
+public_admin.register(Medicine, MedicineAdmin)
+public_admin.register(Disease, DiseaseAdmin)
+public_admin.register(MedicationType, MedicationTypeAdmin)
+public_admin.register(Organ, OrganAdmin)
+public_admin.register(PresentingForm, PresentingFormAdmin)
+public_admin.register(MedicineProduct, MedicineProductAdmin)
