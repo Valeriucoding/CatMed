@@ -160,7 +160,7 @@ def medicine_delete(request, medicine_id):
         # messages.success(request, f"{medicine.name} has been successfully deleted.")
         if request.htmx:
             return HttpResponse(
-                status=200, headers={"HX-Redirect": reverse("catalog:medicine_list"), "HX-Trigger": "medicine-deleted"}
+                status=200, headers={"HX-Trigger": "medicine-deleted"}
             )
         return HttpResponseRedirect(reverse("catalog:medicine_list"))
     return HttpResponse(status=405)
