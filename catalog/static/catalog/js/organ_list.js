@@ -27,15 +27,15 @@ document.body.addEventListener('htmx:afterRequest', function (event) {
             document.getElementById("organ_delete_modal").close();
         }
     }
-});
+}, { once: true });
 document.body.addEventListener('closeOrganCreateModal', function () {
     document.getElementById('organ_create').close();
-});
+}, { once: true });
 
 
 document.body.addEventListener("updateOrganTable", function (event) {
     const tableBody = document.querySelector("#organTableBody");
     Alpine.store('toastManager').addToast("Organ Created", "Organ has been created successfully", "success");
     tableBody.insertAdjacentHTML("beforeend", event.detail.html);
-});
+}, {once: true});
 
