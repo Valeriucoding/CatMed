@@ -74,7 +74,7 @@ function toastManager() {
         toasts: [],
 
         addToast(title, message, type = 'default', icon = null, duration = 5000) {
-            const id = Date.now();
+            const id = `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
             const icons = {
                 success: `<svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>`,

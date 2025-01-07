@@ -27,13 +27,13 @@ document.body.addEventListener('htmx:afterRequest', function (event) {
             document.getElementById("medication_type_delete_modal").close();
         }
     }
-});
+}, { once: true });
 document.body.addEventListener('closeMedicationTypeCreateModal', function () {
     document.getElementById('medication_type_create').close();
-});
+}, { once: true });
 
 document.body.addEventListener("updateMedicationTypesTable", function (event) {
     const tableBody = document.querySelector("#medicationTypesTableBody");
     Alpine.store('toastManager').addToast("Medication Type Created", "Medication Type has been created successfully", "success");
     tableBody.insertAdjacentHTML("beforeend", event.detail.html);
-});
+}, {once: true});
