@@ -31,3 +31,5 @@ Natural language chatbot for asking the right medicine for a symptom or disease,
 existing database, and retrieve the product with the best price per presenting form and such
 
 
+Implement Stripe
+
