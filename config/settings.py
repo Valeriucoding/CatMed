@@ -33,6 +33,10 @@ DEBUG = env("DEBUG", default=False)
 
 ALLOWED_HOSTS = ["*"]
 
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -44,9 +48,11 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "catalog",
     "django_htmx",
+    "debug_toolbar",
 ]
 
 MIDDLEWARE = [
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
