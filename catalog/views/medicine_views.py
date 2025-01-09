@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.db.models import Q, Count
+from django.db.models import Q, Count, Subquery, OuterRef
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
@@ -9,35 +9,60 @@ from catalog.models import Medicine, Disease, MedicationType, Organ
 
 
 def medicine_list(request):
-    medicines = Medicine.objects.all().prefetch_related("diseases", "medication_types")
+    medicines = Medicine.objects.all().prefetch_related(
+        "diseases",
+        "medication_types",
+        "organs",
+    )
+
     disease_ids = request.GET.getlist("disease")
     medication_type_ids = request.GET.getlist("medication-type")
     organ_ids = request.GET.getlist("organ")
 
-    diseases_params = []
-
     if disease_ids:
         medicines = medicines.filter(diseases__id__in=disease_ids).distinct()
-        diseases = Disease.objects.filter(id__in=disease_ids)
-        diseases_params = list(diseases)
+        diseases_params = Disease.objects.filter(id__in=disease_ids)
+    else:
+        diseases_params = []
 
-    medication_types_params = []
     if medication_type_ids:
-        medicines = medicines.filter(
-            medication_types__id__in=medication_type_ids
-        ).distinct()
-        medication_types = MedicationType.objects.filter(id__in=medication_type_ids)
-        medication_types_params = list(medication_types)
+        medicines = medicines.filter(medication_types__id__in=medication_type_ids).distinct()
+        medication_types_params = MedicationType.objects.filter(id__in=medication_type_ids)
+    else:
+        medication_types_params = []
 
-    organs_params = []
     if organ_ids:
         medicines = medicines.filter(organs__id__in=organ_ids).distinct()
-        organs = Organ.objects.filter(id__in=organ_ids)
-        organs_params = list(organs)
+        organs_params = Organ.objects.filter(id__in=organ_ids)
+    else:
+        organs_params = []
 
-    diseases = Disease.objects.annotate(medicine_count=Count('medicines')).filter(medicine_count__gt=0)
-    medication_types = MedicationType.objects.annotate(medicine_count=Count('medicines')).filter(medicine_count__gt=0)
-    organs = Organ.objects.annotate(medicine_count=Count('medicines')).filter(medicine_count__gt=0)
+    diseases = Disease.objects.annotate(
+        medicine_count=Subquery(
+            Medicine.objects.filter(diseases=OuterRef('pk'))
+            .values('diseases')
+            .annotate(count=Count('id'))
+            .values('count')
+        )
+    ).filter(medicine_count__gt=0)
+
+    medication_types = MedicationType.objects.annotate(
+        medicine_count=Subquery(
+            Medicine.objects.filter(medication_types=OuterRef('pk'))
+            .values('medication_types')
+            .annotate(count=Count('id'))
+            .values('count')
+        )
+    ).filter(medicine_count__gt=0)
+
+    organs = Organ.objects.annotate(
+        medicine_count=Subquery(
+            Medicine.objects.filter(organs=OuterRef('pk'))
+            .values('organs')
+            .annotate(count=Count('id'))
+            .values('count')
+        )
+    ).filter(medicine_count__gt=0)
 
     context = {
         "medicines": medicines,
@@ -56,14 +81,9 @@ def medicine_list(request):
 
     return render(
         request,
-        (
-            "catalog/partials/medicine_list_partial.html"
-            if request.htmx
-            else "catalog/medicine_list.html"
-        ),
+        "catalog/partials/medicine_list_partial.html" if request.htmx else "catalog/medicine_list.html",
         context,
     )
-
 
 def medicine_detail(request, medicine_id):
     medicine = Medicine.objects.get(id=medicine_id)
