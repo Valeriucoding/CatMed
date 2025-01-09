@@ -4,6 +4,7 @@
 
 ### Bugs
 - [] medicine delete notification
+- medicine product delete modal
 
 ##### Later
 * add the other models
