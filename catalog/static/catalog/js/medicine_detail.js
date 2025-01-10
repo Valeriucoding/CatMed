@@ -16,6 +16,7 @@ function showMedicineProductDeleteModal(button) {
 }
 
 document.body.addEventListener('htmx:afterRequest', function (event) {
+    console.log("HTmx after request")
     if (event.detail.elt.id === 'confirm_medicine_product_delete_button' && event.detail.xhr.status === 200) {
         const response = JSON.parse(event.detail.xhr.responseText);
         if (response.status === 'success') {
@@ -27,11 +28,11 @@ document.body.addEventListener('htmx:afterRequest', function (event) {
             document.getElementById("medicine_product_delete_modal").close();
         }
     }
-}, { once: true });
+});
 
 document.body.addEventListener('updateMedicineProductTable', function (event) {
     document.getElementById("medicine_product_create_modal").close();
     const tableBody = document.querySelector("#medicineProductTableBody");
     Alpine.store('toastManager').addToast("Medicine Product Created", "Medicine Product has been created successfully", "success");
     tableBody.insertAdjacentHTML("beforeend", event.detail.html);
-}, { once: true });
+});
