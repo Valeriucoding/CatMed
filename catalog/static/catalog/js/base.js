@@ -37,13 +37,12 @@ function changeToSelectedState() {
 
 function clearMedicineListFilter(badge) {
     const parentDiv = badge.parentElement;
-    const badgeSearchParam = parentDiv.id.split('-')[1];
+    const badgeSearchParam = parentDiv.id.match(/\d+$/)[0];
     const searchParamName = parentDiv.getAttribute('data-search-param');
 
     const url = new URL(window.location);
     const params = url.searchParams.get(searchParamName);
     if (params) {
-        console.log(params);
         const values = params.split(',');
         const newValues = values.filter(value => value !== badgeSearchParam);
         if (newValues.length > 0) {
