@@ -1,22 +1,28 @@
+{% load custom_filters %}
 <tr id="medicine-product-{{ product.pk }}">
     <td>
         {% if product.product_url %}
-            <a href="{{ product.product_url }}" class="underline">{{ product.name }}</a>
+            <a href="{{ product.product_url }}" class="underline">{{ product.name }}</a> <span class="text-red-500">({{ product.product_url|domain }})<span>
         {% else %}
             {{ product.name }}
         {% endif %}
     </td>
     <td>{% if product.price %}{{ product.price }}{% else %}&nbsp;{% endif %}</td>
-    <td>
-        <button class="btn btn-primary btn-sm" hx-get="{% url "catalog:medicine_product_update" product.pk %}"
-                hx-target="#medicine_product_update_modal_content" hx-swap="innerHTML" onclick="medicine_product_update_modal.showModal()">
-          <i class="fas fa-edit"></i>
+<td>
+    <div class="flex space-x-2">
+        <button class="btn btn-primary btn-sm" 
+                hx-get="{% url 'catalog:medicine_product_update' product.pk %}" 
+                hx-target="#medicine_product_update_modal_content" 
+                hx-swap="innerHTML" 
+                onclick="medicine_product_update_modal.showModal()">
+            <i class="fas fa-edit"></i>
         </button>
-        <button class="btn btn-error btn-sm" data-medicine-product-name="{{ product.name }}"
-                data-medicine-product-pk="{{ product.pk }}"
-                onclick="showMedicineProductDeleteModal(this)"
-        >
+        <button class="btn btn-error btn-sm" 
+                data-medicine-product-name="{{ product.name }}" 
+                data-medicine-product-pk="{{ product.pk }}" 
+                onclick="showMedicineProductDeleteModal(this)">
             <i class="fas fa-trash"></i>
         </button>
-    </td>
+    </div>
+</td>
 </tr>

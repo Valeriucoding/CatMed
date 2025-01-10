@@ -80,7 +80,7 @@ class MedicineProduct(models.Model):
     buy_place = models.CharField(
         max_length=100, choices=BUY_PLACES, blank=True, null=True
     )
-    product_url = models.CharField(max_length=100, null=True, blank=True)
+    product_url = models.CharField(max_length=255, null=True, blank=True)
     price = models.IntegerField(null=True, blank=True)
     currency = models.CharField(max_length=10,choices=CURRENCY_CHOICES, default="RON", null=True, blank=True)
     notes = models.TextField(null=True, blank=True)
