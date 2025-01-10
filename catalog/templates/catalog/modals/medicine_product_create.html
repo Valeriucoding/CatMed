@@ -1,19 +1,56 @@
-<form hx-post="{{ url }}" hx-target="#ModalContent">
-    {% csrf_token %}
-    <p>Supported websites for url and name fetch: <span class="text-red-500">zenyth.ro</span></p>
-    {% for field in form %}
-        <div class="form-control {% if field.errors %}form-control-error{% endif %}">
-            <label for="{{ field.id_for_label }}" class="label">
-                <span class="label-text">{{ field.label }}</span>
-            </label>
-            {{ field }}
-            {% for error in field.errors %}
-                <span class="text-error text-sm mt-1">{{ error }}</span>
-            {% endfor %}
-        </div>
-    {% endfor %}
+<form hx-post="{{ url }}" hx-target="#ModalContent" x-data="{ 
+    url: '',
+    isZenythUrl() {
+        return this.url.includes('zenyth.ro')
+    }
+}">
+  {% csrf_token %}
+  <p>Supported websites for url and name fetch: <span class="text-red-500">zenyth.ro</span></p>
 
-    <div class="flex justify-end">
-        <button type="submit" class="btn btn-primary mt-4">Submit</button>
-    </div>
+  <!-- Product URL Field -->
+  <div class="form-control {% if form.product_url.errors %}form-control-error{% endif %}">
+    <label for="{{ form.product_url.id_for_label }}" class="label">
+      <span class="label-text">{{ form.product_url.label }}</span>
+    </label>
+    <input
+      type="url"
+      name="product_url"
+      x-model="url"
+      class="input input-bordered w-full"
+      id="{{ form.product_url.id_for_label }}"
+    >
+    {% for error in form.product_url.errors %}
+      <span class="text-error text-sm mt-1">{{ error }}</span>
+    {% endfor %}
+  </div>
+
+  <!-- Name Field -->
+  <div class="form-control {% if form.name.errors %}form-control-error{% endif %}"
+       x-show="!isZenythUrl()"
+       x-transition>
+    <label for="{{ form.name.id_for_label }}" class="label">
+      <span class="label-text">{{ form.name.label }}</span>
+    </label>
+    {{ form.name }}
+    {% for error in form.name.errors %}
+      <span class="text-error text-sm mt-1">{{ error }}</span>
+    {% endfor %}
+  </div>
+
+  <!-- Price Field -->
+  <div class="form-control {% if form.price.errors %}form-control-error{% endif %}"
+       x-show="!isZenythUrl()"
+       x-transition>
+    <label for="{{ form.price.id_for_label }}" class="label">
+      <span class="label-text">{{ form.price.label }}</span>
+    </label>
+    {{ form.price }}
+    {% for error in form.price.errors %}
+      <span class="text-error text-sm mt-1">{{ error }}</span>
+    {% endfor %}
+  </div>
+
+  <div class="flex justify-end">
+    <button type="submit" class="btn btn-primary mt-4">Submit</button>
+  </div>
 </form>

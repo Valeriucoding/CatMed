@@ -8,11 +8,10 @@
     </td>
     <td>{% if product.price %}{{ product.price }}{% else %}&nbsp;{% endif %}</td>
     <td>
-        {#                                <button class="btn btn-primary btn-sm" hx-get="#"#}
-        {#                                        hx-target="#medicine-product-{{ product.pk }}" hx-swap="innerHTML"#}
-        {#                                        hx-push-url="true">#}
-        {#                                    <i class="fas fa-edit"></i>#}
-        {#                                </button>#}
+        <button class="btn btn-primary btn-sm" hx-get="{% url "catalog:medicine_product_update" product.pk %}"
+                hx-target="#medicine_product_update_modal_content" hx-swap="innerHTML" onclick="medicine_product_update_modal.showModal()">
+          <i class="fas fa-edit"></i>
+        </button>
         <button class="btn btn-error btn-sm" data-medicine-product-name="{{ product.name }}"
                 data-medicine-product-pk="{{ product.pk }}"
                 onclick="showMedicineProductDeleteModal(this)"

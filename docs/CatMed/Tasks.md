@@ -3,7 +3,6 @@
 ### New features
 
 ### Bugs
-- [] medicine delete notification
 
 ##### Later
 * add the other models
