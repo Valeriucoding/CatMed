@@ -10,3 +10,4 @@
 * Add support for medicine products in the medicine list + get price and name from supported sites
 * add select2 to the medicine create and fix layout
 * fix medicine delete ux
+* medicine product: ability to delete
