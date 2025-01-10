@@ -68,6 +68,11 @@ class MedicineProduct(models.Model):
         ("herbal_shop", "Herbal Shop"),
         ("website", "Website"),
     )
+    CURRENCY_CHOICES = (
+        ("RON", "RON"),
+        ("USD", "USD"),
+        ("EUR", "EUR"),
+    )
     medicine = models.ForeignKey(
         Medicine, on_delete=models.CASCADE, related_name="medicine_products"
     )
@@ -77,6 +82,8 @@ class MedicineProduct(models.Model):
     )
     product_url = models.CharField(max_length=100, null=True, blank=True)
     price = models.IntegerField(null=True, blank=True)
+    currency = models.CharField(max_length=10,choices=CURRENCY_CHOICES, default="RON", null=True, blank=True)
+    notes = models.TextField(null=True, blank=True)
     method_of_administration = models.TextField(null=True, blank=True)
     presenting_form = models.ForeignKey(
         PresentingForm, on_delete=models.CASCADE, blank=True, null=True
@@ -89,4 +96,6 @@ class MedicineProduct(models.Model):
 
     def save(self, *args, **kwargs):
         get_medicine_product_info(self)
+        if self.product_url:
+            self.buy_place = "website"
         super(MedicineProduct, self).save(*args, **kwargs)

@@ -23,6 +23,7 @@ urlpatterns = [
     # medicine product
     path("medicine-products/create/<int:medicine_pk>/", medicine_product_views.medicine_product_create, name="medicine_product_create"),
     path("medicine-products/delete/<int:medicine_product_pk>/", medicine_product_views.medicine_product_delete, name="medicine_product_delete"),
+    path("medicine-products/update/<int:medicine_product_pk>/", medicine_product_views.medicine_product_update, name="medicine_product_update"),
     # disease
     path("diseases/", catalog.views.disease_views.disease_list, name="disease_list"),
     path("disease/create/", catalog.views.disease_views.disease_create, name="disease_create"),

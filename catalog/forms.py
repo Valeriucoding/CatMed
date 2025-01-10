@@ -57,8 +57,10 @@ class MedicineProductForm(forms.ModelForm):
 
     class Meta:
         model = MedicineProduct
-        fields = ["name", "product_url", "price"]
+        fields = ["name", "product_url", "price", "currency", "notes"]
         widgets = {
             "product_url": forms.URLInput(attrs={"class": "input input-bordered w-full"}),
-            "price": forms.NumberInput(attrs={"class": "input input-bordered w-full"}),
+            "price": forms.NumberInput(attrs={"class": "input input-bordered w-full", "required": False}),
+            "currency": forms.Select(attrs={"class": "input input-bordered w-full"}),
+            "notes": forms.Textarea(attrs={"class": "textarea textarea-bordered w-full", "style": "height: 100px;"})
         }

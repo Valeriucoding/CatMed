@@ -29,9 +29,20 @@ document.body.addEventListener('htmx:afterRequest', function (event) {
     }
 });
 
-document.body.addEventListener('updateMedicineProductTable', function (event) {
+document.body.addEventListener('addMedicineProductTableComponent', function (event) {
     document.getElementById("medicine_product_create_modal").close();
     const tableBody = document.querySelector("#medicineProductTableBody");
     Alpine.store('toastManager').addToast("Medicine Product Created", "Medicine Product has been created successfully", "success");
     tableBody.insertAdjacentHTML("beforeend", event.detail.html);
+});
+
+document.body.addEventListener("updateMedicineProductTable", function (event) {
+    document.getElementById("medicine_product_update_modal").close();
+    const path = event.target["htmx-internal-data"].path;
+    const id = path.match(/\/medicine-products\/update\/(\d+)\//)[1];
+    const medicineProductItem = document.getElementById(`medicine-product-${id}`);
+    medicineProductItem.outerHTML = event.detail.html;
+    const newMedicineProductItem = document.getElementById(`medicine-product-${id}`);
+    htmx.process(newMedicineProductItem);
+    Alpine.store('toastManager').addToast("Medicine Product Updated", "Medicine Product has been updated successfully", "default" , "success");
 });
