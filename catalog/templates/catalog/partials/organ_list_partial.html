@@ -66,4 +66,17 @@
     </form>
 </dialog>
 
-<script src="{% static "js/organ_list.js" %}"></script>
+<script>
+    // Check if script is already loaded
+    if (typeof window.organListScriptLoaded === 'undefined') {
+        console.log('Loading organ list script');
+        const script = document.createElement('script');
+        script.src = "{% static "js/organ_list.js" %}";
+        script.onload = function() {
+            window.organListScriptLoaded = true;
+        };
+        document.head.appendChild(script);
+    } else {
+        console.log('Organ list script already loaded');
+    }
+</script>

@@ -67,4 +67,14 @@
     </form>
 </dialog>
 
-<script src="{% static 'js/disease_list.js' %}"></script>
+<script>
+    // Check if script is already loaded
+    if (typeof window.medicineDetailScriptLoaded === 'undefined') {
+        const script = document.createElement('script');
+        script.src = "{% static 'js/disease_list.js' %}";
+        script.onload = function() {
+            window.medicineDetailScriptLoaded = true;
+        };
+        document.head.appendChild(script);
+    }
+</script>
