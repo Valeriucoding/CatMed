@@ -1,11 +1,11 @@
 <form hx-post="{{ url }}" hx-target="#ModalContent" x-data="{ 
     url: '',
-    isZenythUrl() {
-        return this.url.includes('zenyth.ro')
+    isSupportedUrl() {
+        return this.url.includes('zenyth.ro') || this.url.includes('secom.ro');
     }
 }">
   {% csrf_token %}
-  <p>Supported websites for url and name fetch: <span class="text-red-500">zenyth.ro</span></p>
+  <p>Supported websites for URL and name fetch: <span class="text-red-500">zenyth.ro, secom.ro</span></p>
 
   <!-- Product URL Field -->
   <div class="form-control {% if form.product_url.errors %}form-control-error{% endif %}">
@@ -26,7 +26,7 @@
 
   <!-- Name Field -->
   <div class="form-control {% if form.name.errors %}form-control-error{% endif %}"
-       x-show="!isZenythUrl()"
+       x-show="!isSupportedUrl()"
        x-transition>
     <label for="{{ form.name.id_for_label }}" class="label">
       <span class="label-text">{{ form.name.label }}</span>
@@ -39,7 +39,7 @@
 
   <!-- Price Field -->
   <div class="form-control {% if form.price.errors %}form-control-error{% endif %}"
-       x-show="!isZenythUrl()"
+       x-show="!isSupportedUrl()"
        x-transition>
     <label for="{{ form.price.id_for_label }}" class="label">
       <span class="label-text">{{ form.price.label }}</span>
