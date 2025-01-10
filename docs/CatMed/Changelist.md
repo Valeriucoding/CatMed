@@ -7,7 +7,7 @@
 * add search bar to medicine list
 * add filters to medicine list
 * add toast notifications
-* Add support for medicine products in the medicine list + get price and name from supported sites
+* Add support for medicine products in the medicine list + get price and name from supported sites (zenyth.ro, secom.ro)
 * add select2 to the medicine create and fix layout
 * fix medicine delete ux
 * medicine product: ability to delete
