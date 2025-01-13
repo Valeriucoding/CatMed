@@ -1,5 +1,5 @@
 # Python stuff
-asgiref==3.7.2
+asgiref==3.8.1
 black==24.3.0
 click==8.1.6
 colorama==0.4.6
@@ -24,3 +24,4 @@ posthog==3.6.0
 requests~=2.32.3
 beautifulsoup4~=4.12.3
 sentry-sdk[django]==2.19.2
+django-allauth==65.3.1
