@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     # Local apps
     "catalog",
+    "accounts",
     # Third-party apps
     "django_htmx",
     "debug_toolbar",
