@@ -1,7 +1,7 @@
 # Urgent
 
 ### New features
-
+add user authentication + private and public databases + landing page
 ### Bugs
 
 ##### Later
