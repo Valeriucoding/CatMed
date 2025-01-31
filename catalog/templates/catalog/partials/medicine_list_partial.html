@@ -1,152 +1,157 @@
 {% load static %}
 <div class="p-4 space-y-4">
-  <!-- Alert Message -->
-  {% if alert_message %}
-    <div id="customAlert" role="alert" class="alert alert-success mb-4 custom-alert">
-      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-      </svg>
-      <span>{{ alert_message }}</span>
-    </div>
-  {% endif %}
-
-  <!-- Floating Add Button -->
-  <div class="absolute top-4 right-4 flex space-x-2">
-                         <span class="btn btn-primary flex items-center rounded-full"
-                               hx-get="{% url 'catalog:medicine_create' %}"
-                               hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">
-      <i class="fas fa-plus"></i>
-    </span>
-    {% include "catalog/components/account_actions.html" %}
-  </div>
-  <!-- Search and Filters -->
-  <div class="flex flex-col lg:flex-row items-start lg:items-center gap-4">
-    <!-- Search Bar -->
-    <label class="input input-bordered flex items-center gap-2 bg-base-100 px-2 py-1 text-sm w-full lg:w-64">
-      <input
-        type="text"
-        class="grow bg-transparent placeholder-gray-500 text-sm focus:outline-none"
-        placeholder="Search"
-        name="q"
-        hx-get="{% url 'catalog:medicine_search' %}"
-        hx-trigger="keyup changed delay:500ms"
-        hx-target="#medicines-container"
-        hx-include="[name='disease'], [name='medication_type'], [name='organ'], [name='buy_place']"
-      />
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        viewBox="0 0 16 16"
-        fill="currentColor"
-        class="h-4 w-4 opacity-70"
-      >
-        <path
-          fill-rule="evenodd"
-          d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
-          clip-rule="evenodd"></path>
-      </svg>
-    </label>
-
-
-
-
-    <!-- Filters Dropdown -->
-{#    <div class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box w-full lg:w-auto">#}
-{#      <input type="checkbox" />#}
-  {#      <div class="collapse-title flex items-center gap-2 text-sm font-medium p-2">#}
-{#        <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">#}
-{#          <path d="M3 6h18M3 12h18M3 18h18"></path>#}
-{#        </svg>#}
-{#        Filters#}
-{#        <svg class="h-3 w-3 transform peer-checked:rotate-180 transition-transform" fill="none" stroke="currentColor"#}
-{#             stroke-width="2" viewBox="0 0 24 24">#}
-{#          <path d="M6 9l6 6 6-6"></path>#}
-{#        </svg>#}
-{#      </div>#}
-{#      <div class="collapse-content">#}
-<div class="flex gap-1 flex-wrap ">
-          <!-- Disease Filter -->
-          <div class="form-control">
-{#            <label class="label">#}
-{#              <span class="label-text">Select Disease</span>#}
-{#            </label>#}
-            <select class="select select-bordered" name="disease"
-                    hx-get="{% url 'catalog:medicine_search' %}"
-                    hx-trigger="change"
-                    hx-target="#medicines-container"
-                    hx-include="[name='q'], [name='disease'], [name='medication_type'], [name='organ'], [name='buy_place']">
-              <option selected value="">Select disease</option>
-              {% for disease in diseases %}
-                <option value="{{ disease.id }}">{{ disease.name }}</option>
-              {% endfor %}
-            </select>
-          </div>
-{##}
-          <!-- Medication Type Filter -->
-          <div class="form-control">
-{#            <label class="label">#}
-{#              <span class="label-text">Medication Type</span>#}
-{#            </label>#}
-            <select class="select select-bordered" name="medication_type"
-                    hx-get="{% url 'catalog:medicine_search' %}"
-                    hx-trigger="change"
-                    hx-target="#medicines-container"
-                    hx-include="[name='q'], [name='disease'], [name='medication_type'], [name='organ'], [name='buy_place']">
-              <option selected value="">Select medication type</option>
-              {% for medication_type in medication_types %}
-                <option value="{{ medication_type.id }}">{{ medication_type.name }}</option>
-              {% endfor %}
-            </select>
-          </div>
-{##}
-{#          <!-- Organ Filter -->#}
-          <div class="form-control">
-{#            <label class="label">#}
-{#              <span class="label-text">Select Organ</span>#}
-{#            </label>#}
-            <select class="select select-bordered" name="organ"
-                    hx-get="{% url 'catalog:medicine_search' %}"
-                    hx-trigger="change"
-                    hx-target="#medicines-container"
-                    hx-include="[name='q'], [name='disease'], [name='medication_type'], [name='organ'], [name='buy_place']">
-              <option selected value="">Select organ</option>
-              {% for organ in organs %}
-                <option value="{{ organ.id }}">{{ organ.name }}</option>
-              {% endfor %}
-            </select>
-          </div>
+    <!-- Alert Message -->
+    {% if alert_message %}
+        <div id="customAlert" role="alert" class="alert alert-success mb-4 custom-alert">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none"
+                 viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                      d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <span>{{ alert_message }}</span>
         </div>
-{#      </div>#}
-{#    </div>#}
-  </div>
+    {% endif %}
 
-  <!-- Selected Filters -->
-  <div class="flex flex-wrap gap-2">
-    {% for disease_obj in diseases_params %}
-      <div id="disease-{{ disease_obj.id }}" class="badge badge-secondary badge-lg flex items-center"
-           data-search-param="disease">
-        {{ disease_obj.name }}
-        <i class="ml-3 fas fa-times text-sm relative" style="top: 0.1rem;" onclick="clearMedicineListFilter(this)"></i>
-      </div>
-    {% endfor %}
-    {% for medication_type_obj in medication_types_params %}
-      <div id="medication-type-{{ medication_type_obj.id }}" class="badge badge-secondary badge-lg flex items-center"
-           data-search-param="medication-type">
-        {{ medication_type_obj.name }}
-        <i class="ml-3 fas fa-times text-sm relative" style="top: 0.1rem;" onclick="clearMedicineListFilter(this)"></i>
-      </div>
-    {% endfor %}
-    {% for organ_obj in organs_params %}
-      <div id="organ-{{ organ_obj.id }}" class="badge badge-secondary badge-lg flex items-center"
-           data-search-param="organ">
-        {{ organ_obj.name }}
-        <i class="ml-3 fas fa-times text-sm relative" style="top: 0.1rem;" onclick="clearMedicineListFilter(this)"></i>
-      </div>
-    {% endfor %}
-  </div>
+    <!-- Floating Add Button -->
+    <div class="absolute top-4 right-4 flex space-x-2">
+        {% if user.is_authenticated %}
+            <span class="btn btn-primary flex items-center rounded-full"
+                  hx-get="{% url 'catalog:medicine_create' %}"
+                  hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">
+            <i class="fas fa-plus"></i>
+        {% endif %}
+        </span>
+        {% include "catalog/components/account_actions.html" %}
+    </div>
+    <!-- Search and Filters -->
+    <div class="flex flex-col lg:flex-row items-start lg:items-center gap-4">
+        <!-- Search Bar -->
+        <label class="input input-bordered flex items-center gap-2 bg-base-100 px-2 py-1 text-sm w-full lg:w-64">
+            <input
+                    type="text"
+                    class="grow bg-transparent placeholder-gray-500 text-sm focus:outline-none"
+                    placeholder="Search"
+                    name="q"
+                    hx-get="{% url 'catalog:medicine_search' %}"
+                    hx-trigger="keyup changed delay:500ms"
+                    hx-target="#medicines-container"
+                    hx-include="[name='disease'], [name='medication_type'], [name='organ'], [name='buy_place']"
+            />
+            <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 16 16"
+                    fill="currentColor"
+                    class="h-4 w-4 opacity-70"
+            >
+                <path
+                        fill-rule="evenodd"
+                        d="M9.965 11.026a5 5 0 1 1 1.06-1.06l2.755 2.754a.75.75 0 1 1-1.06 1.06l-2.755-2.754ZM10.5 7a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0Z"
+                        clip-rule="evenodd"></path>
+            </svg>
+        </label>
 
-  <!-- Medicines Grid -->
-  <div id="medicines-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-    {% include 'catalog/components/medicine_card.html' %}
-  </div>
+
+        <!-- Filters Dropdown -->
+        {#    <div class="collapse collapse-arrow border border-base-300 bg-base-100 rounded-box w-full lg:w-auto">#}
+        {#      <input type="checkbox" />#}
+        {#      <div class="collapse-title flex items-center gap-2 text-sm font-medium p-2">#}
+        {#        <svg class="h-3 w-3" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">#}
+        {#          <path d="M3 6h18M3 12h18M3 18h18"></path>#}
+        {#        </svg>#}
+        {#        Filters#}
+        {#        <svg class="h-3 w-3 transform peer-checked:rotate-180 transition-transform" fill="none" stroke="currentColor"#}
+        {#             stroke-width="2" viewBox="0 0 24 24">#}
+        {#          <path d="M6 9l6 6 6-6"></path>#}
+        {#        </svg>#}
+        {#      </div>#}
+        {#      <div class="collapse-content">#}
+        <div class="flex gap-1 flex-wrap ">
+            <!-- Disease Filter -->
+            <div class="form-control">
+                {#            <label class="label">#}
+                {#              <span class="label-text">Select Disease</span>#}
+                {#            </label>#}
+                <select class="select select-bordered" name="disease"
+                        hx-get="{% url 'catalog:medicine_search' %}"
+                        hx-trigger="change"
+                        hx-target="#medicines-container"
+                        hx-include="[name='q'], [name='disease'], [name='medication_type'], [name='organ'], [name='buy_place']">
+                    <option selected value="">Select disease</option>
+                    {% for disease in diseases %}
+                        <option value="{{ disease.id }}">{{ disease.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            {##}
+            <!-- Medication Type Filter -->
+            <div class="form-control">
+                {#            <label class="label">#}
+                {#              <span class="label-text">Medication Type</span>#}
+                {#            </label>#}
+                <select class="select select-bordered" name="medication_type"
+                        hx-get="{% url 'catalog:medicine_search' %}"
+                        hx-trigger="change"
+                        hx-target="#medicines-container"
+                        hx-include="[name='q'], [name='disease'], [name='medication_type'], [name='organ'], [name='buy_place']">
+                    <option selected value="">Select medication type</option>
+                    {% for medication_type in medication_types %}
+                        <option value="{{ medication_type.id }}">{{ medication_type.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            {##}
+            {#          <!-- Organ Filter -->#}
+            <div class="form-control">
+                {#            <label class="label">#}
+                {#              <span class="label-text">Select Organ</span>#}
+                {#            </label>#}
+                <select class="select select-bordered" name="organ"
+                        hx-get="{% url 'catalog:medicine_search' %}"
+                        hx-trigger="change"
+                        hx-target="#medicines-container"
+                        hx-include="[name='q'], [name='disease'], [name='medication_type'], [name='organ'], [name='buy_place']">
+                    <option selected value="">Select organ</option>
+                    {% for organ in organs %}
+                        <option value="{{ organ.id }}">{{ organ.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+        {#      </div>#}
+        {#    </div>#}
+    </div>
+
+    <!-- Selected Filters -->
+    <div class="flex flex-wrap gap-2">
+        {% for disease_obj in diseases_params %}
+            <div id="disease-{{ disease_obj.id }}" class="badge badge-secondary badge-lg flex items-center"
+                 data-search-param="disease">
+                {{ disease_obj.name }}
+                <i class="ml-3 fas fa-times text-sm relative" style="top: 0.1rem;"
+                   onclick="clearMedicineListFilter(this)"></i>
+            </div>
+        {% endfor %}
+        {% for medication_type_obj in medication_types_params %}
+            <div id="medication-type-{{ medication_type_obj.id }}"
+                 class="badge badge-secondary badge-lg flex items-center"
+                 data-search-param="medication-type">
+                {{ medication_type_obj.name }}
+                <i class="ml-3 fas fa-times text-sm relative" style="top: 0.1rem;"
+                   onclick="clearMedicineListFilter(this)"></i>
+            </div>
+        {% endfor %}
+        {% for organ_obj in organs_params %}
+            <div id="organ-{{ organ_obj.id }}" class="badge badge-secondary badge-lg flex items-center"
+                 data-search-param="organ">
+                {{ organ_obj.name }}
+                <i class="ml-3 fas fa-times text-sm relative" style="top: 0.1rem;"
+                   onclick="clearMedicineListFilter(this)"></i>
+            </div>
+        {% endfor %}
+    </div>
+
+    <!-- Medicines Grid -->
+    <div id="medicines-container" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+        {% include 'catalog/components/medicine_card.html' %}
+    </div>
 </div>

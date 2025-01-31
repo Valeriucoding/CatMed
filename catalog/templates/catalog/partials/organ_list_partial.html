@@ -10,15 +10,15 @@
     </div>
 {% endif %}
 
-{% if user.is_authenticated %}
-  <div class="absolute top-4 right-4 flex space-x-2">
+<div class="absolute top-4 right-4 flex space-x-2">
+    {% if user.is_authenticated %}
         <span class="btn btn-primary flex items-center rounded-full" onclick="organ_create.showModal()"
               hx-get="{% url 'catalog:organ_list_create' %}" hx-target="#ModalContent">
             <i class="fas fa-plus"></i>
         </span>
-        {% include "catalog/components/account_actions.html" %}
+    {% endif %}
+    {% include "catalog/components/account_actions.html" %}
 </div>
-{% endif %}
 <div class="items-start">
     <div class="overflow-x-auto">
         <table class="table">
@@ -74,7 +74,7 @@
     if (typeof window.organListScriptLoaded === 'undefined') {
         const script = document.createElement('script');
         script.src = "{% static "js/organ_list.js" %}";
-        script.onload = function() {
+        script.onload = function () {
             window.organListScriptLoaded = true;
         };
         document.head.appendChild(script);
