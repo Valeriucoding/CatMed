@@ -1,10 +1,9 @@
 # Urgent
 update readme
+add postgresql db
+confirm email page
 
 ### New features
-remove username? or maybe just make it optional
-add smtp 
-    account email notifications (ACCOUNT_EMAIL_VERIFICATION)
 login page with daisy ui 
     use themed google icon
 
