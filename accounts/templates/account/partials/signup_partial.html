@@ -1,8 +1,9 @@
 {% load form_tags %}
 {% load i18n %}
 {% load account socialaccount %}
-
-{#{% block head_title %}{% trans "Sign Up" %}{% endblock %}#}
+<div class="absolute top-4 right-4 flex space-x-2">
+        {% include "catalog/components/account_actions.html" %}
+</div>
 
 {% block content %}
   <div class="min-h-screen bg-base-200 flex items-center justify-center">
@@ -13,7 +14,7 @@
         <form class="signup form-control" method="POST" action="{% url 'account_signup' %}">
           {% csrf_token %}
 
-          {% if form.errors %}
+          {% if form.non_field_errors %}
             <div class="alert alert-error mb-4">
               <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none"
                    viewBox="0 0 24 24">
@@ -23,18 +24,6 @@
               <span>{{ form.non_field_errors }}</span>
             </div>
           {% endif %}
-
-          <div class="form-control mb-4">
-            <label class="label" for="{{ form.username.id_for_label }}">
-              <span class="label-text">{% trans "Username" %}</span>
-            </label>
-            {{ form.username|add_classes:"input input-bordered w-full" }}
-            {% if form.username.errors %}
-              <label class="label">
-                <span class="label-text-alt text-error">{{ form.username.errors }}</span>
-              </label>
-            {% endif %}
-          </div>
 
           <div class="form-control mb-4">
             <label class="label" for="{{ form.email.id_for_label }}">

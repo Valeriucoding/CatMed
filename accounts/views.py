@@ -17,9 +17,7 @@ class HTMXSignupView(SignupView):
 
     def get(self, request, *args, **kwargs):
         if request.headers.get('HX-Request'):
-            print("HTMX request detected")
             self.template_name = self.partial_template_name
-        print("Full page request detected")
         return super().get(request, *args, **kwargs)
 
 class HTMXLogoutView(LogoutView):

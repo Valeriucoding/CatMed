@@ -3,6 +3,9 @@
 {% load account socialaccount %}
 
 {#{% block head_title %}{% trans "Sign In" %}{% endblock %}#}
+<div class="absolute top-4 right-4 flex space-x-2">
+        {% include "catalog/components/account_actions.html" %}
+</div>
 
 {% block content %}
   <div class="min-h-screen bg-base-200 flex items-center justify-center">
