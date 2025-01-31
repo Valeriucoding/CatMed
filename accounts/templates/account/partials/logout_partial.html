@@ -1,0 +1,27 @@
+{% load i18n %}
+<div class="absolute top-4 right-4 flex space-x-2">
+        {% include "catalog/components/account_actions.html" %}
+</div>
+{% block content %}
+  <div class="min-h-screen bg-base-200 flex items-center justify-center">
+    <div class="card w-96 bg-base-100 shadow-xl">
+      <div class="card-body">
+        <h1 class="card-title text-2xl font-bold mb-4">{% trans "Sign Out" %}</h1>
+        <p class="text-center mb-4">{% trans "Are you sure you want to sign out?" %}</p>
+        
+        <form class="form-control" method="POST" action="{% url 'account_logout' %}">
+          {% csrf_token %}
+          
+          {% if redirect_field_value %}
+            <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+          {% endif %}
+          
+          <div class="flex justify-between mt-4">
+            <a href="/" class="btn btn-outline">{% trans "Cancel" %}</a>
+            <button class="btn btn-error" type="submit">{% trans "Sign Out" %}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

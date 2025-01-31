@@ -15,6 +15,8 @@ def get_medicine_product_info(self):
             _scrape_zenyth(self, soup)
         elif 'secom.ro' in domain:
             _scrape_secom(self, soup)
+        elif 'drmax.ro' in domain:
+            _scrape_drmax(self, soup)
 
 
 def _scrape_zenyth(self, soup):
@@ -45,3 +47,17 @@ def _scrape_secom(self, soup):
         if name_elem:
             self.name = name_elem.text.strip()
 
+def _scrape_drmax(self, soup):
+    """Set name and price from Dr. Max website if found"""
+    price_elem = soup.find(class_='price-text')
+    if price_elem:
+        price_text = price_elem.text.strip()
+        try:
+            self.price = float(price_text.replace(',', '.').replace(' Lei', ''))
+        except ValueError:
+            self.price = None
+
+    if not self.name:
+        name_elem = soup.find(class_='pr-detail__title')
+        if name_elem:
+            self.name = name_elem.text.strip()

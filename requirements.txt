@@ -1,5 +1,5 @@
 # Python stuff
-asgiref==3.7.2
+asgiref==3.8.1
 black==24.3.0
 click==8.1.6
 colorama==0.4.6
@@ -12,7 +12,7 @@ tomli==2.0.1
 typing_extensions==4.7.1
 tzdata==2023.3
 
-Django==4.2.17
+Django==4.2.18
 django-htmx==1.18.0
 whitenoise==6.7.0
 django-environ==0.11.2
@@ -24,3 +24,7 @@ posthog==3.6.0
 requests~=2.32.3
 beautifulsoup4~=4.12.3
 sentry-sdk[django]==2.19.2
+django-allauth==65.3.1
+dj-config-url~=0.1.1
+psycopg2-binary==2.9.10
+django-allauth[socialaccount]

@@ -1,11 +1,11 @@
 <form hx-post="{{ url }}" hx-target="#ModalContent" x-data="{ 
     url: '',
     isSupportedUrl() {
-        return this.url.includes('zenyth.ro') || this.url.includes('secom.ro');
+        return this.url.includes('zenyth.ro') || this.url.includes('secom.ro') || this.url.includes('drmax.ro');
     }
 }">
   {% csrf_token %}
-  <p>Supported websites for URL and name fetch: <span class="text-red-500">zenyth.ro, secom.ro</span></p>
+  <p>Supported websites for URL and name fetch: <span class="text-red-500">zenyth.ro, secom.ro, drmax.ro</span></p>
 
   <!-- Product URL Field -->
   <div class="form-control {% if form.product_url.errors %}form-control-error{% endif %}">

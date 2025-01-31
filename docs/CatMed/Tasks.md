@@ -1,6 +1,11 @@
 # Urgent
+update readme
+add postgresql db
+confirm email page
 
 ### New features
+login page with daisy ui 
+    use themed google icon
 
 ### Bugs
 

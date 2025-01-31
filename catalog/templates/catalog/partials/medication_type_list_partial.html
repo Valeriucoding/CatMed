@@ -1,11 +1,14 @@
 {% load static %}
 {% block title %}Medication Type List{% endblock title %}
-
-<div class="absolute top-4 right-4">
+<div class="absolute top-4 right-4 flex space-x-2">
+    {% if user.is_authenticated %}
         <span class="btn btn-primary flex items-center rounded-full" onclick="medication_type_create.showModal()"
               hx-get="{% url 'catalog:medication_type_list_create' %}" hx-target="#ModalContent">
             <i class="fas fa-plus"></i>
         </span>
+    {% endif %}
+    {% include "catalog/components/account_actions.html" %}
+
 </div>
 {#TODO: add medication type modal#}
 <div class="items-start">
@@ -19,7 +22,7 @@
             </thead>
             <tbody id="medicationTypesTableBody">
             {% for medication_type in medication_types %}
-                {% include "catalog/components/table_item.html" with model="medication-type" object=medication_type delete_func="showMedicationTypeDeleteModal(this)"%}
+                {% include "catalog/components/table_item.html" with model="medication-type" object=medication_type delete_func="showMedicationTypeDeleteModal(this)" %}
             {% endfor %}
             </tbody>
         </table>
@@ -64,7 +67,7 @@
     if (typeof window.medicineDetailScriptLoaded === 'undefined') {
         const script = document.createElement('script');
         script.src = "{% static "js/medication_type_list.js" %}";
-        script.onload = function() {
+        script.onload = function () {
             window.medicineDetailScriptLoaded = true;
         };
         document.head.appendChild(script);

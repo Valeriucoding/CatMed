@@ -1,5 +1,5 @@
 <div align="center">
-  CatMed
+  CatMed - a simple medicine datatabase
   <br />
 
 [//]: # ([//]: # &#40;  <a href="#about"><strong>Explore the screenshots »</strong></a>&#41;)
@@ -61,7 +61,7 @@
 
 ---
 
-#### **website takes ~60 seconds to load for the first time, please be patient.**
+[//]: # (#### **website takes ~60 seconds to load for the first time, please be patient.**)
 
 ## About
 
@@ -88,13 +88,12 @@ The goal of this project is to see it being used by my friend but also by other 
 
 #### Future plans
 
-Eventually, I plan to add more features to the project, such as the ability to add product url links to the medicines
-and scrape the price of the medicine from the website.
+Future features include the ability to track prices more accurately and adding user authentication with private and public databases.
 
 |                                                                                                                          |                                                                                           |
 |:------------------------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------:|
-| ![Medicine List](https://cloud-kaashtgnt-hack-club-bot.vercel.app/0screencapture-localhost-8000-2024-08-31-15_09_30.png) | ![Medicine Detail](https://cloud-disxcrtjb-hack-club-bot.vercel.app/0medicine_detail.png) |
-|                  ![Update Page](https://cloud-6k1do4g83-hack-club-bot.vercel.app/0medicine_update.png)                   |    ![Disease List](https://cloud-oje1dihmm-hack-club-bot.vercel.app/0disease_list.png)    |
+| ![Medicine List](https://cloud-qssehrklt-hack-club-bot.vercel.app/0screencapture-catmed-me-2025-01-10-14_21_11.png) | ![Medicine Detail](https://cloud-orzlt6hdm-hack-club-bot.vercel.app/0screencapture-catmed-me-1-2025-01-10-14_21_20.png) |
+|                  ![Update Page](https://cloud-ixcty7npz-hack-club-bot.vercel.app/0screencapture-catmed-me-1-update-2025-01-10-14_21_35.png)                   |    ![Disease List](https://cloud-kdqq4thn8-hack-club-bot.vercel.app/0screencapture-catmed-me-diseases-2025-01-10-14_21_48.png)    |
 
 [//]: # (<table>)
 
