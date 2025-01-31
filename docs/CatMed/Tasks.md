@@ -1,7 +1,12 @@
 # Urgent
+update readme
+add postgresql db
+confirm email page
 
 ### New features
-add user authentication + private and public databases + landing page
+login page with daisy ui 
+    use themed google icon
+
 ### Bugs
 
 ##### Later
