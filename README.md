@@ -78,9 +78,16 @@ can create medicines in the system and link them to different organs or categori
 treat.
 
 The idea behind this project is to make it easier to keep track of medicines and how they’re connected to different
-diseases and body parts.
+diseases and organs.
 It was created with the intention of helping doctors to quickly find the right medicine for a
 specific condition.
+
+#### Features
+
+* Associate medicines with diseases, medication types, and organs
+* Assign medicine products to a medicine and get the price and name from supported websites
+  * Supported websites: [Zenyth](https://zenyth.ro), [Secom](https://secom.ro), [DrMax](https://drmax.ro)
+* Basic authentication with more features coming soon
 
 #### The goal
 
@@ -88,7 +95,7 @@ The goal of this project is to see it being used by my friend but also by other 
 
 #### Future plans
 
-Future features include the ability to track prices more accurately and adding user authentication with private and public databases.
+Future features include the ability to track prices more accurately and adding the ability to have private and public databases of medicines.
 
 |                                                                                                                          |                                                                                           |
 |:------------------------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------:|

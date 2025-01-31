@@ -2,6 +2,7 @@
 update readme
 add postgresql db
 confirm email page
+sync user with email on posthog
 
 ### New features
 login page with daisy ui 
