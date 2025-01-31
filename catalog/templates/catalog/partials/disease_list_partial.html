@@ -9,13 +9,15 @@
         <span>{{ alert_message }}</span>
     </div>
 {% endif %}
-
-<div class="absolute top-4 right-4">
+{% if user.is_authenticated %}
+  <div class="absolute top-4 right-4 flex space-x-2">
         <span class="btn btn-primary flex items-center rounded-full" onclick="disease_create.showModal()"
               hx-get="{% url 'catalog:disease_list_create' %}" hx-target="#ModalContent">
             <i class="fas fa-plus"></i>
         </span>
+        {% include "catalog/components/account_actions.html" %}
 </div>
+{% endif %}
 <div class="items-start">
     <div class="overflow-x-auto">
         <table class="table">

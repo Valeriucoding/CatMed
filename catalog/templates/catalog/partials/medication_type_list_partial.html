@@ -1,12 +1,14 @@
 {% load static %}
 {% block title %}Medication Type List{% endblock title %}
-
-<div class="absolute top-4 right-4">
+{% if user.is_authenticated %}
+  <div class="absolute top-4 right-4 flex space-x-2">
         <span class="btn btn-primary flex items-center rounded-full" onclick="medication_type_create.showModal()"
               hx-get="{% url 'catalog:medication_type_list_create' %}" hx-target="#ModalContent">
             <i class="fas fa-plus"></i>
         </span>
+
 </div>
+{% endif %}
 {#TODO: add medication type modal#}
 <div class="items-start">
     <div class="overflow-x-auto">

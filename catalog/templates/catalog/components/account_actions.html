@@ -1,0 +1,15 @@
+  {% if not user.is_authenticated %}
+    <span class="btn btn-primary flex items-center rounded-full" hx-get="{% url 'account_login' %}"
+          hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">
+      <i class="fas fa-sign-in-alt"></i> Login
+    </span>
+    <span class="btn btn-secondary flex items-center rounded-full" hx-get="{% url 'account_signup' %}"
+          hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">
+      <i class="fas fa-user-plus"></i> Signup
+    </span>
+  {% else %}
+    <span class="btn btn-primary flex items-center rounded-full" hx-get="{% url 'account_logout' %}"
+          hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">
+      <i class="fas fa-sign-out-alt"></i> Logout
+    </span>
+  {% endif %}
