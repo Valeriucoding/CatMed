@@ -1,16 +1,13 @@
 # Urgent
-update readme
-add postgresql db
-confirm email page
+add user account page
 sync user with email on posthog
 
 ### New features
-login page with daisy ui 
-    use themed google icon
 
 ### Bugs
 
 ##### Later
+- [] add postgresql db
 * add the other models
 - [] use tailwind cli for the production build
 
