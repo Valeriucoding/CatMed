@@ -16,6 +16,9 @@
     <script src="/static/admin/js/autocomplete.js" data-form-media></script>
     <!-- end of form media -->
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.0.9/dist/full.min.css" rel="stylesheet" type="text/css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+            integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.tailwindcss.com?plugins=typography"></script>
     <script src="https://unpkg.com/htmx.org@1.9.8"
             integrity="sha384-rgjA7mptc2ETQqXoYC3/zJvkU7K/aP44Y+z7xQuJiVnB/422P/Ak+F/AqFR7E4Wr"
@@ -29,8 +32,8 @@
     <div class="toast toast-end toast-bottom toast-fade-out z-50">
         <template x-for="toast in Alpine.store('toastManager').toasts" :key="toast.id">
             <div
-                class="alert"
-                :class="{
+                    class="alert"
+                    :class="{
                         'alert-info': toast.type === 'info',
                         'alert-success': toast.type === 'success',
                         'alert-warning': toast.type === 'warning',
@@ -45,8 +48,8 @@
                     <div class="text-xs" x-text="toast.message"></div>
                 </div>
                 <button
-                    class="btn btn-sm btn-ghost"
-                    @click="Alpine.store('toastManager').removeToast(toast.id)"
+                        class="btn btn-sm btn-ghost"
+                        @click="Alpine.store('toastManager').removeToast(toast.id)"
                 >
                     ✕
                 </button>
@@ -69,7 +72,7 @@
                     </div>
                     <div id="main-container">
                         {% block content %}
-                          This sentence will disappear.
+                            This sentence will disappear.
                         {% endblock %}
                     </div>
                 </div>
