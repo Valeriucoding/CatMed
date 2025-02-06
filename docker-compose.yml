@@ -3,9 +3,10 @@ version: '3.8'
 services:
   web:
     build: .
-    command: sh -c "python manage.py migrate && gunicorn --bind ${DJANGO_HOST}:${DJANGO_PORT} catmed.wsgi:application"
+    command: sh -c "ls -R /code && python manage.py migrate && gunicorn --bind ${DJANGO_HOST}:${DJANGO_PORT} catmed.wsgi:application"
     volumes:
       - .:/code
+
     ports:
       - "${DJANGO_PORT}:${DJANGO_PORT}"
 #    env_file:
