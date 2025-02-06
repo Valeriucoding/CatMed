@@ -15,4 +15,4 @@ COPY . /code/
 EXPOSE ${DJANGO_PORT}
 
 # Run migrations and start Gunicorn
-CMD ["sh", "-c", "python manage.py migrate && gunicorn --bind ${DJANGO_HOST}:${DJANGO_PORT} catmed.wsgi:application"]
+CMD ["sh", "-c", "ls -R /code && python manage.py migrate && gunicorn --bind ${DJANGO_HOST}:${DJANGO_PORT} catmed.wsgi:application"]
