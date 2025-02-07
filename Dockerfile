@@ -1,18 +1,24 @@
-FROM python:3.11-slim
+# Dockerfile
+FROM python:3.12-slim-bookworm
+
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+RUN apt-get update && apt-get install -y \
+    libpq-dev \
+    gcc \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN mkdir -p /code
 
 WORKDIR /code
 
-# Install system dependencies for PostgreSQL (if needed)
-RUN apt-get update && apt-get install -y gcc libpq-dev && rm -rf /var/lib/apt/lists/*
-
-# Install Python dependencies
+# If you want to use pip
 COPY requirements.txt /code/
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install -r requirements.txt
 
-# Copy project files
-COPY . /code/
+COPY . /code
 
-EXPOSE ${DJANGO_PORT}
+RUN python manage.py collectstatic --noinput
 
-# Run migrations and start Gunicorn
-CMD ["sh", "-c", "ls -R /code && python manage.py migrate && gunicorn --bind ${DJANGO_HOST}:${DJANGO_PORT} catmed.wsgi:application"]
+RUN chmod +x /code/entrypoint.sh

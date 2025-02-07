@@ -1,27 +1,23 @@
-version: '3.8'
+version: '3'
 
 services:
-  web:
-    build: .
-    command: sh -c "ls -R /code && python manage.py migrate && gunicorn --bind ${DJANGO_HOST}:${DJANGO_PORT} catmed.wsgi:application"
+  server:
+    container_name: catmed
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    entrypoint: /code/entrypoint.sh
     volumes:
-      - .:/code
+      - static_volume:/code/staticfiles
+    expose:
+      - 7000
+    environment:
+      DEBUG: "False"
+      SECRET_KEY: ${SECRET_KEY}
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS}
+      CSRF_TRUSTED_ORIGINS: ${CSRF_TRUSTED_ORIGINS}
+      DATABASE_URL: ${DATABASE_URL}
 
-    ports:
-      - "${DJANGO_PORT}:${DJANGO_PORT}"
-#    env_file:
-#      - .env
-#    depends_on:
-#      - db
-
-#  db:
-#    image: postgres:13
-#    volumes:
-#      - postgres_data:/var/lib/postgresql/data
-#    environment:
-#      POSTGRES_DB: ${POSTGRES_DB}
-#      POSTGRES_USER: ${POSTGRES_USER}
-#      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
-#
-#volumes:
-#  postgres_data:
+volumes:
+  static_volume: { }
