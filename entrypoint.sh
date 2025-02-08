@@ -13,4 +13,4 @@ do
 done
 
 
-gunicorn --bind :7000 --workers 2 catmed.wsgi
+gunicorn --bind :7000 --workers 2 config.wsgi
