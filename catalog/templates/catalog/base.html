@@ -170,6 +170,10 @@
             // Alternatively, use this for default SPA pageview tracking
             // posthog.page();
         });
+        window.isAuthenticated = {{ request.user.is_authenticated|yesno:"true,false" }};
+        if (!window.isAuthenticated) {
+            posthog.reset();
+        }
     </script>
     <script src="{% static 'js/base.js' %}"></script>
 </footer>
