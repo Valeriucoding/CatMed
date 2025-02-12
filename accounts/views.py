@@ -58,4 +58,9 @@ class HTMXLogoutView(LogoutView):
 
 
 def user_profile(request):
+    if request.htmx:
+        return render(
+            request,
+            "account/partials/user_profile_card_partial.html",
+        )
     return render(request, "account/user_profile_card.html")

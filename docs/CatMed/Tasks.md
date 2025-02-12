@@ -1,15 +1,16 @@
-# Urgent
-
 fix creating related models
 remove the unnecessary scroll
+add contact form
+add footer
+work on a temporary favicon
 
-### New features
+# User Card
+
+- [] add email change form
 
 ### Bugs
 
 ##### Later
-
-- [] add postgresql db
 
 * add the other models
 
