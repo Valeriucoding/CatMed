@@ -1,11 +1,6 @@
 # Urgent
 
 add user account page
-add view for /accounts/password/reset/done/
-
-* /accounts/password/reset/key/4-set-password/
-* /accounts/password/reset/key/done/
-  sync user with email on posthog
 
 ### New features
 
