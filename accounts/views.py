@@ -5,6 +5,8 @@ from allauth.account.views import (
     SignupView,
 )
 
+from django.shortcuts import render
+
 
 class HTMXLoginView(LoginView):
     template_name = "account/login.html"
@@ -53,3 +55,7 @@ class HTMXLogoutView(LogoutView):
         if request.user.is_authenticated:
             posthog.capture(request.user.id, "User Logged Out")
         return super().dispatch(request, *args, **kwargs)
+
+
+def user_profile(request):
+    return render(request, "account/user_profile_card.html")
