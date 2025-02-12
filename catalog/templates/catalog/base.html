@@ -70,6 +70,16 @@
                         <h1 class="prose-2xl mb-4 select-none" hx-get="{% url "catalog:medicine_list" %}"
                             hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">CatMed</h1>
                     </div>
+                    <div class="absolute top-4 right-4 flex space-x-2">
+                        {% if user.is_authenticated %}
+                            <span class="btn btn-primary flex items-center rounded-full"
+                                  hx-get="{% url 'catalog:medicine_create' %}"
+                                  hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">
+                            <i class="fas fa-plus"></i>
+                        {% endif %}
+                        </span>
+                        {% include "catalog/components/account_actions.html" %}
+                    </div>
                     <div id="main-container">
                         {% block content %}
                             This sentence will disappear.
