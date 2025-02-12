@@ -193,6 +193,10 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+ACCOUNT_FORMS = {
+    "reset_password_from_key": "accounts.forms.StyledResetPasswordKeyForm",
+}
+
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = "email"
