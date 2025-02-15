@@ -3,6 +3,7 @@ remove the unnecessary scroll
 add contact form
 add footer
 work on a temporary favicon
+fix account icon
 
 # User Card
 

@@ -1,0 +1,62 @@
+<div class="drawer-side">
+    <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label>
+    <ul class="menu bg-base-200 text-base-content min-h-full w-80 p-4 text-lg">
+        <li>
+            <a id="medicine-sidebar-item"
+               hx-get="{% url "catalog:medicine_list" %}"
+               hx-target="#main-container"
+               hx-swap="innerHTML"
+               hx-push-url="true"
+               class="py-4"
+               @click="isOpen = false">
+                <i class="fa-solid fa-prescription-bottle-medical fa-fw mr-2"></i> Medicines
+            </a>
+        </li>
+        <li>
+            <a id="disease-sidebar-item"
+               hx-get="{% url "catalog:disease_list" %}"
+               hx-target="#main-container"
+               hx-swap="innerHTML"
+               hx-push-url="true"
+               class="py-4"
+               @click="isOpen = false">
+                <i class="fas fa-virus fa-fw mr-2"></i> Diseases
+            </a>
+        </li>
+        <li>
+            <a id="medication-type-sidebar-item"
+               hx-get="{% url "catalog:medication_type_list" %}"
+               hx-target="#main-container"
+               hx-swap="innerHTML"
+               hx-push-url="true"
+               class="py-4"
+               @click="isOpen = false">
+                <i class="fas fa-pills fa-fw mr-2"></i> Medication Types
+            </a>
+        </li>
+        <li>
+            <a id="organ-sidebar-item"
+               hx-get="{% url "catalog:organ_list" %}"
+               hx-target="#main-container"
+               hx-swap="innerHTML"
+               hx-push-url="true"
+               class="py-4"
+               @click="isOpen = false">
+                <i class="fas fa-lungs fa-fw mr-2"></i> Organs
+            </a>
+        </li>
+        <div class="divider my-4"></div>
+
+        <li>
+            <a id="contact-sidebar-item"
+               hx-get="{% url "catalog:contact_form" %}"
+               hx-target="#main-container"
+               hx-swap="innerHTML"
+               hx-push-url="true"
+               class="py-4"
+               @click="isOpen = false">
+                <i class="fas fa-envelope fa-fw mr-2"></i> Contact
+            </a>
+        </li>
+    </ul>
+</div>

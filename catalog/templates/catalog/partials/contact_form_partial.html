@@ -1,0 +1,54 @@
+<form hx-post="{% url 'catalog:contact_form' %}"
+      hx-target="this"
+      hx-swap="outerHTML"
+      class="space-y-4">
+    {% csrf_token %}
+    <div class="form-control">
+        <label class="label">
+            <span class="label-text">Name</span>
+        </label>
+        {{ form.name }}
+        {% if form.name.errors %}
+            <div class="text-error text-sm mt-1">
+                {{ form.name.errors }}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="form-control">
+        <label class="label">
+            <span class="label-text">Email</span>
+        </label>
+        {{ form.email }}
+        {% if form.email.errors %}
+            <div class="text-error text-sm mt-1">
+                {{ form.email.errors }}
+            </div>
+        {% endif %}
+    </div>
+
+    <div class="form-control">
+        <label class="label">
+            <span class="label-text">Message</span>
+        </label>
+        {{ form.message }}
+        {% if form.message.errors %}
+            <div class="text-error text-sm mt-1">
+                {{ form.message.errors }}
+            </div>
+        {% endif %}
+    </div>
+
+    <button type="submit" class="btn btn-primary w-full">Send Message</button>
+</form>
+<script>
+    document.body.addEventListener('contactFormSuccess', function () {
+        Alpine.store('toastManager').addToast(
+            "Message Sent",
+            "Your message has been sent successfully",
+            "success"
+        );
+
+        htmx.trigger('#contact-form', 'reset');
+    });
+</script>
