@@ -9,8 +9,8 @@ from accounts.views import (
 
 
 urlpatterns = [
-    path("accounts/login/", HTMXLoginView.as_view(), name="account_login"),
-    path("accounts/signup/", HTMXSignupView.as_view(), name="account_signup"),
-    path("accounts/logout/", HTMXLogoutView.as_view(), name="account_logout"),
-    path("accounts/profile/", user_profile, name="user_profile"),
+    path("login/", HTMXLoginView.as_view(), name="account_login"),
+    path("signup/", HTMXSignupView.as_view(), name="account_signup"),
+    path("logout/", HTMXLogoutView.as_view(), name="account_logout"),
+    path("profile/", user_profile, name="user_profile"),
 ]
