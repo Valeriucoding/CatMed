@@ -1,30 +1,38 @@
 {% if not user.is_authenticated %}
-  <span class="btn btn-primary flex items-center rounded-full" hx-get="{% url 'account_login' %}"
-        hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">
+    <span class="btn btn-primary flex items-center rounded-full" hx-get="{% url 'account_login' %}"
+          hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">
     <i class="fas fa-sign-in-alt"></i> Login
   </span>
-  <span class="btn btn-secondary flex items-center rounded-full" hx-get="{% url 'account_signup' %}"
-        hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">
+    <span class="btn btn-secondary flex items-center rounded-full" hx-get="{% url 'account_signup' %}"
+          hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">
     <i class="fas fa-user-plus"></i> Signup
   </span>
 {% else %}
-<div class="dropdown dropdown-end">
-  <label tabindex="0" class="btn btn-circle avatar">
-    <div class="w-10 h-10 rounded-full bg-gray-300 inline-flex items-center justify-center">
-      <span class="flex items-center justify-center w-full h-full">
-        <i class="fas fa-user text-xl text-gray-600"></i>
+    <div class="dropdown dropdown-end" x-data="{ open: false }">
+        <label tabindex="0" class="btn btn-circle avatar" @click="open = !open">
+            <div class="w-10 h-10 rounded-full bg-gray-300 inline-flex items-center justify-center">
+                <span class="flex items-center justify-center w-full h-full">
+                <i class="fas fa-user text-xl text-gray-600"></i>
+            </div>
+        </label>
+        <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52" x-show="open"
+            @click.outside="open = false">
+            <li>
+                <a hx-get="{% url 'user_profile' %}"
+                   hx-target="#main-container"
+                   hx-swap="innerHTML"
+                   hx-push-url="true"
+                   @click="open = false">
+                    <i class="fas fa-user-cog"></i> Account
+                </a>
+                <a hx-get="{% url 'account_logout' %}"
+                   hx-target="#main-container"
+                   hx-swap="innerHTML"
+                   hx-push-url="true"
+                   @click="open = false">
+                    <i class="fas fa-sign-out-alt"></i> Logout
+                </a>
+            </li>
+        </ul>
     </div>
-    </label>
-    <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52">
-{#      <li><a href="{% url 'account_settings' %}"><i class="fas fa-user-cog"></i> Account</a></li>#}
-      <li>
-        <a hx-get="{% url 'account_logout' %}"
-           hx-target="#main-container"
-           hx-swap="innerHTML"
-           hx-push-url="true">
-          <i class="fas fa-sign-out-alt"></i> Logout
-        </a>
-      </li>
-    </ul>
-  </div>
 {% endif %}

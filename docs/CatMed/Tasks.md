@@ -1,15 +1,22 @@
-# Urgent
-add user account page
-sync user with email on posthog
+fix creating related models
+remove the unnecessary scroll
+add contact form
+add footer
+work on a temporary favicon
+fix account icon
 
-### New features
+# User Card
+
+- [] add email change form
 
 ### Bugs
 
 ##### Later
-- [] add postgresql db
+
 * add the other models
+
 - [] use tailwind cli for the production build
 
 ## Models
+
 do we need name for PresentingForm?
