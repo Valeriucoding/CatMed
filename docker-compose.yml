@@ -7,15 +7,12 @@ services:
     build:
       context: .
       dockerfile: ./Dockerfile
-      args:
-        - IP_ADDRESS=${IP_ADDRESS}
     entrypoint: /code/entrypoint.sh
     volumes:
       - static_volume:/code/staticfiles
     expose:
       - 7000
     environment:
-      IP_ADDRESS: ${IP_ADDRESS}
       DEBUG: "False"
       SECRET_KEY: ${SECRET_KEY}
       ALLOWED_HOSTS: ${ALLOWED_HOSTS}

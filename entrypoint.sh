@@ -13,4 +13,4 @@ do
 done
 
 
-gunicorn --bind ${IP_ADDRESS}:7000 --workers 2 config.wsgi
+gunicorn --bind :7000 --workers 2 config.wsgi
