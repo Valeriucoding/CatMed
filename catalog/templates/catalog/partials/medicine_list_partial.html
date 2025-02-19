@@ -13,16 +13,16 @@
     {% endif %}
 
     <!-- Floating Add Button -->
-    <div class="absolute top-4 right-4 flex space-x-2">
-        {% if user.is_authenticated %}
-            <span class="btn btn-primary flex items-center rounded-full"
-                  hx-get="{% url 'catalog:medicine_create' %}"
-                  hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">
-            <i class="fas fa-plus"></i>
-        {% endif %}
-        </span>
-        {% include "catalog/components/account_actions.html" %}
-    </div>
+    {#    <div class="absolute top-4 right-4 flex space-x-2">#}
+    {#        {% if user.is_authenticated %}#}
+    {#            <span class="btn btn-primary flex items-center rounded-full"#}
+    {#                  hx-get="{% url 'catalog:medicine_create' %}"#}
+    {#                  hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">#}
+    {#            <i class="fas fa-plus"></i>#}
+    {#        {% endif %}#}
+    {#        </span>#}
+    {#        {% include "catalog/components/account_actions.html" %}#}
+    {#    </div>#}
     <!-- Search and Filters -->
     <div class="flex flex-col lg:flex-row items-start lg:items-center gap-4">
         <!-- Search Bar -->

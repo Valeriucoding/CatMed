@@ -70,6 +70,16 @@
                         <h1 class="prose-2xl mb-4 select-none" hx-get="{% url "catalog:medicine_list" %}"
                             hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">CatMed</h1>
                     </div>
+                    <div class="absolute top-4 right-4 flex space-x-2">
+                        {% if user.is_authenticated %}
+                            <span class="btn btn-primary flex items-center rounded-full"
+                                  hx-get="{% url 'catalog:medicine_create' %}"
+                                  hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">
+                            <i class="fas fa-plus"></i>
+                        {% endif %}
+                        </span>
+                        {% include "catalog/components/account_actions.html" %}
+                    </div>
                     <div id="main-container">
                         {% block content %}
                             This sentence will disappear.
@@ -78,55 +88,7 @@
                 </div>
             </div>
         </div>
-        <div class="drawer-side">
-            <label for="my-drawer-2" aria-label="close sidebar" class="drawer-overlay"></label>
-            <ul class="menu bg-base-200 text-base-content min-h-full w-80 p-4 text-lg">
-                <li>
-                    <a id="medicine-sidebar-item"
-                       hx-get="{% url "catalog:medicine_list" %}"
-                       hx-target="#main-container"
-                       hx-swap="innerHTML"
-                       hx-push-url="true"
-                       class="py-4"
-                       @click="isOpen = false">
-                        <i class="fa-solid fa-prescription-bottle-medical fa-fw mr-2"></i> Medicines
-                    </a>
-                </li>
-                <li>
-                    <a id="disease-sidebar-item"
-                       hx-get="{% url "catalog:disease_list" %}"
-                       hx-target="#main-container"
-                       hx-swap="innerHTML"
-                       hx-push-url="true"
-                       class="py-4"
-                       @click="isOpen = false">
-                        <i class="fas fa-virus fa-fw mr-2"></i> Diseases
-                    </a>
-                </li>
-                <li>
-                    <a id="medication-type-sidebar-item"
-                       hx-get="{% url "catalog:medication_type_list" %}"
-                       hx-target="#main-container"
-                       hx-swap="innerHTML"
-                       hx-push-url="true"
-                       class="py-4"
-                       @click="isOpen = false">
-                        <i class="fas fa-pills fa-fw mr-2"></i> Medication Types
-                    </a>
-                </li>
-                <li>
-                    <a id="organ-sidebar-item"
-                       hx-get="{% url "catalog:organ_list" %}"
-                       hx-target="#main-container"
-                       hx-swap="innerHTML"
-                       hx-push-url="true"
-                       class="py-4"
-                       @click="isOpen = false">
-                        <i class="fas fa-lungs fa-fw mr-2"></i> Organs
-                    </a>
-                </li>
-            </ul>
-        </div>
+        {% include "catalog/components/sidebar.html" %}
     </div>
 </body>
 
@@ -170,6 +132,10 @@
             // Alternatively, use this for default SPA pageview tracking
             // posthog.page();
         });
+        window.isAuthenticated = {{ request.user.is_authenticated|yesno:"true,false" }};
+        if (!window.isAuthenticated) {
+            posthog.reset();
+        }
     </script>
     <script src="{% static 'js/base.js' %}"></script>
 </footer>

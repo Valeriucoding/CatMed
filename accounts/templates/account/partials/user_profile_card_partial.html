@@ -1,0 +1,73 @@
+{% block content %}
+    <div class="min-h-screen bg-base-200 py-8">
+        <div class="max-w-2xl mx-auto">
+            <!-- Profile Card -->
+            <div class="card bg-base-100 shadow-xl">
+                <div class="card-body">
+                    <!-- Profile Header -->
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="avatar placeholder">
+                            <div class="bg-neutral text-neutral-content rounded-full w-24">
+                                <span class="text-3xl">{{ user.username|make_list|first|upper }}</span>
+                            </div>
+                        </div>
+                        <div>
+                            <h2 class="card-title text-2xl">{{ user.username }}</h2>
+                            <p class="text-base-content/70">{{ user.email }}</p>
+                        </div>
+                    </div>
+
+                    <!-- Account Details -->
+                    <div class="divider">Account Details</div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Username</span>
+                            </label>
+                            <input type="text" value="{{ user.username }}" class="input input-bordered" readonly/>
+                        </div>
+
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Email</span>
+                            </label>
+                            <input type="email" value="{{ user.email }}" class="input input-bordered" readonly/>
+                        </div>
+
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Date Joined</span>
+                            </label>
+                            <input type="text" value="{{ user.date_joined|date:'F j, Y' }}" class="input input-bordered"
+                                   readonly/>
+                        </div>
+
+                        <div class="form-control">
+                            <label class="label">
+                                <span class="label-text">Last Login</span>
+                            </label>
+                            <input type="text" value="{{ user.last_login|date:'F j, Y' }}" class="input input-bordered"
+                                   readonly/>
+                        </div>
+                    </div>
+
+                    <!-- Actions -->
+                    <div class="divider">Actions</div>
+
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="{% url 'account_reset_password' %}" class="btn btn-primary">
+                            Change Password
+                        </a>
+                        {#                        <a href="{% url 'edit_profile' %}" class="btn btn-secondary">#}
+                        {#                            Edit Profile#}
+                        {#                        </a>#}
+                        {#                        <button class="btn btn-error">#}
+                        {#                            Delete Account#}
+                        {#                        </button>#}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

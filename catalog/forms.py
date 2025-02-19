@@ -64,3 +64,25 @@ class MedicineProductForm(forms.ModelForm):
             "currency": forms.Select(attrs={"class": "input input-bordered w-full"}),
             "notes": forms.Textarea(attrs={"class": "textarea textarea-bordered w-full", "style": "height: 100px;"})
         }
+
+class ContactForm(forms.Form):
+    name = forms.CharField(
+        max_length=100,
+        widget=forms.TextInput(attrs={
+            "class": "input input-bordered w-full",
+            "placeholder": "Your name"
+        })
+    )
+    email = forms.EmailField(
+        widget=forms.EmailInput(attrs={
+            "class": "input input-bordered w-full",
+            "placeholder": "Your email"
+        })
+    )
+    message = forms.CharField(
+        widget=forms.Textarea(attrs={
+            "class": "textarea textarea-bordered w-full",
+            "rows": 5,
+            "placeholder": "Your message"
+        })
+    )

@@ -1,4 +1,11 @@
-from allauth.account.views import LoginView, LogoutView, PasswordResetFromKeyView, PasswordResetView, SignupView
+import posthog
+from allauth.account.views import (
+    LoginView,
+    LogoutView,
+    SignupView,
+)
+
+from django.shortcuts import render
 
 
 class HTMXLoginView(LoginView):
@@ -10,6 +17,13 @@ class HTMXLoginView(LoginView):
             self.template_name = self.partial_template_name
         return super().get(request, *args, **kwargs)
 
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        user = self.request.user
+        posthog.identify(user.id, {"email": user.email})
+        posthog.capture(user.id, "User Logged In")
+        return response
+
 
 class HTMXSignupView(SignupView):
     template_name = "account/signup.html"
@@ -19,6 +33,13 @@ class HTMXSignupView(SignupView):
         if request.headers.get("HX-Request"):
             self.template_name = self.partial_template_name
         return super().get(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        user = self.user
+        posthog.identify(user.id, {"email": user.email})
+        posthog.capture(user.id, "User Signed Up")
+        return response
 
 
 class HTMXLogoutView(LogoutView):
@@ -30,33 +51,16 @@ class HTMXLogoutView(LogoutView):
             self.template_name = self.partial_template_name
         return super().get(request, *args, **kwargs)
 
-
-class HTMXForgotPasswordView(PasswordResetView):
-    template_name = "account/password_reset.html"
-    partial_template_name = "account/partials/password_reset_partial.html"
-
-    def get(self, request, *args, **kwargs):
-        if request.headers.get("HX-Request"):
-            self.template_name = self.partial_template_name
-        return super().get(request, *args, **kwargs)
-
-    def post(self, request, *args, **kwargs):
-        if request.headers.get("HX-Request"):
-            self.template_name = self.partial_template_name
-        return super().post(request, *args, **kwargs)
+    def dispatch(self, request, *args, **kwargs):
+        if request.user.is_authenticated:
+            posthog.capture(request.user.id, "User Logged Out")
+        return super().dispatch(request, *args, **kwargs)
 
 
-class HTMXPasswordResetConfirmView(PasswordResetFromKeyView):
-    # TODO: not working rn
-    template_name = "account/password_reset_confirm.html"
-    partial_template_name = "account/partials/password_reset_confirm_partial.html"
-
-    def get(self, request, *args, **kwargs):
-        if request.headers.get("HX-Request"):
-            self.template_name = self.partial_template_name
-        return super().get(request, *args, **kwargs)
-
-    def post(self, request, *args, **kwargs):
-        if request.headers.get("HX-Request"):
-            self.template_name = self.partial_template_name
-        return super().post(request, *args, **kwargs)
+def user_profile(request):
+    if request.htmx:
+        return render(
+            request,
+            "account/partials/user_profile_card_partial.html",
+        )
+    return render(request, "account/user_profile_card.html")

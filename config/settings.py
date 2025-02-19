@@ -12,10 +12,10 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 import os
 from pathlib import Path
-
+import dj_database_url
 import environ
 import sentry_sdk
-import dj_database_url
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -53,11 +53,11 @@ INSTALLED_APPS = [
     # Third-party apps
     "django_htmx",
     "debug_toolbar",
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
-    'allauth.socialaccount.providers.facebook',
+    "allauth",
+    "allauth.account",
+    "allauth.socialaccount",
+    "allauth.socialaccount.providers.google",
+    "allauth.socialaccount.providers.facebook",
 ]
 
 MIDDLEWARE = [
@@ -134,8 +134,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 
 AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
+    "django.contrib.auth.backends.ModelBackend",
+    "allauth.account.auth_backends.AuthenticationBackend",
 ]
 
 # Internationalization
@@ -185,20 +185,24 @@ if not DEBUG:
 # Django Allauth
 
 SOCIALACCOUNT_PROVIDERS = {
-    'google': {
-        'APP': {
-            'client_id': env('GOOGLE_CLIENT_ID', default=""),
-            'secret': env('GOOGLE_CLIENT_SECRET', default=""),
-            'key': ''
+    "google": {
+        "APP": {
+            "client_id": env("GOOGLE_CLIENT_ID", default=""),
+            "secret": env("GOOGLE_CLIENT_SECRET", default=""),
+            "key": "",
         }
     }
 }
+ACCOUNT_FORMS = {
+    "reset_password_from_key": "accounts.forms.StyledResetPasswordKeyForm",
+}
+
 
 ACCOUNT_EMAIL_REQUIRED = True
-ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_AUTHENTICATION_METHOD = "email"
 ACCOUNT_EMAIL_NOTIFICATIONS = True
-SOCIALACCOUNT_LOGIN_ON_GET=True
-LOGIN_REDIRECT_URL = '/'
+SOCIALACCOUNT_LOGIN_ON_GET = True
+LOGIN_REDIRECT_URL = "/"
 ACCOUNT_USERNAME_REQUIRED = False
 
 # EMAIL
@@ -210,3 +214,4 @@ EMAIL_USE_SSL = False
 EMAIL_HOST_USER = env("EMAIL_HOST_USER", default="")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD", default="")
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+DEFAULT_TO_EMAIL = env("DEFAULT_TO_EMAIL", default=EMAIL_HOST_USER)

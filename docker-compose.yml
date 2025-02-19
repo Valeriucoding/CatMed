@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  server:
+    container_name: catmed
+    restart: unless-stopped
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+      args:
+        - IP_ADDRESS=${IP_ADDRESS}
+    entrypoint: /code/entrypoint.sh
+    volumes:
+      - static_volume:/code/staticfiles
+    expose:
+      - 7000
+    environment:
+      IP_ADDRESS: ${IP_ADDRESS}
+      DEBUG: "False"
+      SECRET_KEY: ${SECRET_KEY}
+      ALLOWED_HOSTS: ${ALLOWED_HOSTS}
+      CSRF_TRUSTED_ORIGINS: ${CSRF_TRUSTED_ORIGINS}
+      DATABASE_URL: ${DATABASE_URL}
+
+volumes:
+  static_volume: { }
