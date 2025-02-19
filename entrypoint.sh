@@ -13,4 +13,4 @@ do
 done
 
 
-gunicorn --bind localhost:8000 --workers 2 config.wsgi
+gunicorn --bind localhost:7000 --workers 2 config.wsgi
