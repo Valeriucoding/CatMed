@@ -18,10 +18,6 @@ services:
       ALLOWED_HOSTS: ${ALLOWED_HOSTS}
       CSRF_TRUSTED_ORIGINS: ${CSRF_TRUSTED_ORIGINS}
       DATABASE_URL: ${DATABASE_URL}
-    labels:
-      coolify.enable: "true"
-      coolify.healthcheck.path: "/"
-      coolify.healthcheck.port: "7000"
 
 volumes:
   static_volume: { }
