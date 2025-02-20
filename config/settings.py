@@ -32,7 +32,7 @@ SECRET_KEY = env("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env("DEBUG", default=False)
 
-ALLOWED_HOSTS = env("ALLOWED_HOSTS", default="localhost,127.0.0.1", cast=lambda x: [i.strip() for i in x.split(",")])
+ALLOWED_HOSTS = env("ALLOWED_HOSTS", default=("localhost", "127.0.0.1"))
 
 CSRF_TRUSTED_ORIGINS = env(
     "CSRF_TRUSTED_ORIGINS",
