@@ -13,4 +13,4 @@ do
 done
 
 
-gunicorn --bind 0.0.0.0:7000 --workers 2 config.wsgi
+gunicorn --bind :80 --workers 2 config.wsgi
