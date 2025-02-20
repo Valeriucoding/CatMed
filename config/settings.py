@@ -16,7 +16,6 @@ import dj_database_url
 import environ
 import sentry_sdk
 
-
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -138,7 +137,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",
@@ -160,13 +158,13 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "catalog/static/catalog")]
-if not DEBUG:
-    STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
-    STORAGES = {
-        "staticfiles": {
-            "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
-        },
-    }
+# if not DEBUG:
+STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+STORAGES = {
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
@@ -187,7 +185,6 @@ if not DEBUG:
         environment="dev" if DEBUG else "prod",
     )
 
-
 # Django Allauth
 
 SOCIALACCOUNT_PROVIDERS = {
@@ -202,7 +199,6 @@ SOCIALACCOUNT_PROVIDERS = {
 ACCOUNT_FORMS = {
     "reset_password_from_key": "accounts.forms.StyledResetPasswordKeyForm",
 }
-
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = "email"
