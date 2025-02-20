@@ -10,14 +10,18 @@ services:
     entrypoint: /code/entrypoint.sh
     volumes:
       - static_volume:/code/staticfiles
-    expose:
-      - 7000
+    ports:
+      - "7000:7000"
     environment:
       DEBUG: "False"
       SECRET_KEY: ${SECRET_KEY}
       ALLOWED_HOSTS: ${ALLOWED_HOSTS}
       CSRF_TRUSTED_ORIGINS: ${CSRF_TRUSTED_ORIGINS}
       DATABASE_URL: ${DATABASE_URL}
+    labels:
+      coolify.enable: "true"
+      coolify.healthcheck.path: "/"
+      coolify.healthcheck.port: "7000"
 
 volumes:
   static_volume: { }
