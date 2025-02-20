@@ -11,7 +11,7 @@ services:
     volumes:
       - static_volume:/code/staticfiles
     ports:
-      - "80:80"
+      - "8080:8080"
     environment:
       DEBUG: "False"
       SECRET_KEY: ${SECRET_KEY}

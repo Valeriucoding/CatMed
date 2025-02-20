@@ -35,7 +35,7 @@ ALLOWED_HOSTS = env("ALLOWED_HOSTS", default=("localhost", "127.0.0.1"))
 
 CSRF_TRUSTED_ORIGINS = env(
     "CSRF_TRUSTED_ORIGINS",
-    default="http://localhost:8000,http://127.0.0.1:8000",
+    default="http://localhost:8080,http://127.0.0.1:8080",
     cast=lambda x: [i.strip() for i in x.split(",")],
 )
 
