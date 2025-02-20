@@ -221,16 +221,22 @@ DEFAULT_TO_EMAIL = env("DEFAULT_TO_EMAIL", default=EMAIL_HOST_USER)
 LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
+    'formatters': {
+        'verbose': {
+            'format': '{levelname} {asctime} {module} {process:d} {thread:d} {message}',
+            'style': '{',
+        },
+    },
     'handlers': {
-        'file': {
+        'console': {
+            'class': 'logging.StreamHandler',
+            'formatter': 'verbose',
             'level': 'DEBUG',
-            'class': 'logging.FileHandler',
-            'filename': '/tmp/debug.log',
         },
     },
     'loggers': {
         'django': {
-            'handlers': ['file'],
+            'handlers': ['console'],
             'level': 'DEBUG',
             'propagate': True,
         },
