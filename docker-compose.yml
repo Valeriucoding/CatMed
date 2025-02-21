@@ -18,6 +18,10 @@ services:
       ALLOWED_HOSTS: ${ALLOWED_HOSTS}
       CSRF_TRUSTED_ORIGINS: ${CSRF_TRUSTED_ORIGINS}
       DATABASE_URL: ${DATABASE_URL}
-
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://localhost:8001/" ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
 volumes:
   static_volume: { }
