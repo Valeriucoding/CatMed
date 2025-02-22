@@ -1,14 +1,11 @@
 FROM python:3.12-slim-bookworm
-
-ARG IP_ADDRESS
-ENV IP_ADDRESS=${IP_ADDRESS}
-
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 RUN apt-get update && apt-get install -y \
     libpq-dev \
     gcc \
+    curl \
     && rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /code

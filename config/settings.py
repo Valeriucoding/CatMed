@@ -132,7 +132,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
 AUTHENTICATION_BACKENDS = [
     "django.contrib.auth.backends.ModelBackend",
     "allauth.account.auth_backends.AuthenticationBackend",
@@ -181,7 +180,6 @@ if not DEBUG:
         environment="dev" if DEBUG else "prod",
     )
 
-
 # Django Allauth
 
 SOCIALACCOUNT_PROVIDERS = {
@@ -196,7 +194,6 @@ SOCIALACCOUNT_PROVIDERS = {
 ACCOUNT_FORMS = {
     "reset_password_from_key": "accounts.forms.StyledResetPasswordKeyForm",
 }
-
 
 ACCOUNT_EMAIL_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = "email"
