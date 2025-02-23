@@ -10,22 +10,26 @@
 {% else %}
     <div class="dropdown dropdown-end" x-data="{ open: false }">
         <label tabindex="0" class="btn btn-circle avatar" @click="open = !open">
-            <div class="w-10 h-10 rounded-full bg-gray-300 inline-flex items-center justify-center">
+            <div class="w-10 h-10 rounded-full bg-base-200 inline-flex items-center justify-center shadow-inner">
                 <span class="flex items-center justify-center w-full h-full">
-                <i class="fas fa-user text-xl text-gray-600"></i>
+                <i class="fas fa-user text-xl text-base-content"></i>
             </div>
         </label>
-        <ul tabindex="0" class="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52" x-show="open"
+        <ul tabindex="0"
+            class="dropdown-content menu p-2 shadow-lg bg-base-200 rounded-box w-52 "
+            x-show="open"
             @click.outside="open = false">
             <li>
-                <a hx-get="{% url 'user_profile' %}"
+                <a class="hover:bg-base-300"
+                   hx-get="{% url 'user_profile' %}"
                    hx-target="#main-container"
                    hx-swap="innerHTML"
                    hx-push-url="true"
                    @click="open = false">
                     <i class="fas fa-user-cog"></i> Account
                 </a>
-                <a hx-get="{% url 'account_logout' %}"
+                <a class="hover:bg-base-300"
+                   hx-get="{% url 'account_logout' %}"
                    hx-target="#main-container"
                    hx-swap="innerHTML"
                    hx-push-url="true"
