@@ -33,7 +33,7 @@ SECRET_KEY = env("SECRET_KEY")
 DEBUG = env("DEBUG", default=False)
 
 ALLOWED_HOSTS = ["*"]
-CSRF_TRUSTED_ORIGINS = env("CSRF_TRUSTED_ORIGINS", default="").split(",")
+CSRF_TRUSTED_ORIGINS = ["*"]
 
 INTERNAL_IPS = [
     "127.0.0.1",
