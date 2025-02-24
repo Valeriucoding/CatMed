@@ -58,5 +58,30 @@
                 <i class="fas fa-envelope fa-fw mr-2"></i> Contact
             </a>
         </li>
+        {% if not user.is_authenticated %}
+            <div class="md:hidden mt-auto">
+                <div class="divider my-4"></div>
+                <li>
+                    <a hx-get="{% url 'account_login' %}"
+                       hx-target="#main-container"
+                       hx-swap="innerHTML"
+                       hx-push-url="true"
+                       class="py-4"
+                       @click="isOpen = false">
+                        <i class="fas fa-sign-in-alt fa-fw mr-2"></i> Login
+                    </a>
+                </li>
+                <li>
+                    <a hx-get="{% url 'account_signup' %}"
+                       hx-target="#main-container"
+                       hx-swap="innerHTML"
+                       hx-push-url="true"
+                       class="py-4"
+                       @click="isOpen = false">
+                        <i class="fas fa-user-plus fa-fw mr-2"></i> Signup
+                    </a>
+                </li>
+            </div>
+        {% endif %}
     </ul>
 </div>
