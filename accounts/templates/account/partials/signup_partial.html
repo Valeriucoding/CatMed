@@ -6,17 +6,17 @@
 </div>
 
 {% block content %}
-  <div class="min-h-screen bg-base-200 flex items-center justify-center">
-    <div class="card w-96 bg-base-100 shadow-xl">
-      <div class="card-body">
-        <h1 class="card-title text-2xl font-bold mb-4">{% trans "Sign Up" %}</h1>
+  <div class="min-h-screen bg-base-200 flex items-center justify-center px-4 py-6 sm:px-6">
+    <div class="card w-full max-w-sm sm:max-w-md bg-base-100 shadow-xl">
+      <div class="card-body px-4 py-5 sm:p-6">
+        <h1 class="card-title text-xl sm:text-2xl font-bold mb-4">{% trans "Sign Up" %}</h1>
 
         <form class="signup form-control" method="POST" action="{% url 'account_signup' %}">
           {% csrf_token %}
 
           {% if form.non_field_errors %}
-            <div class="alert alert-error mb-4">
-              <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none"
+            <div class="alert alert-error mb-4 text-sm">
+              <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-5 w-5 sm:h-6 sm:w-6" fill="none"
                    viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                       d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/>
@@ -25,11 +25,16 @@
             </div>
           {% endif %}
 
-          <div class="form-control mb-4">
+          <div class="form-control mb-3 sm:mb-4">
             <label class="label" for="{{ form.email.id_for_label }}">
               <span class="label-text">{% trans "Email" %}</span>
             </label>
-            {{ form.email|add_classes:"input input-bordered w-full" }}
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                <i class="fas fa-envelope"></i>
+              </span>
+              {{ form.email|add_classes:"input input-bordered w-full pl-10 text-sm sm:text-base" }}
+            </div>
             {% if form.email.errors %}
               <label class="label">
                 <span class="label-text-alt text-error">{{ form.email.errors }}</span>
@@ -37,11 +42,16 @@
             {% endif %}
           </div>
 
-          <div class="form-control mb-4">
+          <div class="form-control mb-3 sm:mb-4">
             <label class="label" for="{{ form.password1.id_for_label }}">
               <span class="label-text">{% trans "Password" %}</span>
             </label>
-            {{ form.password1|add_classes:"input input-bordered w-full" }}
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                <i class="fas fa-lock"></i>
+              </span>
+              {{ form.password1|add_classes:"input input-bordered w-full pl-10 text-sm sm:text-base" }}
+            </div>
             {% if form.password1.errors %}
               <label class="label">
                 <span class="label-text-alt text-error">{{ form.password1.errors }}</span>
@@ -49,11 +59,16 @@
             {% endif %}
           </div>
 
-          <div class="form-control mb-4">
+          <div class="form-control mb-3 sm:mb-4">
             <label class="label" for="{{ form.password2.id_for_label }}">
               <span class="label-text">{% trans "Confirm Password" %}</span>
             </label>
-            {{ form.password2|add_classes:"input input-bordered w-full" }}
+            <div class="relative">
+              <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                <i class="fas fa-lock"></i>
+              </span>
+              {{ form.password2|add_classes:"input input-bordered w-full pl-10 text-sm sm:text-base" }}
+            </div>
             {% if form.password2.errors %}
               <label class="label">
                 <span class="label-text-alt text-error">{{ form.password2.errors }}</span>
@@ -65,22 +80,22 @@
             <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
           {% endif %}
 
-          <div class="form-control mt-6">
+          <div class="form-control mt-4 sm:mt-6">
             <button class="btn btn-primary" type="submit">{% trans "Sign Up" %}</button>
           </div>
         </form>
 
         {% get_providers as socialaccount_providers %}
         {% if socialaccount_providers %}
-          <div class="divider mt-6">{% trans "Or sign up with" %}</div>
-          <div class="flex justify-center mt-4">
+          <div class="divider mt-4 sm:mt-6">{% trans "Or sign up with" %}</div>
+          <div class="flex justify-center mt-3 sm:mt-4">
             {% for provider in socialaccount_providers %}
               {% if provider.id == "google" %}
                 <a href="{% provider_login_url provider.id process='signup' %}" class="btn btn-circle bg-white hover:bg-gray-200 border-gray-300 shadow">
-                  <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google Logo" class="h-6 w-6">
+                  <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" alt="Google Logo" class="h-5 w-5 sm:h-6 sm:w-6">
                 </a>
               {% else %}
-                <a href="{% provider_login_url provider.id process='signup' %}" class="btn btn-primary">
+                <a href="{% provider_login_url provider.id process='signup' %}" class="btn btn-primary text-xs sm:text-sm">
                   {% trans "Sign up with" %} {{ provider.name }}
                 </a>
               {% endif %}
@@ -88,8 +103,8 @@
           </div>
         {% endif %}
 
-        <div class="divider mt-6">{% trans "Already have an account?" %}</div>
-        <p class="text-center">
+        <div class="divider mt-4 sm:mt-6">{% trans "Already have an account?" %}</div>
+        <p class="text-center text-sm sm:text-base">
           <a class="link link-hover" href="{{ login_url }}">
             {% trans "Sign In" %}
           </a>
