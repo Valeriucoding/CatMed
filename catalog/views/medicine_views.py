@@ -3,6 +3,7 @@ from django.db.models import Q, Count, Subquery, OuterRef
 from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse
+from django.contrib.auth.decorators import login_required
 
 from catalog.forms import MedicineForm
 from catalog.models import Medicine, Disease, MedicationType, Organ
@@ -96,6 +97,7 @@ def medicine_detail(request, medicine_id):
     return render(request, "catalog/medicine_detail.html", {"medicine": medicine})
 
 
+@login_required
 def medicine_create(request):
     form = MedicineForm(request.POST or None)
     url = reverse("catalog:medicine_create")
@@ -136,6 +138,7 @@ def medicine_create(request):
     return render(request, "catalog/medicine_form.html", context)
 
 
+@login_required
 def medicine_update(request, medicine_id):
     medicine = get_object_or_404(Medicine, id=medicine_id)
     form = MedicineForm(request.POST or None, instance=medicine)
@@ -172,7 +175,7 @@ def medicine_update(request, medicine_id):
 
     return render(request, "catalog/medicine_form.html", context)
 
-
+@login_required
 def medicine_delete(request, medicine_id):
     medicine = get_object_or_404(Medicine, id=medicine_id)
     if request.method == "DELETE":

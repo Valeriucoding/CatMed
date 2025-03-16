@@ -9,6 +9,7 @@
     </td>
     <td>{% if product.price %}{{ product.price }}{% else %}&nbsp;{% endif %}</td>
 <td>
+    {% if user.is_authenticated%}
     <div class="flex space-x-2">
         <button class="btn btn-primary btn-sm" 
                 hx-get="{% url 'catalog:medicine_product_update' product.pk %}" 
@@ -24,5 +25,6 @@
             <i class="fas fa-trash"></i>
         </button>
     </div>
+    {%endif%}
 </td>
 </tr>

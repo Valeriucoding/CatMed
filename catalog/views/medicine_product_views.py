@@ -1,5 +1,6 @@
 import json
 
+from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.template.loader import render_to_string
@@ -8,7 +9,7 @@ from django.urls import reverse
 from catalog.forms import MedicineProductForm
 from catalog.models import MedicineProduct
 
-
+@login_required
 def medicine_product_create(request, medicine_pk):
     form = MedicineProductForm(request.POST or None)
     url = reverse("catalog:medicine_product_create", kwargs={"medicine_pk": medicine_pk})
@@ -31,6 +32,7 @@ def medicine_product_create(request, medicine_pk):
     html_content = render_to_string("catalog/modals/medicine_product_create.html", context, request)
     return HttpResponse(html_content)
 
+@login_required
 def medicine_product_delete(request, medicine_product_pk):
     if request.method == "DELETE":
         medicine_product = get_object_or_404(MedicineProduct, pk=medicine_product_pk)
@@ -40,7 +42,7 @@ def medicine_product_delete(request, medicine_product_pk):
         return HttpResponseRedirect(reverse("catalog:medicine_detail", args=[medicine_product.medicine.id]))
     return JsonResponse({"status": "error"}, status=400)
 
-
+@login_required
 def medicine_product_update(request, medicine_product_pk):
     medicine_product = get_object_or_404(MedicineProduct, pk=medicine_product_pk)
     if request.method == "POST":
