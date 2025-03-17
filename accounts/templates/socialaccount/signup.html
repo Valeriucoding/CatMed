@@ -1,0 +1,86 @@
+{% extends "catalog/base.html" %}
+{% load i18n %}
+{% load allauth %}
+{% load form_tags %}
+
+{% block head_title %}
+    {% trans "Signup" %}
+{% endblock head_title %}
+
+{% block content %}
+    <div class="min-h-screen bg-base-200 flex items-center justify-center px-4 py-6 sm:px-6">
+        <div class="card w-full max-w-sm sm:max-w-md bg-base-100 shadow-xl">
+            <div class="card-body px-4 py-5 sm:p-6">
+                <h1 class="card-title text-xl sm:text-2xl font-bold mb-4">{% trans "Sign Up" %}</h1>
+
+                <p class="text-sm sm:text-base mb-4">
+                    {% blocktrans with provider_name=account.get_provider.name site_name=site.name %}
+                        You are about to use your {{ provider_name }} account to login to {{ site_name }}. As a final
+                        step, please complete the following form:
+                    {% endblocktrans %}
+                </p>
+
+                <form class="signup form-control" method="POST" action="{% url 'socialaccount_signup' %}">
+                    {% csrf_token %}
+
+                    {% if form.non_field_errors %}
+                        <div class="alert alert-error mb-4 text-sm">
+                            <svg xmlns="http://www.w3.org/2000/svg"
+                                 class="stroke-current shrink-0 h-5 w-5 sm:h-6 sm:w-6" fill="none"
+                                 viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                      d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                            <span>{{ form.non_field_errors }}</span>
+                        </div>
+                    {% endif %}
+
+                    {% for field in form %}
+                        <div class="form-control mb-3 sm:mb-4">
+                            <label class="label" for="{{ field.id_for_label }}">
+                                <span class="label-text">{{ field.label }}</span>
+                            </label>
+                            <div class="relative">
+              <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                {% if field.name == 'email' %}
+                    <i class="fas fa-envelope"></i>
+                {% elif 'password' in field.name %}
+                    <i class="fas fa-lock"></i>
+                {% else %}
+                    <i class="fas fa-user"></i>
+                {% endif %}
+              </span>
+                                {{ field|add_classes:"input input-bordered w-full pl-10 text-sm sm:text-base" }}
+                            </div>
+                            {% if field.errors %}
+                                <label class="label">
+                                    <span class="label-text-alt text-error">{{ field.errors }}</span>
+                                </label>
+                            {% endif %}
+                            {% if field.help_text %}
+                                <label class="label">
+                                    <span class="label-text-alt">{{ field.help_text }}</span>
+                                </label>
+                            {% endif %}
+                        </div>
+                    {% endfor %}
+
+                    {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}"/>
+                    {% endif %}
+
+                    <div class="form-control mt-4 sm:mt-6">
+                        <button class="btn btn-primary" type="submit">{% trans "Sign Up" %}</button>
+                    </div>
+                </form>
+
+                <div class="divider mt-4 sm:mt-6">{% trans "Already have an account?" %}</div>
+                <p class="text-center text-sm sm:text-base">
+                    <a class="link link-hover" href="{{ login_url }}">
+                        {% trans "Sign In" %}
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
