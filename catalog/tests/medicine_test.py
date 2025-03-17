@@ -19,6 +19,9 @@ class TestMedicineModel(CatalogFactory):
 
 
 class TestMedicineViews(CatalogFactory):
+    def setUp(self):
+        self.client.force_login(user=self.user)
+
     def test_medicine_list_url(self):
         response = self.client.get("/")
         self.assertEqual(response.status_code, 200)
