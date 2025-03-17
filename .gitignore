@@ -188,3 +188,5 @@ fabric.properties
 
 # Obsidian
 docs/CatMed/.obsidian/core-plugins.json
+
+/staticfiles/

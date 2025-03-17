@@ -18,6 +18,9 @@ RUN pip install -r requirements.txt
 
 COPY . /code
 
+# Create the static directory if it doesn't exist
+RUN mkdir -p /code/staticfiles
+
 RUN python manage.py collectstatic --noinput
 
 RUN chmod +x /code/entrypoint.sh
