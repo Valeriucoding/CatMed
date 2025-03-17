@@ -8,6 +8,7 @@
             {{ object.name }}
         </a>
     </td>
+    {%if user.is_authenticated%}
     <td>
         <i class="fa fa-edit text-primary cursor-pointer"
                 {% if model == "disease" %}
@@ -22,4 +23,5 @@
         <i class="ml-3 fa fa-trash text-warning" data-{{ model }}-name="{{ object.name }}"
            data-{{ model }}-id="{{ object.id }}" onclick="{{ delete_func }}"></i>
     </td>
+    {%endif%}
 </tr>

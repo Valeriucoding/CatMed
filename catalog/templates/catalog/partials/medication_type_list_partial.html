@@ -14,7 +14,9 @@
             <thead>
             <tr>
                 <th>Name</th>
+                {%if user.is_authenticated%}
                 <th>Operations</th>
+                {%endif%}
             </tr>
             </thead>
             <tbody id="medicationTypesTableBody">
