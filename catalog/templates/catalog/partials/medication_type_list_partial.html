@@ -1,16 +1,13 @@
 {% load static %}
-{% block title %}Medication Type List{% endblock title %}
-{#<div class="absolute top-4 right-4 flex space-x-2">#}
-{#    {% if user.is_authenticated %}#}
-{#        <span class="btn btn-primary flex items-center rounded-full" onclick="medication_type_create.showModal()"#}
-{#              hx-get="{% url 'catalog:medication_type_list_create' %}" hx-target="#ModalContent">#}
-{#            <i class="fas fa-plus"></i>#}
-{#        </span>#}
-{#    {% endif %}#}
-{#    {% include "catalog/components/account_actions.html" %}#}
-{##}
-{#</div>#}
-{#TODO: add medication type modal#}
+<div class="flex items-center mb-4">
+    <div class="text-xl font-bold mr-2">Medication Type List</div>
+    {% if user.is_authenticated %}
+        <span class="btn btn-xs btn-outline btn-primary flex items-center rounded-full" onclick="medication_type_create.showModal()"
+              hx-get="{% url 'catalog:medication_type_list_create' %}" hx-target="#ModalContent">
+              <i class="fas fa-plus text-xs"></i>
+        </span>
+    {% endif %}
+</div>
 <div class="items-start">
     <div class="overflow-x-auto">
         <table class="table">

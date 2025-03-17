@@ -1,5 +1,13 @@
 {% load static %}
-{% block title %}Organ list{% endblock title %}
+<div class="flex items-center mb-4">
+    <div class="text-xl font-bold mr-2">Organ list</div>
+    {% if user.is_authenticated %}
+        <span class="btn btn-xs btn-outline btn-primary flex items-center rounded-full" onclick="organ_create.showModal()"
+              hx-get="{% url 'catalog:organ_list_create' %}" hx-target="#ModalContent">
+              <i class="fas fa-plus text-xs"></i>
+        </span>
+    {% endif %}
+</div>
 {% if alert_message %}
     <div id="customAlert" role="alert" class="alert alert-success mb-4 custom-alert">
         <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
@@ -10,15 +18,6 @@
     </div>
 {% endif %}
 
-{#<div class="absolute top-4 right-4 flex space-x-2">#}
-{#    {% if user.is_authenticated %}#}
-{#        <span class="btn btn-primary flex items-center rounded-full" onclick="organ_create.showModal()"#}
-{#              hx-get="{% url 'catalog:organ_list_create' %}" hx-target="#ModalContent">#}
-{#            <i class="fas fa-plus"></i>#}
-{#        </span>#}
-{#    {% endif %}#}
-{#    {% include "catalog/components/account_actions.html" %}#}
-{#</div>#}
 <div class="items-start">
     <div class="overflow-x-auto">
         <table class="table">

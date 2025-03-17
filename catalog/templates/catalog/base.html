@@ -123,9 +123,9 @@
                             <span class="btn btn-primary btn-sm sm:btn-md flex items-center rounded-full"
                                   hx-get="{% url 'catalog:medicine_create' %}"
                                   hx-target="#main-container" hx-swap="innerHTML" hx-push-url="true">
-                            <i class="fas fa-plus"></i>
+                                <i class="fas fa-plus"></i>
+                            </span>
                         {% endif %}
-                        </span>
                         {% include "catalog/components/account_actions.html" %}
                     </div>
                     <div id="main-container" class="px-2 sm:px-4">
