@@ -135,13 +135,20 @@
                     </div>
                 </div>
             </div>
+            <!-- Footer -->
+            <footer class="footer footer-center p-4 bg-base-200 text-base-content mt-auto">
+                <div>
+                    <p>Copyright © <span id="current-year"></span> - Made with ❤️ by <a href="https://github.com/valericoding" target="_blank" class="font-medium hover:underline">Valericoding</a></p>
+                </div>
+            </footer>
         </div>
         {% include "catalog/components/sidebar.html" %}
     </div>
-</body>
-
-
+</div>
 <footer>
     <script src="{% static 'js/base.js' %}"></script>
+    <script>
+        document.getElementById('current-year').textContent = new Date().getFullYear();
+    </script>
 </footer>
 </html>
