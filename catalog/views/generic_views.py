@@ -15,7 +15,7 @@ def contact_form(request):
             email = form.cleaned_data.get("email")
             message = form.cleaned_data.get("message")
             send_mail(
-                f"New Contact Form Submission from {name}",
+                f"New Contact Form Submission from {name}, email: {email}",
                 message,
                 email,
                 [settings.DEFAULT_TO_EMAIL],
